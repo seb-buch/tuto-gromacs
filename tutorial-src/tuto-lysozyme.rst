@@ -35,9 +35,12 @@ Le fichier `.pdb` ne contient que les coordonnées des atomes mais ne contient p
 Pour générer cette topologie, on peut utiliser l'utilitaire `pdb2gmx` qui permet de lire un fichier `.pdb` et de générer automatiquement la topologie associée.
 
 .. important::
+
     Comme le but est d'étudier l'effet des ponts S-S, nous allons générer *2* topologies:
-        1. une topologie contenant les ponts S-S
-        2. une topologie ne contenant *pas* les ponts S-S
+
+    1. une topologie contenant les ponts S-S
+
+    2. une topologie ne contenant *pas* les ponts S-S
 
 La commande pour générer la topologie du lysozyme est::
 
