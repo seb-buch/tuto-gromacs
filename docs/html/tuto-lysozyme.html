@@ -1,0 +1,258 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Tutoriel « Lysozyme » &#8212; documentation Tutorial-gromacs 2017.1</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2017.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Tutoriel « Membrane »" href="tuto-membrane.html" />
+    <link rel="prev" title="Introduction à GROMACS" href="intro-gromacs.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tutoriel-lysozyme">
+<h1>Tutoriel «&nbsp;Lysozyme&nbsp;»<a class="headerlink" href="#tutoriel-lysozyme" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Le but de ce tutoriel est d’étudier l’influence des ponts disulfures sur la stabilité en température du lysozyme.
+Le lysozyme est une protéine présente notamment dans le blanc d’oeuf et qui possède des propriétés antimicrobienne puisque
+cette enzyme (EC 3.2.1.17) hydrolyse le peptidoglycane ce qui fragilise la paroi des bactéries à Gram positif:</p>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="_images/Mecanism_of_action_for_Lysozyme.svg"><img alt="_images/Mecanism_of_action_for_Lysozyme.svg" src="_images/Mecanism_of_action_for_Lysozyme.svg" width="400px" /></a>
+<p class="caption"><span class="caption-text">Liaison hydrolysée par le lysozyme.</span></p>
+</div>
+<p>Le lysozyme contient aussi 4 ponts disulfure qui lui confère une structure relativement stable puisque sa température de dénaturation élevée (85°C dans le glycérol <a class="reference internal" href="#knubovets1999" id="id1">[Knubovets1999]</a>).</p>
+<div class="figure align-center" id="id3">
+<a class="reference internal image-reference" href="_images/lysozyme_S-S.png"><img alt="_images/lysozyme_S-S.png" src="_images/lysozyme_S-S.png" style="height: 400px;" /></a>
+<p class="caption"><span class="caption-text">Structure du lysozyme avec ses 4 ponts S-S.</span></p>
+</div>
+<div class="section" id="creation-de-la-topologie">
+<h2>Création de la topologie<a class="headerlink" href="#creation-de-la-topologie" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La structure du lysozyme est bien connue et est disponible sur le site de la <a class="reference external" href="http://www.rcsb.org/pdb/home/home.do">PDB</a>. Le code PDB pour le lysozyme de blanc d’oeuf est: <a class="reference external" href="http://www.rcsb.org/pdb/explore/explore.do?structureId=1aki">1AKI</a>.
+La première étape est donc de télécharger les coordonnées atomiques sous le format <cite>.pdb</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">files</span><span class="o">.</span><span class="n">rcsb</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="mi">1</span><span class="n">AKI</span><span class="o">.</span><span class="n">pdb</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Ouvrir le fichier <cite>1AKI.pdb</cite> pour voir toutes les informations qu’il contient.</p>
+</div>
+<p>Le fichier <cite>.pdb</cite> ne contient que les coordonnées des atomes mais ne contient pas la topologie de la molécule qui, elle, est liée à un champ de forces.
+Pour générer cette topologie, on peut utiliser l’utilitaire <cite>pdb2gmx</cite> qui permet de lire un fichier <cite>.pdb</cite> et de générer automatiquement la topologie associée.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<dl class="last docutils">
+<dt>Comme le but est d’étudier l’effet des ponts S-S, nous allons générer <em>2</em> topologies:</dt>
+<dd><ol class="first last arabic simple">
+<li>une topologie contenant les ponts S-S</li>
+<li>une topologie ne contenant <em>pas</em> les ponts S-S</li>
+</ol>
+</dd>
+</dl>
+</div>
+<p>La commande pour générer la topologie du lysozyme est:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">pdb2gmx</span> <span class="o">-</span><span class="n">f</span> <span class="mi">1</span><span class="n">AKI</span><span class="o">.</span><span class="n">pdb</span> <span class="o">-</span><span class="n">ss</span>
+</pre></div>
+</div>
+<p>L’option <cite>-ss</cite> rend interactif le choix des ponts S-S.</p>
+<p>Premièrement <cite>pdb2gmx</cite> demande de choisir le champ de force:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="mi">1</span><span class="p">:</span> <span class="n">AMBER03</span> <span class="n">protein</span><span class="p">,</span> <span class="n">nucleic</span> <span class="n">AMBER94</span> <span class="p">(</span><span class="n">Duan</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span><span class="p">,</span> <span class="n">J</span><span class="o">.</span> <span class="n">Comp</span><span class="o">.</span> <span class="n">Chem</span><span class="o">.</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">1999</span><span class="o">-</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">2003</span><span class="p">)</span>
+ <span class="mi">2</span><span class="p">:</span> <span class="n">AMBER94</span> <span class="n">force</span> <span class="n">field</span> <span class="p">(</span><span class="n">Cornell</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span><span class="p">,</span> <span class="n">JACS</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">5179</span><span class="o">-</span><span class="mi">5197</span><span class="p">,</span> <span class="mi">1995</span><span class="p">)</span>
+ <span class="mi">3</span><span class="p">:</span> <span class="n">AMBER96</span> <span class="n">protein</span><span class="p">,</span> <span class="n">nucleic</span> <span class="n">AMBER94</span> <span class="p">(</span><span class="n">Kollman</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span><span class="p">,</span> <span class="n">Acc</span><span class="o">.</span> <span class="n">Chem</span><span class="o">.</span> <span class="n">Res</span><span class="o">.</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">461</span><span class="o">-</span><span class="mi">469</span><span class="p">,</span> <span class="mi">1996</span><span class="p">)</span>
+ <span class="mi">4</span><span class="p">:</span> <span class="n">AMBER99</span> <span class="n">protein</span><span class="p">,</span> <span class="n">nucleic</span> <span class="n">AMBER94</span> <span class="p">(</span><span class="n">Wang</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span><span class="p">,</span> <span class="n">J</span><span class="o">.</span> <span class="n">Comp</span><span class="o">.</span> <span class="n">Chem</span><span class="o">.</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">1049</span><span class="o">-</span><span class="mi">1074</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+ <span class="mi">5</span><span class="p">:</span> <span class="n">AMBER99SB</span> <span class="n">protein</span><span class="p">,</span> <span class="n">nucleic</span> <span class="n">AMBER94</span> <span class="p">(</span><span class="n">Hornak</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span><span class="p">,</span> <span class="n">Proteins</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">712</span><span class="o">-</span><span class="mi">725</span><span class="p">,</span> <span class="mi">2006</span><span class="p">)</span>
+ <span class="mi">6</span><span class="p">:</span> <span class="n">AMBER99SB</span><span class="o">-</span><span class="n">ILDN</span> <span class="n">protein</span><span class="p">,</span> <span class="n">nucleic</span> <span class="n">AMBER94</span> <span class="p">(</span><span class="n">Lindorff</span><span class="o">-</span><span class="n">Larsen</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span><span class="p">,</span> <span class="n">Proteins</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">1950</span><span class="o">-</span><span class="mi">58</span><span class="p">,</span> <span class="mi">2010</span><span class="p">)</span>
+ <span class="mi">7</span><span class="p">:</span> <span class="n">AMBERGS</span> <span class="n">force</span> <span class="n">field</span> <span class="p">(</span><span class="n">Garcia</span> <span class="o">&amp;</span> <span class="n">Sanbonmatsu</span><span class="p">,</span> <span class="n">PNAS</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">2782</span><span class="o">-</span><span class="mi">2787</span><span class="p">,</span> <span class="mi">2002</span><span class="p">)</span>
+ <span class="mi">8</span><span class="p">:</span> <span class="n">CHARMM27</span> <span class="nb">all</span><span class="o">-</span><span class="n">atom</span> <span class="n">force</span> <span class="n">field</span> <span class="p">(</span><span class="n">CHARM22</span> <span class="n">plus</span> <span class="n">CMAP</span> <span class="k">for</span> <span class="n">proteins</span><span class="p">)</span>
+ <span class="mi">9</span><span class="p">:</span> <span class="n">GROMOS96</span> <span class="mi">43</span><span class="n">a1</span> <span class="n">force</span> <span class="n">field</span>
+<span class="mi">10</span><span class="p">:</span> <span class="n">GROMOS96</span> <span class="mi">43</span><span class="n">a2</span> <span class="n">force</span> <span class="n">field</span> <span class="p">(</span><span class="n">improved</span> <span class="n">alkane</span> <span class="n">dihedrals</span><span class="p">)</span>
+<span class="mi">11</span><span class="p">:</span> <span class="n">GROMOS96</span> <span class="mi">45</span><span class="n">a3</span> <span class="n">force</span> <span class="n">field</span> <span class="p">(</span><span class="n">Schuler</span> <span class="n">JCC</span> <span class="mi">2001</span> <span class="mi">22</span> <span class="mi">1205</span><span class="p">)</span>
+<span class="mi">12</span><span class="p">:</span> <span class="n">GROMOS96</span> <span class="mi">53</span><span class="n">a5</span> <span class="n">force</span> <span class="n">field</span> <span class="p">(</span><span class="n">JCC</span> <span class="mi">2004</span> <span class="n">vol</span> <span class="mi">25</span> <span class="n">pag</span> <span class="mi">1656</span><span class="p">)</span>
+<span class="mi">13</span><span class="p">:</span> <span class="n">GROMOS96</span> <span class="mi">53</span><span class="n">a6</span> <span class="n">force</span> <span class="n">field</span> <span class="p">(</span><span class="n">JCC</span> <span class="mi">2004</span> <span class="n">vol</span> <span class="mi">25</span> <span class="n">pag</span> <span class="mi">1656</span><span class="p">)</span>
+<span class="mi">14</span><span class="p">:</span> <span class="n">GROMOS96</span> <span class="mi">54</span><span class="n">a7</span> <span class="n">force</span> <span class="n">field</span> <span class="p">(</span><span class="n">Eur</span><span class="o">.</span> <span class="n">Biophys</span><span class="o">.</span> <span class="n">J</span><span class="o">.</span> <span class="p">(</span><span class="mi">2011</span><span class="p">),</span> <span class="mi">40</span><span class="p">,,</span> <span class="mi">843</span><span class="o">-</span><span class="mi">856</span><span class="p">,</span> <span class="n">DOI</span><span class="p">:</span> <span class="mf">10.1007</span><span class="o">/</span><span class="n">s00249</span><span class="o">-</span><span class="mi">011</span><span class="o">-</span><span class="mi">0700</span><span class="o">-</span><span class="mi">9</span><span class="p">)</span>
+<span class="mi">15</span><span class="p">:</span> <span class="n">OPLS</span><span class="o">-</span><span class="n">AA</span><span class="o">/</span><span class="n">L</span> <span class="nb">all</span><span class="o">-</span><span class="n">atom</span> <span class="n">force</span> <span class="n">field</span> <span class="p">(</span><span class="mi">2001</span> <span class="n">aminoacid</span> <span class="n">dihedrals</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ici, nous allons choisir <cite>GROMOS96 54a7</cite> (choix <em>14</em>).</p>
+<p>Ensuite, le modèle d’eau doit être choisi:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span> <span class="n">SPC</span>    <span class="n">simple</span> <span class="n">point</span> <span class="n">charge</span><span class="p">,</span> <span class="n">recommended</span>
+<span class="mi">2</span><span class="p">:</span> <span class="n">SPC</span><span class="o">/</span><span class="n">E</span>  <span class="n">extended</span> <span class="n">simple</span> <span class="n">point</span> <span class="n">charge</span>
+<span class="mi">3</span><span class="p">:</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<p>Il faut choisir <cite>SPC</cite> (choix <em>1</em>)</p>
+<p>Enfin, le choix des ponts S-S intervient:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>Link CYS-6 SG-48 and CYS-127 SG-981 (y/n) ?
+</pre></div>
+</div>
+<p>Pour chacun des ponts (4), il faut répondre <cite>y</cite> pour confirmer la présence du pont ou <cite>n</cite> pour générer une topologie sans le pont (= Cystéines libres).</p>
+<p>A partir de ces réponses, <cite>pdb2gmx</cite> génère 3 fichiers:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><cite>conf.gro</cite> qui contient les coordonnées des atomes (similaire au fichier <cite>.pdb</cite> de départ)</li>
+<li><cite>posre.itp</cite> qui contient les données nécessaires pour contraindre les atomes (voir utilité plus loin)</li>
+<li><cite>topol.top</cite> qui contient la topologie du lysozyme et du système.</li>
+</ol>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Ouvrir ces fichiers pour voir ce qu’ils contiennent</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Astuce</p>
+<p class="last">Pour générer les 2 topologies (avec et sans pont S-S), il faut donc exécuter <cite>pdb2gmx</cite> deux fois de suite.</p>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Pour éviter de mélanger les deux topologies, il est fortement conseillé de travailler dans 2 dossiers différents!</p>
+</div>
+</div>
+<div class="section" id="solvatation-du-lysozyme">
+<h2>Solvatation du lysozyme<a class="headerlink" href="#solvatation-du-lysozyme" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Premièrement il est nécessaire de créer la boite de simulation autour de notre protéine:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">editconf</span> <span class="o">-</span><span class="n">f</span> <span class="n">conf</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">o</span> <span class="n">lyso</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">d</span> <span class="mf">0.7</span> <span class="o">-</span><span class="n">bt</span> <span class="n">dodecahedron</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Ouvrir <cite>lyso.gro</cite> avec VMD pour observer la boîte de simulation.</p>
+</div>
+<p>gmx solvate -p system_noSS.top -cp lyso_noSS.gro -cs -o lyso_noSS_W.gro</p>
+</div>
+<div class="section" id="ajout-des-ions">
+<h2>Ajout des ions<a class="headerlink" href="#ajout-des-ions" title="Lien permanent vers ce titre">¶</a></h2>
+<p>gmx grompp -f ../ions.mdp -c lyso_noSS_W.gro -p system_noSS.top -o ions.tpr</p>
+<p>gmx genion -s ions.tpr -o lyso_noSS_WI.gro -p system_noSS.top -neutral</p>
+</div>
+<div class="section" id="minimisation-energetique">
+<h2>Minimisation énergétique<a class="headerlink" href="#minimisation-energetique" title="Lien permanent vers ce titre">¶</a></h2>
+<p>gmx grompp -f ../minim.mdp -c lyso_noSS_WI.gro -p system_noSS.top -o em.tpr</p>
+<p>gmx mdrun -v -deffnm em</p>
+</div>
+<div class="section" id="equilibration-nvt">
+<h2>Équilibration NVT<a class="headerlink" href="#equilibration-nvt" title="Lien permanent vers ce titre">¶</a></h2>
+<p>gmx grompp -f ../nvt.mdp -c em.gro -p system_noSS.top -o nvt.tpr</p>
+<p>gmx mdrun -v -deffnm nvt</p>
+</div>
+<div class="section" id="equilibration-npt">
+<h2>Équilibration NPT<a class="headerlink" href="#equilibration-npt" title="Lien permanent vers ce titre">¶</a></h2>
+<p>gmx grompp -f ../npt.mdp -c nvt.gro -p system_noSS.top -t nvt.cpt -o npt.tpr</p>
+<p>gmx mdrun -v -deffnm npt</p>
+</div>
+<div class="section" id="production-analyse">
+<h2>Production &amp; analyse<a class="headerlink" href="#production-analyse" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="simulation-de-production">
+<h3>Simulation de production<a class="headerlink" href="#simulation-de-production" title="Lien permanent vers ce titre">¶</a></h3>
+<p>gmx grompp -f ../md.mdp -c npt.gro -p system_noSS.top -t npt.cpt -o md.tpr</p>
+<p>gmx mdrun -v -deffnm md</p>
+</div>
+<div class="section" id="analyse">
+<h3>Analyse<a class="headerlink" href="#analyse" title="Lien permanent vers ce titre">¶</a></h3>
+<p>gmx trjconv -f md.xtc -fit rot+trans -o md_fit.xtc -s md.tpr</p>
+<p>gmx trjconv -f md_fit.xtc -o md_fit.xtc -pbc mol -ur compact -s md.tpr</p>
+<p>gmx rms -f md_fit.xtc -s md.tpr -o rmsd.xvg</p>
+<p class="rubric">Références</p>
+<table class="docutils citation" frame="void" id="knubovets1999" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[Knubovets1999]</a></td><td>Knubovets T, Osterhout JJ, Connolly PJ, Klibanov AM. Proc Natl Acad Sci. 1999. 96(4):1262–7.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table des Matières</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="visualisation.html">Outils de visualisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro-gromacs.html">Introduction à GROMACS</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutoriel «&nbsp;Lysozyme&nbsp;»</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creation-de-la-topologie">Création de la topologie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solvatation-du-lysozyme">Solvatation du lysozyme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ajout-des-ions">Ajout des ions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#minimisation-energetique">Minimisation énergétique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#equilibration-nvt">Équilibration NVT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#equilibration-npt">Équilibration NPT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#production-analyse">Production &amp; analyse</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#simulation-de-production">Simulation de production</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#analyse">Analyse</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tuto-membrane.html">Tutoriel «&nbsp;Membrane&nbsp;»</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto-AMP.html">Tutoriel «&nbsp;AMP&nbsp;»</a></li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="intro-gromacs.html" title="Chapitre précédent">Introduction à GROMACS</a></li>
+      <li>Next: <a href="tuto-membrane.html" title="Chapitre suivant">Tutoriel «&nbsp;Membrane&nbsp;»</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Recherche rapide</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Sébastien Buchoux.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
