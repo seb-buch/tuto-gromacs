@@ -54,7 +54,7 @@ clean:
 .PHONY: html
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
-	@echo "<meta http-equiv=\"refresh\" content=\"0; url=./html/index.html\"/>\n" > $(BUILDDIR)/index.html
+	@ln -s $(BUILDDIR)/html/* $(BUILDDIR)/
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
