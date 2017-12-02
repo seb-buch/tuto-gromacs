@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tutoriel “Lysozyme” &mdash; documentation Tutorial-gromacs 2017.1</title>
+  <title>Tutoriel « Lysozyme » &mdash; documentation Tutorial-gromacs 2017.1</title>
   
 
+  
+  
   
   
 
@@ -30,8 +32,11 @@
   
 
   
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Recherche" href="search.html"/>
     <link rel="top" title="documentation Tutorial-gromacs 2017.1" href="index.html"/>
-        <link rel="next" title="Tutoriel “Membrane”" href="tuto-membrane.html"/>
+        <link rel="next" title="Tutoriel « Membrane »" href="tuto-membrane.html"/>
         <link rel="prev" title="Introduction à GROMACS" href="intro-gromacs.html"/> 
 
   
@@ -41,6 +46,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -81,10 +87,12 @@
           
             
             
-                <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="visualisation.html">Outils de visualisation</a></li>
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro-gromacs.html">Introduction à GROMACS</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Tutoriel &#8220;Lysozyme&#8221;</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutoriel «&nbsp;Lysozyme&nbsp;»</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#creation-de-la-topologie">Création de la topologie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#solvatation-du-lysozyme">Solvatation du lysozyme</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ajout-des-ions">Ajout des ions</a></li>
@@ -105,8 +113,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="tuto-membrane.html">Tutoriel &#8220;Membrane&#8221;</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tuto-AMP.html">Tutoriel &#8220;AMP&#8221;</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto-membrane.html">Tutoriel «&nbsp;Membrane&nbsp;»</a></li>
 </ul>
 
             
@@ -119,8 +126,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">Tutorial-gromacs</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Tutorial-gromacs</a>
+        
       </nav>
 
 
@@ -129,33 +138,50 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-      
-    <li>Tutoriel &#8220;Lysozyme&#8221;</li>
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Tutoriel «&nbsp;Lysozyme&nbsp;»</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
   <div class="section" id="tutoriel-lysozyme">
-<h1>Tutoriel &#8220;Lysozyme&#8221;<a class="headerlink" href="#tutoriel-lysozyme" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Le but de ce tutoriel est d&#8217;étudier l&#8217;influence des ponts disulfures sur la stabilité en température du lysozyme.
-Le lysozyme est une protéine présente notamment dans le blanc d&#8217;oeuf et qui possède des propriétés antimicrobienne puisque
+<span id="tuto-lyso"></span><h1>Tutoriel «&nbsp;Lysozyme&nbsp;»<a class="headerlink" href="#tutoriel-lysozyme" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Le but de ce tutoriel est d’étudier l’influence des ponts disulfures sur la stabilité en température du lysozyme.
+Le lysozyme est une protéine présente notamment dans le blanc d’oeuf et qui possède des propriétés antimicrobienne puisque
 cette enzyme (EC 3.2.1.17) hydrolyse le peptidoglycane ce qui fragilise la paroi des bactéries à Gram positif:</p>
 <div class="figure align-center" id="id7">
-<a class="reference internal image-reference" href="_images/Mecanism_of_action_for_Lysozyme.svg"><img src="_images/Mecanism_of_action_for_Lysozyme.svg" width="400px" /></a>
+<a class="reference internal image-reference" href="_images/Mecanism_of_action_for_Lysozyme.svg"><img alt="_images/Mecanism_of_action_for_Lysozyme.svg" src="_images/Mecanism_of_action_for_Lysozyme.svg" width="400px" /></a>
 <p class="caption"><span class="caption-text">Liaison hydrolysée par le lysozyme.</span></p>
 </div>
 <p>Le lysozyme contient aussi 4 ponts disulfure qui lui confère une structure relativement stable puisque sa température de dénaturation élevée (85°C dans le glycérol <a class="reference internal" href="#knubovets1999" id="id1">[Knubovets1999]</a>).</p>
@@ -165,62 +191,62 @@ cette enzyme (EC 3.2.1.17) hydrolyse le peptidoglycane ce qui fragilise la paroi
 </div>
 <div class="section" id="creation-de-la-topologie">
 <h2>Création de la topologie<a class="headerlink" href="#creation-de-la-topologie" title="Lien permanent vers ce titre">¶</a></h2>
-<p>La structure du lysozyme est bien connue et est disponible sur le site de la <a class="reference external" href="http://www.rcsb.org/pdb/home/home.do">PDB</a>. Le code PDB pour le lysozyme de blanc d&#8217;oeuf est: <a class="reference external" href="http://www.rcsb.org/pdb/explore/explore.do?structureId=1aki">1AKI</a>.
+<p>La structure du lysozyme est bien connue et est disponible sur le site de la <a class="reference external" href="http://www.rcsb.org/pdb/home/home.do">PDB</a>. Le code PDB pour le lysozyme de blanc d’oeuf est: <a class="reference external" href="http://www.rcsb.org/pdb/explore/explore.do?structureId=1aki">1AKI</a>.
 La première étape est donc de télécharger les coordonnées atomiques sous le format <cite>.pdb</cite>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>&gt; wget https://files.rcsb.org/download/1AKI.pdb
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">files</span><span class="o">.</span><span class="n">rcsb</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="mi">1</span><span class="n">AKI</span><span class="o">.</span><span class="n">pdb</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Ouvrir le fichier <cite>1AKI.pdb</cite> pour voir toutes les informations qu&#8217;il contient.</p>
+<p class="last">Ouvrir le fichier <cite>1AKI.pdb</cite> pour voir toutes les informations qu’il contient.</p>
 </div>
 <p>Le fichier <cite>.pdb</cite> ne contient que les coordonnées des atomes mais ne contient pas la topologie de la molécule qui, elle, est liée à un champ de forces.
-Pour générer cette topologie, on peut utiliser l&#8217;utilitaire <a class="reference internal" href="intro-gromacs.html#pdb2gmx"><span>gmx pdb2gmx</span></a> qui permet de lire un fichier <cite>.pdb</cite> et de générer automatiquement la topologie associée.</p>
+Pour générer cette topologie, on peut utiliser l’utilitaire <a class="reference internal" href="intro-gromacs.html#pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a> qui permet de lire un fichier <cite>.pdb</cite> et de générer automatiquement la topologie associée.</p>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p>Comme le but est d&#8217;étudier l&#8217;effet des ponts S-S, nous allons générer <em>2</em> topologies:</p>
+<p>Comme le but est d’étudier l’effet des ponts S-S, nous allons générer <em>2</em> topologies:</p>
 <ol class="last arabic simple">
 <li>une topologie contenant les ponts S-S</li>
 <li>une topologie ne contenant <em>pas</em> les ponts S-S</li>
 </ol>
 </div>
 <p>La commande pour générer la topologie du lysozyme est:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>&gt; gmx pdb2gmx -f 1AKI.pdb -ss
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">pdb2gmx</span> <span class="o">-</span><span class="n">f</span> <span class="mi">1</span><span class="n">AKI</span><span class="o">.</span><span class="n">pdb</span> <span class="o">-</span><span class="n">ss</span>
 </pre></div>
 </div>
-<p>L&#8217;option <cite>-ss</cite> rend interactif le choix des ponts S-S.</p>
-<p>Premièrement <a class="reference internal" href="intro-gromacs.html#pdb2gmx"><span>gmx pdb2gmx</span></a> demande de choisir le champ de force:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span> 1: AMBER03 protein, nucleic AMBER94 (Duan et al., J. Comp. Chem. 24, 1999-2012, 2003)
- 2: AMBER94 force field (Cornell et al., JACS 117, 5179-5197, 1995)
- 3: AMBER96 protein, nucleic AMBER94 (Kollman et al., Acc. Chem. Res. 29, 461-469, 1996)
- 4: AMBER99 protein, nucleic AMBER94 (Wang et al., J. Comp. Chem. 21, 1049-1074, 2000)
- 5: AMBER99SB protein, nucleic AMBER94 (Hornak et al., Proteins 65, 712-725, 2006)
- 6: AMBER99SB-ILDN protein, nucleic AMBER94 (Lindorff-Larsen et al., Proteins 78, 1950-58, 2010)
- 7: AMBERGS force field (Garcia &amp; Sanbonmatsu, PNAS 99, 2782-2787, 2002)
- 8: CHARMM27 all-atom force field (CHARM22 plus CMAP for proteins)
- 9: GROMOS96 43a1 force field
-10: GROMOS96 43a2 force field (improved alkane dihedrals)
-11: GROMOS96 45a3 force field (Schuler JCC 2001 22 1205)
-12: GROMOS96 53a5 force field (JCC 2004 vol 25 pag 1656)
-13: GROMOS96 53a6 force field (JCC 2004 vol 25 pag 1656)
-14: GROMOS96 54a7 force field (Eur. Biophys. J. (2011), 40,, 843-856, DOI: 10.1007/s00249-011-0700-9)
-15: OPLS-AA/L all-atom force field (2001 aminoacid dihedrals)
+<p>L’option <cite>-ss</cite> rend interactif le choix des ponts S-S.</p>
+<p>Premièrement <a class="reference internal" href="intro-gromacs.html#pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a> demande de choisir le champ de force:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="mi">1</span><span class="p">:</span> <span class="n">AMBER03</span> <span class="n">protein</span><span class="p">,</span> <span class="n">nucleic</span> <span class="n">AMBER94</span> <span class="p">(</span><span class="n">Duan</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span><span class="p">,</span> <span class="n">J</span><span class="o">.</span> <span class="n">Comp</span><span class="o">.</span> <span class="n">Chem</span><span class="o">.</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">1999</span><span class="o">-</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">2003</span><span class="p">)</span>
+ <span class="mi">2</span><span class="p">:</span> <span class="n">AMBER94</span> <span class="n">force</span> <span class="n">field</span> <span class="p">(</span><span class="n">Cornell</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span><span class="p">,</span> <span class="n">JACS</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">5179</span><span class="o">-</span><span class="mi">5197</span><span class="p">,</span> <span class="mi">1995</span><span class="p">)</span>
+ <span class="mi">3</span><span class="p">:</span> <span class="n">AMBER96</span> <span class="n">protein</span><span class="p">,</span> <span class="n">nucleic</span> <span class="n">AMBER94</span> <span class="p">(</span><span class="n">Kollman</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span><span class="p">,</span> <span class="n">Acc</span><span class="o">.</span> <span class="n">Chem</span><span class="o">.</span> <span class="n">Res</span><span class="o">.</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">461</span><span class="o">-</span><span class="mi">469</span><span class="p">,</span> <span class="mi">1996</span><span class="p">)</span>
+ <span class="mi">4</span><span class="p">:</span> <span class="n">AMBER99</span> <span class="n">protein</span><span class="p">,</span> <span class="n">nucleic</span> <span class="n">AMBER94</span> <span class="p">(</span><span class="n">Wang</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span><span class="p">,</span> <span class="n">J</span><span class="o">.</span> <span class="n">Comp</span><span class="o">.</span> <span class="n">Chem</span><span class="o">.</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">1049</span><span class="o">-</span><span class="mi">1074</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+ <span class="mi">5</span><span class="p">:</span> <span class="n">AMBER99SB</span> <span class="n">protein</span><span class="p">,</span> <span class="n">nucleic</span> <span class="n">AMBER94</span> <span class="p">(</span><span class="n">Hornak</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span><span class="p">,</span> <span class="n">Proteins</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">712</span><span class="o">-</span><span class="mi">725</span><span class="p">,</span> <span class="mi">2006</span><span class="p">)</span>
+ <span class="mi">6</span><span class="p">:</span> <span class="n">AMBER99SB</span><span class="o">-</span><span class="n">ILDN</span> <span class="n">protein</span><span class="p">,</span> <span class="n">nucleic</span> <span class="n">AMBER94</span> <span class="p">(</span><span class="n">Lindorff</span><span class="o">-</span><span class="n">Larsen</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span><span class="p">,</span> <span class="n">Proteins</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">1950</span><span class="o">-</span><span class="mi">58</span><span class="p">,</span> <span class="mi">2010</span><span class="p">)</span>
+ <span class="mi">7</span><span class="p">:</span> <span class="n">AMBERGS</span> <span class="n">force</span> <span class="n">field</span> <span class="p">(</span><span class="n">Garcia</span> <span class="o">&amp;</span> <span class="n">Sanbonmatsu</span><span class="p">,</span> <span class="n">PNAS</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">2782</span><span class="o">-</span><span class="mi">2787</span><span class="p">,</span> <span class="mi">2002</span><span class="p">)</span>
+ <span class="mi">8</span><span class="p">:</span> <span class="n">CHARMM27</span> <span class="nb">all</span><span class="o">-</span><span class="n">atom</span> <span class="n">force</span> <span class="n">field</span> <span class="p">(</span><span class="n">CHARM22</span> <span class="n">plus</span> <span class="n">CMAP</span> <span class="k">for</span> <span class="n">proteins</span><span class="p">)</span>
+ <span class="mi">9</span><span class="p">:</span> <span class="n">GROMOS96</span> <span class="mi">43</span><span class="n">a1</span> <span class="n">force</span> <span class="n">field</span>
+<span class="mi">10</span><span class="p">:</span> <span class="n">GROMOS96</span> <span class="mi">43</span><span class="n">a2</span> <span class="n">force</span> <span class="n">field</span> <span class="p">(</span><span class="n">improved</span> <span class="n">alkane</span> <span class="n">dihedrals</span><span class="p">)</span>
+<span class="mi">11</span><span class="p">:</span> <span class="n">GROMOS96</span> <span class="mi">45</span><span class="n">a3</span> <span class="n">force</span> <span class="n">field</span> <span class="p">(</span><span class="n">Schuler</span> <span class="n">JCC</span> <span class="mi">2001</span> <span class="mi">22</span> <span class="mi">1205</span><span class="p">)</span>
+<span class="mi">12</span><span class="p">:</span> <span class="n">GROMOS96</span> <span class="mi">53</span><span class="n">a5</span> <span class="n">force</span> <span class="n">field</span> <span class="p">(</span><span class="n">JCC</span> <span class="mi">2004</span> <span class="n">vol</span> <span class="mi">25</span> <span class="n">pag</span> <span class="mi">1656</span><span class="p">)</span>
+<span class="mi">13</span><span class="p">:</span> <span class="n">GROMOS96</span> <span class="mi">53</span><span class="n">a6</span> <span class="n">force</span> <span class="n">field</span> <span class="p">(</span><span class="n">JCC</span> <span class="mi">2004</span> <span class="n">vol</span> <span class="mi">25</span> <span class="n">pag</span> <span class="mi">1656</span><span class="p">)</span>
+<span class="mi">14</span><span class="p">:</span> <span class="n">GROMOS96</span> <span class="mi">54</span><span class="n">a7</span> <span class="n">force</span> <span class="n">field</span> <span class="p">(</span><span class="n">Eur</span><span class="o">.</span> <span class="n">Biophys</span><span class="o">.</span> <span class="n">J</span><span class="o">.</span> <span class="p">(</span><span class="mi">2011</span><span class="p">),</span> <span class="mi">40</span><span class="p">,,</span> <span class="mi">843</span><span class="o">-</span><span class="mi">856</span><span class="p">,</span> <span class="n">DOI</span><span class="p">:</span> <span class="mf">10.1007</span><span class="o">/</span><span class="n">s00249</span><span class="o">-</span><span class="mi">011</span><span class="o">-</span><span class="mi">0700</span><span class="o">-</span><span class="mi">9</span><span class="p">)</span>
+<span class="mi">15</span><span class="p">:</span> <span class="n">OPLS</span><span class="o">-</span><span class="n">AA</span><span class="o">/</span><span class="n">L</span> <span class="nb">all</span><span class="o">-</span><span class="n">atom</span> <span class="n">force</span> <span class="n">field</span> <span class="p">(</span><span class="mi">2001</span> <span class="n">aminoacid</span> <span class="n">dihedrals</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Ici, nous allons choisir <cite>GROMOS96 54a7</cite> (choix <em>14</em>).</p>
-<p>Ensuite, le modèle d&#8217;eau doit être choisi:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>1: SPC    simple point charge, recommended
-2: SPC/E  extended simple point charge
-3: None
+<p>Ensuite, le modèle d’eau doit être choisi:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span> <span class="n">SPC</span>    <span class="n">simple</span> <span class="n">point</span> <span class="n">charge</span><span class="p">,</span> <span class="n">recommended</span>
+<span class="mi">2</span><span class="p">:</span> <span class="n">SPC</span><span class="o">/</span><span class="n">E</span>  <span class="n">extended</span> <span class="n">simple</span> <span class="n">point</span> <span class="n">charge</span>
+<span class="mi">3</span><span class="p">:</span> <span class="kc">None</span>
 </pre></div>
 </div>
 <p>Il faut choisir <cite>SPC</cite> (choix <em>1</em>)</p>
 <p>Enfin, le choix des ponts S-S intervient:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>Link CYS-6 SG-48 and CYS-127 SG-981 (y/n) ?
+<div class="highlight-default"><div class="highlight"><pre><span></span>Link CYS-6 SG-48 and CYS-127 SG-981 (y/n) ?
 </pre></div>
 </div>
 <p>Pour chacun des ponts (4), il faut répondre <cite>y</cite> pour confirmer la présence du pont ou <cite>n</cite> pour générer une topologie sans le pont (= Cystéines libres).</p>
-<p>A partir de ces réponses, <a class="reference internal" href="intro-gromacs.html#pdb2gmx"><span>gmx pdb2gmx</span></a> génère 3 fichiers:</p>
+<p>A partir de ces réponses, <a class="reference internal" href="intro-gromacs.html#pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a> génère 3 fichiers:</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li><cite>conf.gro</cite> qui contient les coordonnées des atomes (similaire au fichier <cite>.pdb</cite> de départ)</li>
@@ -230,7 +256,7 @@ Pour générer cette topologie, on peut utiliser l&#8217;utilitaire <a class="re
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Ouvrir ces fichiers pour voir ce qu&#8217;ils contiennent</p>
+<p class="last">Ouvrir ces fichiers pour voir ce qu’ils contiennent</p>
 </div>
 <div class="admonition tip">
 <p class="first admonition-title">Astuce</p>
@@ -243,158 +269,158 @@ Pour générer cette topologie, on peut utiliser l&#8217;utilitaire <a class="re
 </div>
 <div class="section" id="solvatation-du-lysozyme">
 <h2>Solvatation du lysozyme<a class="headerlink" href="#solvatation-du-lysozyme" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Premièrement il est nécessaire de créer la boite de simulation autour de notre protéine grâce à <a class="reference internal" href="intro-gromacs.html#editconf"><span>gmx editconf</span></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>&gt; gmx editconf -f conf.gro -o lyso.gro -d 0.7 -bt dodecahedron
+<p>Premièrement il est nécessaire de créer la boite de simulation autour de notre protéine grâce à <a class="reference internal" href="intro-gromacs.html#editconf"><span class="std std-ref">gmx editconf</span></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">editconf</span> <span class="o">-</span><span class="n">f</span> <span class="n">conf</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">o</span> <span class="n">lyso</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">d</span> <span class="mf">0.7</span> <span class="o">-</span><span class="n">bt</span> <span class="n">dodecahedron</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Ouvrir <cite>lyso.gro</cite> avec VMD pour observer la boîte de simulation et sa réplication dans les trois dimensions de l&#8217;espace.</p>
+<p class="last">Ouvrir <cite>lyso.gro</cite> avec VMD pour observer la boîte de simulation et sa réplication dans les trois dimensions de l’espace.</p>
 </div>
-<p>Maintenant que la boîte de simulation est définie, on peut rajouter le solvant à l&#8217;aide de l&#8217;utilitaire <a class="reference internal" href="intro-gromacs.html#solvate"><span>gmx solvate</span></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>&gt; gmx solvate -p topol.top -cp lyso.gro -cs -o lyso_W.gro
+<p>Maintenant que la boîte de simulation est définie, on peut rajouter le solvant à l’aide de l’utilitaire <a class="reference internal" href="intro-gromacs.html#solvate"><span class="std std-ref">gmx solvate</span></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">solvate</span> <span class="o">-</span><span class="n">p</span> <span class="n">topol</span><span class="o">.</span><span class="n">top</span> <span class="o">-</span><span class="n">cp</span> <span class="n">lyso</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">cs</span> <span class="o">-</span><span class="n">o</span> <span class="n">lyso_W</span><span class="o">.</span><span class="n">gro</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Ouvrir <cite>lyso_W.gro</cite> avec VMD pour observer comment l&#8217;eau est ajoutée au système.</p>
+<p class="last">Ouvrir <cite>lyso_W.gro</cite> avec VMD pour observer comment l’eau est ajoutée au système.</p>
 </div>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">Il est important de vérifier que <a class="reference internal" href="intro-gromacs.html#solvate"><span>gmx solvate</span></a> a bien rajouté la ligne correspondant au solvant dans <cite>topol.top</cite></p>
+<p class="last">Il est important de vérifier que <a class="reference internal" href="intro-gromacs.html#solvate"><span class="std std-ref">gmx solvate</span></a> a bien rajouté la ligne correspondant au solvant dans <cite>topol.top</cite></p>
 </div>
 </div>
 <div class="section" id="ajout-des-ions">
 <h2>Ajout des ions<a class="headerlink" href="#ajout-des-ions" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Le lysozyme n&#8217;est pas neutre et est chargé positivement, la boîte MD étant répliquée dans les trois dimensions, le système
-est virtuellement infini et il est important d&#8217;avoir une boîte neutre.
+<p>Le lysozyme n’est pas neutre et est chargé positivement, la boîte MD étant répliquée dans les trois dimensions, le système
+est virtuellement infini et il est important d’avoir une boîte neutre.
 Il faut donc rajouter des ions négatifs (e.g. des Cl-) pour compenser les charges positives du lysozyme.
 Cela ce fait en deux étapes:</p>
 <p>Premièrement, on crée un fichier de topologie complet (<cite>ions.tpr</cite>) qui contient toutes les informations (coordonnées + topologie) nécessaires.
-Cela est fait par l&#8217;intermédiaire de l&#8217;utilitaire <a class="reference internal" href="intro-gromacs.html#grompp"><span>gmx grompp</span></a> et nécessite, en plus des coordonnées et de la topologie,
+Cela est fait par l’intermédiaire de l’utilitaire <a class="reference internal" href="intro-gromacs.html#grompp"><span class="std std-ref">gmx grompp</span></a> et nécessite, en plus des coordonnées et de la topologie,
 un fichier de paramètre de simulation (<a class="reference download internal" href="_downloads/ions.mdp" download=""><code class="xref download docutils literal"><span class="pre">ions.mdp</span></code></a>):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>&gt; gmx grompp -f ions.mdp -c lyso_W.gro -p topol.top -o ions.tpr
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">grompp</span> <span class="o">-</span><span class="n">f</span> <span class="n">ions</span><span class="o">.</span><span class="n">mdp</span> <span class="o">-</span><span class="n">c</span> <span class="n">lyso_W</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">p</span> <span class="n">topol</span><span class="o">.</span><span class="n">top</span> <span class="o">-</span><span class="n">o</span> <span class="n">ions</span><span class="o">.</span><span class="n">tpr</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>Le fichier de paramètre de simulation (<cite>ions.mdp</cite>) n&#8217;a pas d&#8217;utilité mais il est néanmoins requis par <a class="reference internal" href="intro-gromacs.html#grompp"><span>gmx grompp</span></a>.</p>
-<p class="last">Il peut d&#8217;ailleurs être intéressant de l&#8217;ouvrir (dans un éditeur de texte) pour voir quelle type de simulation il contient.</p>
+<p>Le fichier de paramètre de simulation (<cite>ions.mdp</cite>) n’a pas d’utilité mais il est néanmoins requis par <a class="reference internal" href="intro-gromacs.html#grompp"><span class="std std-ref">gmx grompp</span></a>.</p>
+<p class="last">Il peut d’ailleurs être intéressant de l’ouvrir (dans un éditeur de texte) pour voir quelle type de simulation il contient.</p>
 </div>
 <p>Le fichier <cite>ions.tpr</cite> contenant à la fois les coordonnées des atomes et la topologie du système (i.e. les molécules),
-on peut maintenant l&#8217;utiliser pour remplacer une molécule d&#8217;eau par un ion Cl- afin de rendre la boîte MD neutre.
-Pour cela on utilise l&#8217;utilitaire <a class="reference internal" href="intro-gromacs.html#genion"><span>gmx genion</span></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>&gt; gmx genion -s ions.tpr -o lyso_WI.gro -p topol.top -neutral
+on peut maintenant l’utiliser pour remplacer une molécule d’eau par un ion Cl- afin de rendre la boîte MD neutre.
+Pour cela on utilise l’utilitaire <a class="reference internal" href="intro-gromacs.html#genion"><span class="std std-ref">gmx genion</span></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">genion</span> <span class="o">-</span><span class="n">s</span> <span class="n">ions</span><span class="o">.</span><span class="n">tpr</span> <span class="o">-</span><span class="n">o</span> <span class="n">lyso_WI</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">p</span> <span class="n">topol</span><span class="o">.</span><span class="n">top</span> <span class="o">-</span><span class="n">neutral</span>
 </pre></div>
 </div>
-<p>Même si les molécules sont définies dans le fichier <cite>ions.tpr</cite>, <a class="reference internal" href="intro-gromacs.html#genion"><span>gmx genion</span></a> ne sélectionner que des groupes d&#8217;atomes:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>Select a continuous group of solvent molecules
-Group     0 (         System) has 20808 elements
-Group     1 (        Protein) has  1323 elements
-Group     2 (      Protein-H) has  1001 elements
-Group     3 (        C-alpha) has   129 elements
-Group     4 (       Backbone) has   387 elements
-Group     5 (      MainChain) has   517 elements
-Group     6 (   MainChain+Cb) has   634 elements
-Group     7 (    MainChain+H) has   646 elements
-Group     8 (      SideChain) has   677 elements
-Group     9 (    SideChain-H) has   484 elements
-Group    10 (    Prot-Masses) has  1323 elements
-Group    11 (    non-Protein) has 19485 elements
-Group    12 (          Water) has 19485 elements
-Group    13 (            SOL) has 19485 elements
-Group    14 (      non-Water) has  1323 elements
+<p>Même si les molécules sont définies dans le fichier <cite>ions.tpr</cite>, <a class="reference internal" href="intro-gromacs.html#genion"><span class="std std-ref">gmx genion</span></a> ne sélectionner que des groupes d’atomes:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Select</span> <span class="n">a</span> <span class="n">continuous</span> <span class="n">group</span> <span class="n">of</span> <span class="n">solvent</span> <span class="n">molecules</span>
+<span class="n">Group</span>     <span class="mi">0</span> <span class="p">(</span>         <span class="n">System</span><span class="p">)</span> <span class="n">has</span> <span class="mi">20808</span> <span class="n">elements</span>
+<span class="n">Group</span>     <span class="mi">1</span> <span class="p">(</span>        <span class="n">Protein</span><span class="p">)</span> <span class="n">has</span>  <span class="mi">1323</span> <span class="n">elements</span>
+<span class="n">Group</span>     <span class="mi">2</span> <span class="p">(</span>      <span class="n">Protein</span><span class="o">-</span><span class="n">H</span><span class="p">)</span> <span class="n">has</span>  <span class="mi">1001</span> <span class="n">elements</span>
+<span class="n">Group</span>     <span class="mi">3</span> <span class="p">(</span>        <span class="n">C</span><span class="o">-</span><span class="n">alpha</span><span class="p">)</span> <span class="n">has</span>   <span class="mi">129</span> <span class="n">elements</span>
+<span class="n">Group</span>     <span class="mi">4</span> <span class="p">(</span>       <span class="n">Backbone</span><span class="p">)</span> <span class="n">has</span>   <span class="mi">387</span> <span class="n">elements</span>
+<span class="n">Group</span>     <span class="mi">5</span> <span class="p">(</span>      <span class="n">MainChain</span><span class="p">)</span> <span class="n">has</span>   <span class="mi">517</span> <span class="n">elements</span>
+<span class="n">Group</span>     <span class="mi">6</span> <span class="p">(</span>   <span class="n">MainChain</span><span class="o">+</span><span class="n">Cb</span><span class="p">)</span> <span class="n">has</span>   <span class="mi">634</span> <span class="n">elements</span>
+<span class="n">Group</span>     <span class="mi">7</span> <span class="p">(</span>    <span class="n">MainChain</span><span class="o">+</span><span class="n">H</span><span class="p">)</span> <span class="n">has</span>   <span class="mi">646</span> <span class="n">elements</span>
+<span class="n">Group</span>     <span class="mi">8</span> <span class="p">(</span>      <span class="n">SideChain</span><span class="p">)</span> <span class="n">has</span>   <span class="mi">677</span> <span class="n">elements</span>
+<span class="n">Group</span>     <span class="mi">9</span> <span class="p">(</span>    <span class="n">SideChain</span><span class="o">-</span><span class="n">H</span><span class="p">)</span> <span class="n">has</span>   <span class="mi">484</span> <span class="n">elements</span>
+<span class="n">Group</span>    <span class="mi">10</span> <span class="p">(</span>    <span class="n">Prot</span><span class="o">-</span><span class="n">Masses</span><span class="p">)</span> <span class="n">has</span>  <span class="mi">1323</span> <span class="n">elements</span>
+<span class="n">Group</span>    <span class="mi">11</span> <span class="p">(</span>    <span class="n">non</span><span class="o">-</span><span class="n">Protein</span><span class="p">)</span> <span class="n">has</span> <span class="mi">19485</span> <span class="n">elements</span>
+<span class="n">Group</span>    <span class="mi">12</span> <span class="p">(</span>          <span class="n">Water</span><span class="p">)</span> <span class="n">has</span> <span class="mi">19485</span> <span class="n">elements</span>
+<span class="n">Group</span>    <span class="mi">13</span> <span class="p">(</span>            <span class="n">SOL</span><span class="p">)</span> <span class="n">has</span> <span class="mi">19485</span> <span class="n">elements</span>
+<span class="n">Group</span>    <span class="mi">14</span> <span class="p">(</span>      <span class="n">non</span><span class="o">-</span><span class="n">Water</span><span class="p">)</span> <span class="n">has</span>  <span class="mi">1323</span> <span class="n">elements</span>
 </pre></div>
 </div>
-<p>Les molécules d&#8217;eau sont contenues dans plusieurs groupes (<cite>System</cite>, <cite>Water</cite> et <cite>SOL</cite>) mais apparaissent comme <cite>SOL</cite> dans le fichier de topologie <cite>topol.top</cite>.</p>
-<p>Il faut donc choisir le groupe <cite>13</cite> dans <a class="reference internal" href="intro-gromacs.html#genion"><span>gmx genion</span></a>.</p>
+<p>Les molécules d’eau sont contenues dans plusieurs groupes (<cite>System</cite>, <cite>Water</cite> et <cite>SOL</cite>) mais apparaissent comme <cite>SOL</cite> dans le fichier de topologie <cite>topol.top</cite>.</p>
+<p>Il faut donc choisir le groupe <cite>13</cite> dans <a class="reference internal" href="intro-gromacs.html#genion"><span class="std std-ref">gmx genion</span></a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Ouvrir le fichier <cite>lyso_WI.gro</cite> dans VMD pour visualiser où les ions ont été ajoutés.</p>
 </div>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">Vérifier que le fichier <cite>topol.top</cite> a bien été mis à jour par <a class="reference internal" href="intro-gromacs.html#genion"><span>gmx genion</span></a>.</p>
+<p class="last">Vérifier que le fichier <cite>topol.top</cite> a bien été mis à jour par <a class="reference internal" href="intro-gromacs.html#genion"><span class="std std-ref">gmx genion</span></a>.</p>
 </div>
 </div>
 <div class="section" id="minimisation-energetique">
 <span id="minim"></span><h2>Minimisation énergétique<a class="headerlink" href="#minimisation-energetique" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Les molécules ayant été mises dans la boîte aléatoirement, l&#8217;énergie du système (calculée à partir du champ de force) est très élevé
+<p>Les molécules ayant été mises dans la boîte aléatoirement, l’énergie du système (calculée à partir du champ de force) est très élevé
 et il est nécessaire de la minimiser avant de faire une simulation de dynamique moléculaire.
-Pour cela, on va générer une topologie complète (<cite>em.tpr</cite>) qui va contenir les paramètres de minimisation (<a class="reference download internal" href="_downloads/minim.mdp" download=""><code class="xref download docutils literal"><span class="pre">minim.mdp</span></code></a>) à l&#8217;aide de <a class="reference internal" href="intro-gromacs.html#grompp"><span>gmx grompp</span></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>&gt; gmx grompp -f minim.mdp -c lyso_WI.gro -p topol.top -o em.tpr
+Pour cela, on va générer une topologie complète (<cite>em.tpr</cite>) qui va contenir les paramètres de minimisation (<a class="reference download internal" href="_downloads/minim.mdp" download=""><code class="xref download docutils literal"><span class="pre">minim.mdp</span></code></a>) à l’aide de <a class="reference internal" href="intro-gromacs.html#grompp"><span class="std std-ref">gmx grompp</span></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">grompp</span> <span class="o">-</span><span class="n">f</span> <span class="n">minim</span><span class="o">.</span><span class="n">mdp</span> <span class="o">-</span><span class="n">c</span> <span class="n">lyso_WI</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">p</span> <span class="n">topol</span><span class="o">.</span><span class="n">top</span> <span class="o">-</span><span class="n">o</span> <span class="n">em</span><span class="o">.</span><span class="n">tpr</span>
 </pre></div>
 </div>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">Il faut <em>toujours</em> bien lire la sortie de <a class="reference internal" href="intro-gromacs.html#grompp"><span>gmx grompp</span></a> afin de vérifier que tout se passe bien (i.e. ni &#8220;WARNING&#8221;, ni &#8220;ERROR&#8221;)</p>
+<p class="last">Il faut <em>toujours</em> bien lire la sortie de <a class="reference internal" href="intro-gromacs.html#grompp"><span class="std std-ref">gmx grompp</span></a> afin de vérifier que tout se passe bien (i.e. ni «&nbsp;WARNING&nbsp;», ni «&nbsp;ERROR&nbsp;»)</p>
 </div>
-<p>Une fois que la topologie complète est prête, on peut lancer la minimisation à l&#8217;aide de <a class="reference internal" href="intro-gromacs.html#mdrun"><span>gmx mdrun</span></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>&gt; gmx mdrun -v -deffnm em
+<p>Une fois que la topologie complète est prête, on peut lancer la minimisation à l’aide de <a class="reference internal" href="intro-gromacs.html#mdrun"><span class="std std-ref">gmx mdrun</span></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">deffnm</span> <span class="n">em</span>
 </pre></div>
 </div>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">Ne pas recopier (et exécuter) cette commande sans réflexion! (<a class="reference internal" href="intro-gromacs.html#warning-mdrun"><span>Pourquoi ?</span></a>)</p>
+<p class="last">Ne pas recopier (et exécuter) cette commande sans réflexion! (<a class="reference internal" href="intro-gromacs.html#warning-mdrun"><span class="std std-ref">Pourquoi ?</span></a>)</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Utiliser <a class="reference internal" href="intro-gromacs.html#energy"><span>gmx energy</span></a> pour observer la diminution de l&#8217;énergie au cours de la minimisation.</p>
+<p class="last">Utiliser <a class="reference internal" href="intro-gromacs.html#energy"><span class="std std-ref">gmx energy</span></a> pour observer la diminution de l’énergie au cours de la minimisation.</p>
 </div>
 </div>
 <div class="section" id="equilibration-nvt">
 <span id="id2"></span><h2>Équilibration NVT<a class="headerlink" href="#equilibration-nvt" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Maintenant que la configuration du système est minimisée, on peut équilibrer le système, c&#8217;est à dire introduire
+<p>Maintenant que la configuration du système est minimisée, on peut équilibrer le système, c’est à dire introduire
 les contraintes de température et de pression qui seront appliquées pendant la simulation de production (de données).</p>
-<p>On introduit toujours la contrainte de température en premier sous la forme d&#8217;une simulation souvent assez courte (inférieure à 1 ns)
+<p>On introduit toujours la contrainte de température en premier sous la forme d’une simulation souvent assez courte (inférieure à 1 ns)
 dans laquelle:</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li>Le nombre <cite>N</cite> de particles ne varie pas (imposé par les <a class="reference external" href="https://fr.wikipedia.org/wiki/Condition_p%C3%A9riodique_aux_limites">Conditions Périodiques aux Limites</a>)</li>
-<li>Le volume <cite>V</cite> de la boîte est fixe (car la pression n&#8217;est pas fixée - cf. l&#8217;<a class="reference external" href="https://fr.wikipedia.org/wiki/Loi_des_gaz_parfaits#.C3.89quation_des_gaz_parfaits">équation des gaz parfaits</a>)</li>
-<li>La température <cite>T</cite> du système est fixé à l&#8217;aide d&#8217;un thermostat (e.g. <a class="reference external" href="https://en.wikipedia.org/wiki/Berendsen_thermostat">Thermostat de Berendsen</a>)</li>
+<li>Le volume <cite>V</cite> de la boîte est fixe (car la pression n’est pas fixée - cf. l”<a class="reference external" href="https://fr.wikipedia.org/wiki/Loi_des_gaz_parfaits#.C3.89quation_des_gaz_parfaits">équation des gaz parfaits</a>)</li>
+<li>La température <cite>T</cite> du système est fixé à l’aide d’un thermostat (e.g. <a class="reference external" href="https://en.wikipedia.org/wiki/Berendsen_thermostat">Thermostat de Berendsen</a>)</li>
 </ol>
 </div></blockquote>
-<p>C&#8217;est pourquoi on parle souvent d&#8217;équilibration <cite>NVT</cite>.</p>
-<p>Comme pour la minimisation énergétique, <a class="reference internal" href="intro-gromacs.html#grompp"><span>gmx grompp</span></a> permet de générer la topologie complète:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>&gt; gmx grompp -f nvt.mdp -c em.gro -p topol.top -o nvt.tpr
+<p>C’est pourquoi on parle souvent d’équilibration <cite>NVT</cite>.</p>
+<p>Comme pour la minimisation énergétique, <a class="reference internal" href="intro-gromacs.html#grompp"><span class="std std-ref">gmx grompp</span></a> permet de générer la topologie complète:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">grompp</span> <span class="o">-</span><span class="n">f</span> <span class="n">nvt</span><span class="o">.</span><span class="n">mdp</span> <span class="o">-</span><span class="n">c</span> <span class="n">em</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">p</span> <span class="n">topol</span><span class="o">.</span><span class="n">top</span> <span class="o">-</span><span class="n">o</span> <span class="n">nvt</span><span class="o">.</span><span class="n">tpr</span>
 </pre></div>
 </div>
-<p>Le fichier de paramètre utilisé ici (<a class="reference download internal" href="_downloads/nvt.mdp" download=""><code class="xref download docutils literal"><span class="pre">nvt.mdp</span></code></a>) est évidemment adapté pour l&#8217;équilibration <cite>NVT</cite> avec en particulier:</p>
+<p>Le fichier de paramètre utilisé ici (<a class="reference download internal" href="_downloads/nvt.mdp" download=""><code class="xref download docutils literal"><span class="pre">nvt.mdp</span></code></a>) est évidemment adapté pour l’équilibration <cite>NVT</cite> avec en particulier:</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li>la contrainte des positions</li>
-<li>l&#8217;utilisation d&#8217;un thermostat à une température fixée (= couplage en température)</li>
-<li>l&#8217;absence de couplage en pression (= pression libre)</li>
+<li>l’utilisation d’un thermostat à une température fixée (= couplage en température)</li>
+<li>l’absence de couplage en pression (= pression libre)</li>
 </ol>
 </div></blockquote>
 <div class="section" id="contrainte-des-positions">
 <span id="posres"></span><h3>Contrainte des positions<a class="headerlink" href="#contrainte-des-positions" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Il est possible de contraindre les atomes afin qu&#8217;ils reste fixes. Dans le cas d&#8217;une équilibration,
-il est souvent intéressant (voire nécessaire) de garder les grosses molécules (e.g. molécules) fixes afin de laisser les petites molécules (e.g. eau et ions), très mobiles, s&#8217;équilibrer.</p>
-<p>Dans GROMACS, l&#8217;introduction de ces contraintes se fait généralement via l&#8217;utilisation de fichiers du type <cite>posres.itp</cite>
-tels que celui-ci généré par <a class="reference internal" href="intro-gromacs.html#pdb2gmx"><span>gmx pdb2gmx</span></a> et dont le contenu ressemble à cela:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>[ position_restraints ]
-; atom  type  fx    fy    fz
-     1     1  1000  1000  1000
-     5     1  1000  1000  1000
-     6     1  1000  1000  1000
-     7     1  1000  1000  1000
-     8     1  1000  1000  1000
-     9     1  1000  1000  1000
-    10     1  1000  1000  1000
-...
+<p>Il est possible de contraindre les atomes afin qu’ils reste fixes. Dans le cas d’une équilibration,
+il est souvent intéressant (voire nécessaire) de garder les grosses molécules (e.g. molécules) fixes afin de laisser les petites molécules (e.g. eau et ions), très mobiles, s’équilibrer.</p>
+<p>Dans GROMACS, l’introduction de ces contraintes se fait généralement via l’utilisation de fichiers du type <cite>posres.itp</cite>
+tels que celui-ci généré par <a class="reference internal" href="intro-gromacs.html#pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a> et dont le contenu ressemble à cela:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="n">position_restraints</span> <span class="p">]</span>
+<span class="p">;</span> <span class="n">atom</span>  <span class="nb">type</span>  <span class="n">fx</span>    <span class="n">fy</span>    <span class="n">fz</span>
+     <span class="mi">1</span>     <span class="mi">1</span>  <span class="mi">1000</span>  <span class="mi">1000</span>  <span class="mi">1000</span>
+     <span class="mi">5</span>     <span class="mi">1</span>  <span class="mi">1000</span>  <span class="mi">1000</span>  <span class="mi">1000</span>
+     <span class="mi">6</span>     <span class="mi">1</span>  <span class="mi">1000</span>  <span class="mi">1000</span>  <span class="mi">1000</span>
+     <span class="mi">7</span>     <span class="mi">1</span>  <span class="mi">1000</span>  <span class="mi">1000</span>  <span class="mi">1000</span>
+     <span class="mi">8</span>     <span class="mi">1</span>  <span class="mi">1000</span>  <span class="mi">1000</span>  <span class="mi">1000</span>
+     <span class="mi">9</span>     <span class="mi">1</span>  <span class="mi">1000</span>  <span class="mi">1000</span>  <span class="mi">1000</span>
+    <span class="mi">10</span>     <span class="mi">1</span>  <span class="mi">1000</span>  <span class="mi">1000</span>  <span class="mi">1000</span>
+<span class="o">...</span>
 </pre></div>
 </div>
-<p>Comme le contenu le laisse supposer, ce fichier donne l&#8217;intensité des forces (<cite>fx</cite>, <cite>fy</cite> et <cite>fz</cite>) appliquées aux atomes (identifiés par leur index) pour les contraindre à leur positions.</p>
-<p>Ce fichier n&#8217;est lu (et considéré pour la simulation) que sous certaines conditions précisées dans la topologie de la molécules (contenue dans <cite>topol.top</cite>):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1">#ifdef POSRES</span>
+<p>Comme le contenu le laisse supposer, ce fichier donne l’intensité des forces (<cite>fx</cite>, <cite>fy</cite> et <cite>fz</cite>) appliquées aux atomes (identifiés par leur index) pour les contraindre à leur positions.</p>
+<p>Ce fichier n’est lu (et considéré pour la simulation) que sous certaines conditions précisées dans la topologie de la molécules (contenue dans <cite>topol.top</cite>):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#ifdef POSRES</span>
 <span class="c1">#include &quot;posre.itp&quot;</span>
 <span class="c1">#endif</span>
 </pre></div>
 </div>
 <p>Ici, les contraintes de positions ne sont incluses que si <cite>POSRES</cite> est défini. Or le fichier de paramètre <cite>nvt.mdp</cite> contient justement la ligne:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">define</span>          <span class="o">=</span> <span class="o">-</span><span class="n">DPOSRES</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">define</span>          <span class="o">=</span> <span class="o">-</span><span class="n">DPOSRES</span>
 </pre></div>
 </div>
 <p>qui active (<cite>-D</cite> suivi de <cite>POSRES</cite>) la contrainte de positions.</p>
@@ -403,11 +429,11 @@ tels que celui-ci généré par <a class="reference internal" href="intro-gromac
 <span id="temperature-coupling"></span><h3>Le couplage en température<a class="headerlink" href="#le-couplage-en-temperature" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Différents algorithmes sont disponibles afin de coupler le mouvement des atomes (agitation thermique) à la température.
 Les paramètres associés doivent évidemment être décrits dans le fichier <cite>.mdp</cite> associé à la simulation.
-En l&#8217;occurence, le fichier <cite>nvt.mdp</cite> décrit plus haut contient les lignes suivantes:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>tcoupl              = V-rescale
-tc-grps             = Protein Non-Protein
-tau_t               = 0.1     0.1
-ref_t               = 363     363
+En l’occurence, le fichier <cite>nvt.mdp</cite> décrit plus haut contient les lignes suivantes:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tcoupl</span>              <span class="o">=</span> <span class="n">V</span><span class="o">-</span><span class="n">rescale</span>
+<span class="n">tc</span><span class="o">-</span><span class="n">grps</span>             <span class="o">=</span> <span class="n">Protein</span> <span class="n">Non</span><span class="o">-</span><span class="n">Protein</span>
+<span class="n">tau_t</span>               <span class="o">=</span> <span class="mf">0.1</span>     <span class="mf">0.1</span>
+<span class="n">ref_t</span>               <span class="o">=</span> <span class="mi">363</span>     <span class="mi">363</span>
 </pre></div>
 </div>
 <p>Cela signifie que le thermostat utilisé est <cite>V-rescale</cite> <a class="reference internal" href="#bussi2007" id="id3">[Bussi2007]</a>,
@@ -416,24 +442,24 @@ que la température est fixée à 363 K (~90 °C) de manière indépendante pour
 <div class="section" id="absence-de-couplage-en-pression">
 <h3>Absence de couplage en pression<a class="headerlink" href="#absence-de-couplage-en-pression" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Le fichier <cite>nvt.mdp</cite> contient le réglage suivant pour le couplage en pression:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pcoupl</span>              <span class="o">=</span> <span class="n">no</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pcoupl</span>              <span class="o">=</span> <span class="n">no</span>
 </pre></div>
 </div>
-<p>Ce qui confirme bien l&#8217;absence de couplage en pression.</p>
+<p>Ce qui confirme bien l’absence de couplage en pression.</p>
 </div>
 <div class="section" id="simulation-nvt">
 <h3>Simulation NVT<a class="headerlink" href="#simulation-nvt" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Une fois la topologie complète prête, l&#8217;équilibration <cite>NVT</cite> est effectué à l&#8217;aide de <a class="reference internal" href="intro-gromacs.html#mdrun"><span>gmx mdrun</span></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>&gt; gmx mdrun -v -deffnm nvt
+<p>Une fois la topologie complète prête, l’équilibration <cite>NVT</cite> est effectué à l’aide de <a class="reference internal" href="intro-gromacs.html#mdrun"><span class="std std-ref">gmx mdrun</span></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">deffnm</span> <span class="n">nvt</span>
 </pre></div>
 </div>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">Ne pas recopier (et exécuter) cette commande sans réflexion! (<a class="reference internal" href="intro-gromacs.html#warning-mdrun"><span>Pourquoi ?</span></a>)</p>
+<p class="last">Ne pas recopier (et exécuter) cette commande sans réflexion! (<a class="reference internal" href="intro-gromacs.html#warning-mdrun"><span class="std std-ref">Pourquoi ?</span></a>)</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Vérifier à l&#8217;aide de <a class="reference internal" href="intro-gromacs.html#energy"><span>gmx energy</span></a> que la température est bien stable. Si ce n&#8217;est pas le cas, il faut continuer l&#8217;équilibration.</p>
+<p class="last">Vérifier à l’aide de <a class="reference internal" href="intro-gromacs.html#energy"><span class="std std-ref">gmx energy</span></a> que la température est bien stable. Si ce n’est pas le cas, il faut continuer l’équilibration.</p>
 </div>
 </div>
 </div>
@@ -441,144 +467,151 @@ que la température est fixée à 363 K (~90 °C) de manière indépendante pour
 <span id="id4"></span><h2>Équilibration NPT<a class="headerlink" href="#equilibration-npt" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Une fois que la température est stable, on peut introduire le couplage en pression (toujours en contraignant la position des atomes lourds du lysozyme).</p>
 <p>Le fichier de paramètre (<a class="reference download internal" href="_downloads/npt.mdp" download=""><code class="xref download docutils literal"><span class="pre">npt.mdp</span></code></a>) contient donc naturellement les réglages du couplage en pression:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">pcoupl</span>                   <span class="o">=</span> <span class="n">Parrinello</span><span class="o">-</span><span class="n">Rahman</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pcoupl</span>                   <span class="o">=</span> <span class="n">Parrinello</span><span class="o">-</span><span class="n">Rahman</span>
 <span class="n">pcoupltype</span>       <span class="o">=</span> <span class="n">isotropic</span>
 <span class="n">tau_p</span>                    <span class="o">=</span> <span class="mf">2.0</span>
 <span class="n">ref_p</span>                    <span class="o">=</span> <span class="mf">1.0</span>
 <span class="n">compressibility</span>  <span class="o">=</span> <span class="mf">4.5e-5</span>
 </pre></div>
 </div>
-<p>L&#8217;algorithme de couplage (<cite>Parinello-Rahman</cite> <a class="reference internal" href="#nose1983" id="id5">[Nose1983]</a>) impose ici une pression isotrope d&#8217;un bar avec une compressibilité égale à celle de l&#8217;eau.</p>
+<p>L’algorithme de couplage (<cite>Parinello-Rahman</cite> <a class="reference internal" href="#nose1983" id="id5">[Nose1983]</a>) impose ici une pression isotrope d’un bar avec une compressibilité égale à celle de l’eau.</p>
 <p>De ce fait, lors de cette équilibration:</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li>Le nombre <cite>N</cite> de particles reste toujours fixé (cf. <a class="reference external" href="https://fr.wikipedia.org/wiki/Condition_p%C3%A9riodique_aux_limites">Conditions Périodiques aux Limites</a>)</li>
 <li>La température <cite>T</cite> du système est fixée (voir équilibration précédente)</li>
-<li>La pression <cite>P</cite> est maintenant fixée à l&#8217;aide d&#8217;un barostat</li>
+<li>La pression <cite>P</cite> est maintenant fixée à l’aide d’un barostat</li>
 </ol>
 </div></blockquote>
-<p>On parle donc d&#8217;équlibration <cite>NPT</cite>.</p>
+<p>On parle donc d’équlibration <cite>NPT</cite>.</p>
 <p>On peut également noter le réglage suivant dans <cite>npt.mdp</cite>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">continuation</span>        <span class="o">=</span> <span class="n">yes</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">continuation</span>        <span class="o">=</span> <span class="n">yes</span>
 </pre></div>
 </div>
-<p>Ce paramètre permet d&#8217;indiquer que la simulation est la suite d&#8217;une simulation précédente: on va &#8220;continuer&#8221; l&#8217;équilibration en activant le couplage en pression. Cela se reflète dans l&#8217;appel à <a class="reference internal" href="intro-gromacs.html#grompp"><span>gmx grompp</span></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>&gt; gmx grompp -f npt.mdp -c nvt.gro -p topol.top -t nvt.cpt -o npt.tpr
+<p>Ce paramètre permet d’indiquer que la simulation est la suite d’une simulation précédente: on va «&nbsp;continuer&nbsp;» l’équilibration en activant le couplage en pression. Cela se reflète dans l’appel à <a class="reference internal" href="intro-gromacs.html#grompp"><span class="std std-ref">gmx grompp</span></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">grompp</span> <span class="o">-</span><span class="n">f</span> <span class="n">npt</span><span class="o">.</span><span class="n">mdp</span> <span class="o">-</span><span class="n">c</span> <span class="n">nvt</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">p</span> <span class="n">topol</span><span class="o">.</span><span class="n">top</span> <span class="o">-</span><span class="n">t</span> <span class="n">nvt</span><span class="o">.</span><span class="n">cpt</span> <span class="o">-</span><span class="n">o</span> <span class="n">npt</span><span class="o">.</span><span class="n">tpr</span>
 </pre></div>
 </div>
-<p>Le fichier <cite>nvt.cpt</cite> est un fichier <a class="reference internal" href="intro-gromacs.html#simul-files"><span>checkpoint</span></a> qui contient toutes les informations nécessaire pour poursuivre la simulation (notamment les vitesses des atomes).
-On le fourni à <a class="reference internal" href="intro-gromacs.html#grompp"><span>gmx grompp</span></a> pour permettre de faire l&#8217;équilibration <cite>NPT</cite> en se basant sur l&#8217;équilibration <cite>NVT</cite>.</p>
-<p>On peut alors lancer l&#8217;équilibration <cite>NPT</cite> avec <a class="reference internal" href="intro-gromacs.html#mdrun"><span>gmx mdrun</span></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>&gt; gmx mdrun -v -deffnm npt
+<p>Le fichier <cite>nvt.cpt</cite> est un fichier <a class="reference internal" href="intro-gromacs.html#simul-files"><span class="std std-ref">checkpoint</span></a> qui contient toutes les informations nécessaire pour poursuivre la simulation (notamment les vitesses des atomes).
+On le fourni à <a class="reference internal" href="intro-gromacs.html#grompp"><span class="std std-ref">gmx grompp</span></a> pour permettre de faire l’équilibration <cite>NPT</cite> en se basant sur l’équilibration <cite>NVT</cite>.</p>
+<p>On peut alors lancer l’équilibration <cite>NPT</cite> avec <a class="reference internal" href="intro-gromacs.html#mdrun"><span class="std std-ref">gmx mdrun</span></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">deffnm</span> <span class="n">npt</span>
 </pre></div>
 </div>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">Ne pas recopier (et exécuter) cette commande sans réflexion! (<a class="reference internal" href="intro-gromacs.html#warning-mdrun"><span>Pourquoi ?</span></a>)</p>
+<p class="last">Ne pas recopier (et exécuter) cette commande sans réflexion! (<a class="reference internal" href="intro-gromacs.html#warning-mdrun"><span class="std std-ref">Pourquoi ?</span></a>)</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Utiliser <a class="reference internal" href="intro-gromacs.html#energy"><span>gmx energy</span></a> pour vérifier que la pression est bien stable. Pour cela, le plus pratique est de regarder la taille de la boîte.</p>
+<p class="last">Utiliser <a class="reference internal" href="intro-gromacs.html#energy"><span class="std std-ref">gmx energy</span></a> pour vérifier que la pression est bien stable. Pour cela, le plus pratique est de regarder la taille de la boîte.</p>
 </div>
 </div>
 <div class="section" id="production-analyse">
 <h2>Production &amp; analyse<a class="headerlink" href="#production-analyse" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Une fois que le système est équilibré, on peut lancer la &#8220;vraie&#8221; simulation, sans contraintes, qui va permettre d&#8217;acquérir les données que l&#8217;on analysera par la suite.</p>
+<p>Une fois que le système est équilibré, on peut lancer la «&nbsp;vraie&nbsp;» simulation, sans contraintes, qui va permettre d’acquérir les données que l’on analysera par la suite.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Astuce</p>
 <p class="last">Comme cette simulation sert à produire des données, on parle souvent de simulation de production.</p>
 </div>
 <div class="section" id="simulation-de-production">
 <h3>Simulation de production<a class="headerlink" href="#simulation-de-production" title="Lien permanent vers ce titre">¶</a></h3>
-<p>La seule <em>vraie</em> différence entre le fichier de paramètre d&#8217;équilibration <cite>NPT</cite> (<cite>npt.mdp</cite>) et celui de production (<a class="reference download internal" href="_downloads/md.mdp" download=""><code class="xref download docutils literal"><span class="pre">md.mdp</span></code></a>) se situe
-dans la disparation de la ligne activant les contraintes de positions. En effet, cette ligne est absente du fichier <cite>md.mdp</cite> puisqu&#8217;on veut, justement, que la simulation se fasse sans contraintes.</p>
+<p>La seule <em>vraie</em> différence entre le fichier de paramètre d’équilibration <cite>NPT</cite> (<cite>npt.mdp</cite>) et celui de production (<a class="reference download internal" href="_downloads/md.mdp" download=""><code class="xref download docutils literal"><span class="pre">md.mdp</span></code></a>) se situe
+dans la disparation de la ligne activant les contraintes de positions. En effet, cette ligne est absente du fichier <cite>md.mdp</cite> puisqu’on veut, justement, que la simulation se fasse sans contraintes.</p>
 <p>La génération de la topologie complète se fait comme précédemment:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>&gt; gmx grompp -f md.mdp -c npt.gro -p topol.top -t npt.cpt -o md.tpr
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">grompp</span> <span class="o">-</span><span class="n">f</span> <span class="n">md</span><span class="o">.</span><span class="n">mdp</span> <span class="o">-</span><span class="n">c</span> <span class="n">npt</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">p</span> <span class="n">topol</span><span class="o">.</span><span class="n">top</span> <span class="o">-</span><span class="n">t</span> <span class="n">npt</span><span class="o">.</span><span class="n">cpt</span> <span class="o">-</span><span class="n">o</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span>
 </pre></div>
 </div>
 <p>Idem pour lancer la simulation:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>&gt; gmx mdrun -v -deffnm md
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">deffnm</span> <span class="n">md</span>
 </pre></div>
 </div>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">Ne pas recopier (et exécuter) cette commande sans réflexion! (<a class="reference internal" href="intro-gromacs.html#warning-mdrun"><span>Pourquoi ?</span></a>)</p>
+<p class="last">Ne pas recopier (et exécuter) cette commande sans réflexion! (<a class="reference internal" href="intro-gromacs.html#warning-mdrun"><span class="std std-ref">Pourquoi ?</span></a>)</p>
 </div>
 </div>
 <div class="section" id="extension-de-la-simulation">
 <h3>Extension de la simulation<a class="headerlink" href="#extension-de-la-simulation" title="Lien permanent vers ce titre">¶</a></h3>
 <p>La durée simulée est indiquée implicitement dans le fichier <cite>md.mdp</cite> par les lignes:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">nsteps</span>              <span class="o">=</span> <span class="mi">500000</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">nsteps</span>              <span class="o">=</span> <span class="mi">500000</span>
 <span class="n">dt</span>              <span class="o">=</span> <span class="mf">0.002</span>
 </pre></div>
 </div>
-<p><cite>dt</cite> correspond au pas d&#8217;intégration (ici 2 fs) et <cite>nsteps</cite> au nombre de pas d&#8217;intégration à simuler.
+<p><cite>dt</cite> correspond au pas d’intégration (ici 2 fs) et <cite>nsteps</cite> au nombre de pas d’intégration à simuler.
 La durée simulée est donc de 500000 x 2 fs soit 1 ns.</p>
 <p>Cette durée est malheureusement trop courte pour pouvoir observer une différence de comportement entre le lysozyme natif et le lysozyme sans ponts S-S.
 Il faut donc poursuivre la simulation sur une durée plus longue (50 à 100 ns).
-L&#8217;utilitaire <a class="reference internal" href="intro-gromacs.html#convert-tpr"><span>gmx convert-tpr</span></a> est justement fait pour cela. Pour changer la durée de simulation jusqu&#8217;à une durée de 50 ns (soit 50000 ps), il suffit d&#8217;exécuter la commande suivante:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>&gt; gmx convert-tpr -s md.tpr -o md.tpr -until 50000
+L’utilitaire <a class="reference internal" href="intro-gromacs.html#convert-tpr"><span class="std std-ref">gmx convert-tpr</span></a> est justement fait pour cela. Pour changer la durée de simulation jusqu’à une durée de 50 ns (soit 50000 ps), il suffit d’exécuter la commande suivante:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">convert</span><span class="o">-</span><span class="n">tpr</span> <span class="o">-</span><span class="n">s</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span> <span class="o">-</span><span class="n">o</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span> <span class="o">-</span><span class="n">until</span> <span class="mi">50000</span>
 </pre></div>
 </div>
-<p>Puis de lancer la suite de la simulation à l&#8217;aide de la commande suivante:</p>
+<p>Puis de lancer la suite de la simulation à l’aide de la commande suivante:</p>
 <blockquote>
 <div>&gt; gmx mdrun -v -deffnm md -cpi md.cpt</div></blockquote>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">Ne pas recopier (et exécuter) cette commande sans réflexion! (<a class="reference internal" href="intro-gromacs.html#warning-mdrun"><span>Pourquoi ?</span></a>)</p>
+<p class="last">Ne pas recopier (et exécuter) cette commande sans réflexion! (<a class="reference internal" href="intro-gromacs.html#warning-mdrun"><span class="std std-ref">Pourquoi ?</span></a>)</p>
 </div>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">L&#8217;ajout de <cite>-cpi md.cpt</cite> permet d&#8217;utiliser le fichier <a class="reference internal" href="intro-gromacs.html#simul-files"><span>checkpoint</span></a> comme point de départ plutôt
+<p class="last">L’ajout de <cite>-cpi md.cpt</cite> permet d’utiliser le fichier <a class="reference internal" href="intro-gromacs.html#simul-files"><span class="std std-ref">checkpoint</span></a> comme point de départ plutôt
 que de devoir relancer la simulation depuis le début.</p>
 </div>
 </div>
 <div class="section" id="analyse">
 <h3>Analyse<a class="headerlink" href="#analyse" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Pour des raisons d&#8217;efficacité, GROMACS place toujours tous les atomes dans une boîte de simulation &#8220;rectangulaire&#8221; pour effectuer les calculs.
-Cela croit souvent des artéfacts quand, en particulier, une molécule est à cheval sur deux boîtes (la &#8220;vraie&#8221; et une réplique).</p>
-<p>Il faut donc traiter la trajectoire issue de la simulation de production avant de pouvoir l&#8217;analyser.
-Pour cela on utilise l&#8217;utilitaire <a class="reference internal" href="intro-gromacs.html#trjconv"><span>gmx trjconv</span></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>&gt; gmx trjconv -f md.xtc -o md_mol.xtc -pbc mol -ur compact -s md.tpr
+<p>Pour des raisons d’efficacité, GROMACS place toujours tous les atomes dans une boîte de simulation «&nbsp;rectangulaire&nbsp;» pour effectuer les calculs.
+Cela croit souvent des artéfacts quand, en particulier, une molécule est à cheval sur deux boîtes (la «&nbsp;vraie&nbsp;» et une réplique).</p>
+<p>Il faut donc traiter la trajectoire issue de la simulation de production avant de pouvoir l’analyser.
+Pour cela on utilise l’utilitaire <a class="reference internal" href="intro-gromacs.html#trjconv"><span class="std std-ref">gmx trjconv</span></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">trjconv</span> <span class="o">-</span><span class="n">f</span> <span class="n">md</span><span class="o">.</span><span class="n">xtc</span> <span class="o">-</span><span class="n">o</span> <span class="n">md_mol</span><span class="o">.</span><span class="n">xtc</span> <span class="o">-</span><span class="n">pbc</span> <span class="n">mol</span> <span class="o">-</span><span class="n">ur</span> <span class="n">compact</span> <span class="o">-</span><span class="n">s</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li>l&#8217;option <cite>-pbc mol</cite> permet, fournissant une topologie (<cite>-s md.tpr</cite>), de faire en sorte que les molécules restent entières même si certains de leur atomes &#8220;sortent&#8221; de la boîte.</li>
-<li>l&#8217;option <cite>-ur compact</cite> permet d&#8217;utiliser la représentation &#8220;compacte&#8221; de la boîte (l&#8217;eau prendra ici une forme de <a class="reference external" href="https://fr.wikipedia.org/wiki/Dod%C3%A9ca%C3%A8dre_r%C3%A9gulier">dodécaèdre</a>)</li>
+<li>l’option <cite>-pbc mol</cite> permet, fournissant une topologie (<cite>-s md.tpr</cite>), de faire en sorte que les molécules restent entières même si certains de leur atomes «&nbsp;sortent&nbsp;» de la boîte.</li>
+<li>l’option <cite>-ur compact</cite> permet d’utiliser la représentation «&nbsp;compacte&nbsp;» de la boîte (l’eau prendra ici une forme de <a class="reference external" href="https://fr.wikipedia.org/wiki/Dod%C3%A9ca%C3%A8dre_r%C3%A9gulier">dodécaèdre</a>)</li>
 </ul>
 <p>On peut maintenant analyser la trajectoire!</p>
-<p>Pour rappel, le but est de voir l&#8217;effet des ponts S-S sur la stabilité structurale du lysozyme. Un bon indicateur de la stabilité d&#8217;une protéine est la
+<p>Pour rappel, le but est de voir l’effet des ponts S-S sur la stabilité structurale du lysozyme. Un bon indicateur de la stabilité d’une protéine est la
 déviation standard des positions atomiques ou <a class="reference external" href="https://en.wikipedia.org/wiki/Root-mean-square_deviation_of_atomic_positions">RMSD</a>.</p>
-<p>L&#8217;utilitaire <a class="reference internal" href="intro-gromacs.html#rms"><span>gmx rms</span></a> permet justement de suivre le RMSD au cours de la simulation. Pour cela, il suffit d&#8217;exécuter la commande:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>&gt; gmx rms -f md_mol.xtc -s md.tpr -o rmsd.xvg
+<p>L’utilitaire <a class="reference internal" href="intro-gromacs.html#rms"><span class="std std-ref">gmx rms</span></a> permet justement de suivre le RMSD au cours de la simulation. Pour cela, il suffit d’exécuter la commande:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">rms</span> <span class="o">-</span><span class="n">f</span> <span class="n">md_mol</span><span class="o">.</span><span class="n">xtc</span> <span class="o">-</span><span class="n">s</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span> <span class="o">-</span><span class="n">o</span> <span class="n">rmsd</span><span class="o">.</span><span class="n">xvg</span>
 </pre></div>
 </div>
-<p>En premier, il faut spécifier le groupe d&#8217;atome de référence:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>Select group for least squares fit
-Group     0 (         System) has 20792 elements
-Group     1 (        Protein) has  1323 elements
-Group     2 (      Protein-H) has  1001 elements
-Group     3 (        C-alpha) has   129 elements
-Group     4 (       Backbone) has   387 elements
-Group     5 (      MainChain) has   517 elements
-Group     6 (   MainChain+Cb) has   634 elements
-Group     7 (    MainChain+H) has   646 elements
-Group     8 (      SideChain) has   677 elements
-Group     9 (    SideChain-H) has   484 elements
-Group    10 (    Prot-Masses) has  1323 elements
-Group    11 (    non-Protein) has 19469 elements
-Group    12 (          Water) has 19461 elements
-Group    13 (            SOL) has 19461 elements
-Group    14 (      non-Water) has  1331 elements
-Group    15 (            Ion) has     8 elements
-Group    16 (             CL) has     8 elements
-Group    17 ( Water_and_ions) has 19469 elements
+<p>En premier, il faut spécifier le groupe d’atome de référence:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Select</span> <span class="n">group</span> <span class="k">for</span> <span class="n">least</span> <span class="n">squares</span> <span class="n">fit</span>
+<span class="n">Group</span>     <span class="mi">0</span> <span class="p">(</span>         <span class="n">System</span><span class="p">)</span> <span class="n">has</span> <span class="mi">20792</span> <span class="n">elements</span>
+<span class="n">Group</span>     <span class="mi">1</span> <span class="p">(</span>        <span class="n">Protein</span><span class="p">)</span> <span class="n">has</span>  <span class="mi">1323</span> <span class="n">elements</span>
+<span class="n">Group</span>     <span class="mi">2</span> <span class="p">(</span>      <span class="n">Protein</span><span class="o">-</span><span class="n">H</span><span class="p">)</span> <span class="n">has</span>  <span class="mi">1001</span> <span class="n">elements</span>
+<span class="n">Group</span>     <span class="mi">3</span> <span class="p">(</span>        <span class="n">C</span><span class="o">-</span><span class="n">alpha</span><span class="p">)</span> <span class="n">has</span>   <span class="mi">129</span> <span class="n">elements</span>
+<span class="n">Group</span>     <span class="mi">4</span> <span class="p">(</span>       <span class="n">Backbone</span><span class="p">)</span> <span class="n">has</span>   <span class="mi">387</span> <span class="n">elements</span>
+<span class="n">Group</span>     <span class="mi">5</span> <span class="p">(</span>      <span class="n">MainChain</span><span class="p">)</span> <span class="n">has</span>   <span class="mi">517</span> <span class="n">elements</span>
+<span class="n">Group</span>     <span class="mi">6</span> <span class="p">(</span>   <span class="n">MainChain</span><span class="o">+</span><span class="n">Cb</span><span class="p">)</span> <span class="n">has</span>   <span class="mi">634</span> <span class="n">elements</span>
+<span class="n">Group</span>     <span class="mi">7</span> <span class="p">(</span>    <span class="n">MainChain</span><span class="o">+</span><span class="n">H</span><span class="p">)</span> <span class="n">has</span>   <span class="mi">646</span> <span class="n">elements</span>
+<span class="n">Group</span>     <span class="mi">8</span> <span class="p">(</span>      <span class="n">SideChain</span><span class="p">)</span> <span class="n">has</span>   <span class="mi">677</span> <span class="n">elements</span>
+<span class="n">Group</span>     <span class="mi">9</span> <span class="p">(</span>    <span class="n">SideChain</span><span class="o">-</span><span class="n">H</span><span class="p">)</span> <span class="n">has</span>   <span class="mi">484</span> <span class="n">elements</span>
+<span class="n">Group</span>    <span class="mi">10</span> <span class="p">(</span>    <span class="n">Prot</span><span class="o">-</span><span class="n">Masses</span><span class="p">)</span> <span class="n">has</span>  <span class="mi">1323</span> <span class="n">elements</span>
+<span class="n">Group</span>    <span class="mi">11</span> <span class="p">(</span>    <span class="n">non</span><span class="o">-</span><span class="n">Protein</span><span class="p">)</span> <span class="n">has</span> <span class="mi">19469</span> <span class="n">elements</span>
+<span class="n">Group</span>    <span class="mi">12</span> <span class="p">(</span>          <span class="n">Water</span><span class="p">)</span> <span class="n">has</span> <span class="mi">19461</span> <span class="n">elements</span>
+<span class="n">Group</span>    <span class="mi">13</span> <span class="p">(</span>            <span class="n">SOL</span><span class="p">)</span> <span class="n">has</span> <span class="mi">19461</span> <span class="n">elements</span>
+<span class="n">Group</span>    <span class="mi">14</span> <span class="p">(</span>      <span class="n">non</span><span class="o">-</span><span class="n">Water</span><span class="p">)</span> <span class="n">has</span>  <span class="mi">1331</span> <span class="n">elements</span>
+<span class="n">Group</span>    <span class="mi">15</span> <span class="p">(</span>            <span class="n">Ion</span><span class="p">)</span> <span class="n">has</span>     <span class="mi">8</span> <span class="n">elements</span>
+<span class="n">Group</span>    <span class="mi">16</span> <span class="p">(</span>             <span class="n">CL</span><span class="p">)</span> <span class="n">has</span>     <span class="mi">8</span> <span class="n">elements</span>
+<span class="n">Group</span>    <span class="mi">17</span> <span class="p">(</span> <span class="n">Water_and_ions</span><span class="p">)</span> <span class="n">has</span> <span class="mi">19469</span> <span class="n">elements</span>
 </pre></div>
 </div>
 <p>Ici, on utiliser le squelette protéique (groupe <cite>4</cite>) comme référence.</p>
-<p>Ensuite, il faut sélectionner le groupe d&#8217;atome dont on veut calculer le RMSD. On choisit également le groupe <cite>4</cite>.</p>
-<p>Une fois le calcul effectué, <a class="reference internal" href="intro-gromacs.html#rms"><span>gmx rms</span></a> génère un graphique (au format texte) du RMSD en fonction du temps de simulation: c&#8217;est le fichier <cite>rmsd.xvg</cite>.</p>
+<p>Ensuite, il faut sélectionner le groupe d’atome dont on veut calculer le RMSD. On choisit également le groupe <cite>4</cite>.</p>
+<p>Une fois le calcul effectué, <a class="reference internal" href="intro-gromacs.html#rms"><span class="std std-ref">gmx rms</span></a> génère un graphique (au format texte) du RMSD en fonction du temps de simulation: c’est le fichier <cite>rmsd.xvg</cite>.</p>
 <p>Plus le RMSD est faible, plus la protéine est stable (car ses atomes restent proches de leur position initiale)</p>
+<p>Les fichiers <cite>.xvg</cite> étant des fichiers texte, il peut être utile de les convertir en image.
+Pour cela, un script Python (<a class="reference download internal" href="_downloads/xvg2png.py" download=""><code class="xref download docutils literal"><span class="pre">xvg2png.py</span></code></a> est mis à disposition pour convertir un (ou plusieurs!) fichier <cite>.xvg</cite> en image (format <a class="reference external" href="https://fr.wikipedia.org/wiki/Portable_Network_Graphics">PNG</a>).
+Il suffit simplement d’exécuter le script de la façon suivante:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">python</span> <span class="n">xvg2png</span><span class="o">.</span><span class="n">py</span> <span class="n">rmsd</span><span class="o">.</span><span class="n">xvg</span>
+</pre></div>
+</div>
+<p>Cela créera un fichier <cite>rsmd.png</cite> contenant le graphique au format <cite>PNG</cite>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Tracer ce graphique pour les deux simulations (avec et sans pont S-S) et comparer les pour vérifier si les ponts S-S ont une influence sur la stabilité.</p>
@@ -608,15 +641,18 @@ Group    17 ( Water_and_ions) has 19469 elements
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="tuto-membrane.html" class="btn btn-neutral float-right" title="Tutoriel “Membrane”" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="tuto-membrane.html" class="btn btn-neutral float-right" title="Tutoriel « Membrane »" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="intro-gromacs.html" class="btn btn-neutral" title="Introduction à GROMACS" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="intro-gromacs.html" class="btn btn-neutral" title="Introduction à GROMACS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -650,14 +686,15 @@ Group    17 ( Water_and_ions) has 19469 elements
             VERSION:'2017.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
       <script type="text/javascript" src="_static/translations.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

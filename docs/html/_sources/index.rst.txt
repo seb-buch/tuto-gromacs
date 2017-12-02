@@ -12,11 +12,9 @@ Cette introduction est découpée en différentes parties:
 .. toctree::
     :maxdepth: 2
 
-    visualisation
     intro-gromacs
     tuto-lysozyme
     tuto-membrane
-    tuto-AMP
 
 
 

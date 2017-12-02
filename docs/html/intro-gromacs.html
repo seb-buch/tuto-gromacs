@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -30,9 +32,12 @@
   
 
   
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Recherche" href="search.html"/>
     <link rel="top" title="documentation Tutorial-gromacs 2017.1" href="index.html"/>
-        <link rel="next" title="Tutoriel “Lysozyme”" href="tuto-lysozyme.html"/>
-        <link rel="prev" title="Outils de visualisation" href="visualisation.html"/> 
+        <link rel="next" title="Tutoriel « Lysozyme »" href="tuto-lysozyme.html"/>
+        <link rel="prev" title="Bio15 - Introduction MD" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -41,6 +46,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -81,9 +87,11 @@
           
             
             
-                <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="visualisation.html">Outils de visualisation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Introduction à GROMACS</a><ul>
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction à GROMACS</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#utiliser-gromacs">Utiliser GROMACS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#les-fichiers-gromacs">Les fichiers GROMACS</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#coordonnees-atomiques">Coordonnées atomiques</a></li>
@@ -94,6 +102,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#outils-gromacs-pour-lancer-une-simulation">Outils GROMACS pour lancer une simulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gmx-insert-molecules">gmx insert-molecules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gmx-pdb2gmx">gmx pdb2gmx</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gmx-editconf">gmx editconf</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gmx-solvate">gmx solvate</a></li>
@@ -107,13 +116,15 @@
 <li class="toctree-l3"><a class="reference internal" href="#gmx-energy">gmx energy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gmx-trjconv">gmx trjconv</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gmx-rms">gmx rms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gmx-density">gmx density</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gmx-make-ndx">gmx make_ndx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gmx-msd">gmx msd</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="tuto-lysozyme.html">Tutoriel &#8220;Lysozyme&#8221;</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tuto-membrane.html">Tutoriel &#8220;Membrane&#8221;</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tuto-AMP.html">Tutoriel &#8220;AMP&#8221;</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto-lysozyme.html">Tutoriel «&nbsp;Lysozyme&nbsp;»</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto-membrane.html">Tutoriel «&nbsp;Membrane&nbsp;»</a></li>
 </ul>
 
             
@@ -126,8 +137,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">Tutorial-gromacs</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Tutorial-gromacs</a>
+        
       </nav>
 
 
@@ -136,21 +149,38 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-      
-    <li>Introduction à GROMACS</li>
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Introduction à GROMACS</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -158,15 +188,15 @@
             
   <div class="section" id="introduction-a-gromacs">
 <span id="presentation-gromacs"></span><h1>Introduction à GROMACS<a class="headerlink" href="#introduction-a-gromacs" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Toutes les simulations de dynamique moléculaire présentées ici sont effectuées à l&#8217;aide de la suite logicielle <a class="reference external" href="http://www.gromacs.org">GROMACS</a>
+<p>Toutes les simulations de dynamique moléculaire présentées ici sont effectuées à l’aide de la suite logicielle <a class="reference external" href="http://www.gromacs.org">GROMACS</a>
 qui permet de préparer les simulations (<cite>gmx grompp</cite>), de les exécuter (<cite>gmx mdrun</cite>) et également de les analyser (e.g. <cite>gmx energy</cite>).</p>
 <div class="section" id="utiliser-gromacs">
 <h2>Utiliser GROMACS<a class="headerlink" href="#utiliser-gromacs" title="Lien permanent vers ce titre">¶</a></h2>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">GROMACS n&#8217;a pas d&#8217;interface graphique. Il est donc nécessaire de passer par l&#8217;invite de commande.</p>
+<p class="last">GROMACS n’a pas d’interface graphique. Il est donc nécessaire de passer par l’invite de commande.</p>
 </div>
-<p>Toutes les commandes propres à GROMACS doivent être exécutées par l&#8217;intermédiaire de l&#8217;exécutable <cite>gmx</cite>. Il est par exemple possible d&#8217;afficher l&#8217;aide de GROMACS grâce à:</p>
+<p>Toutes les commandes propres à GROMACS doivent être exécutées par l’intermédiaire de l’exécutable <cite>gmx</cite>. Il est par exemple possible d’afficher l’aide de GROMACS grâce à:</p>
 <blockquote>
 <div>gmx help</div></blockquote>
 </div>
@@ -174,7 +204,7 @@ qui permet de préparer les simulations (<cite>gmx grompp</cite>), de les exécu
 <h2>Les fichiers GROMACS<a class="headerlink" href="#les-fichiers-gromacs" title="Lien permanent vers ce titre">¶</a></h2>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">Cette liste n&#8217;est pas exhaustive</p>
+<p class="last">Cette liste n’est pas exhaustive</p>
 </div>
 <div class="section" id="coordonnees-atomiques">
 <span id="coord-files"></span><h3>Coordonnées atomiques<a class="headerlink" href="#coordonnees-atomiques" title="Lien permanent vers ce titre">¶</a></h3>
@@ -210,7 +240,10 @@ qui permet de préparer les simulations (<cite>gmx grompp</cite>), de les exécu
 <h2>Outils GROMACS pour lancer une simulation<a class="headerlink" href="#outils-gromacs-pour-lancer-une-simulation" title="Lien permanent vers ce titre">¶</a></h2>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">Cette liste n&#8217;est pas exhaustive et ne reprend que les outils utilisés dans ce tutoriel.</p>
+<p class="last">Cette liste n’est pas exhaustive et ne reprend que les outils utilisés dans ce tutoriel.</p>
+</div>
+<div class="section" id="gmx-insert-molecules">
+<span id="insert-molecules"></span><h3>gmx insert-molecules<a class="headerlink" href="#gmx-insert-molecules" title="Lien permanent vers ce titre">¶</a></h3>
 </div>
 <div class="section" id="gmx-pdb2gmx">
 <span id="pdb2gmx"></span><h3>gmx pdb2gmx<a class="headerlink" href="#gmx-pdb2gmx" title="Lien permanent vers ce titre">¶</a></h3>
@@ -231,8 +264,8 @@ qui permet de préparer les simulations (<cite>gmx grompp</cite>), de les exécu
 <span id="mdrun"></span><h3>gmx mdrun<a class="headerlink" href="#gmx-mdrun" title="Lien permanent vers ce titre">¶</a></h3>
 <div class="admonition important" id="warning-mdrun">
 <p class="first admonition-title">Important</p>
-<p>La commande <a class="reference internal" href="#mdrun"><span>gmx mdrun</span></a> <strong>ne doit jamais</strong> être exécutée seule sur un supercalculateur!</p>
-<p class="last">Par défaut, <a class="reference internal" href="#mdrun"><span>gmx mdrun</span></a> utilise <em>toutes</em> les ressources disponibles or, sur un supercalculateur, l&#8217;attribution des ressources se fait par l&#8217;intermédiaire d&#8217;un gestionnaire.
+<p>La commande <a class="reference internal" href="#mdrun"><span class="std std-ref">gmx mdrun</span></a> <strong>ne doit jamais</strong> être exécutée seule sur un supercalculateur!</p>
+<p class="last">Par défaut, <a class="reference internal" href="#mdrun"><span class="std std-ref">gmx mdrun</span></a> utilise <em>toutes</em> les ressources disponibles or, sur un supercalculateur, l’attribution des ressources se fait par l’intermédiaire d’un gestionnaire.
 Il faut donc <strong>impérativement</strong> passer par un gestionnaire de tâches (via un script de lancement).</p>
 </div>
 </div>
@@ -244,7 +277,7 @@ Il faut donc <strong>impérativement</strong> passer par un gestionnaire de tâc
 <h2>Outils GROMACS pour analyser une simulation<a class="headerlink" href="#outils-gromacs-pour-analyser-une-simulation" title="Lien permanent vers ce titre">¶</a></h2>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">GROMACS offre beaucoup d&#8217;outils pour l&#8217;analyse, la liste suivante ne contient que ceux utilisés dans ce tutoriel.</p>
+<p class="last">GROMACS offre beaucoup d’outils pour l’analyse, la liste suivante ne contient que ceux utilisés dans ce tutoriel.</p>
 </div>
 <div class="section" id="gmx-energy">
 <span id="energy"></span><h3>gmx energy<a class="headerlink" href="#gmx-energy" title="Lien permanent vers ce titre">¶</a></h3>
@@ -255,20 +288,32 @@ Il faut donc <strong>impérativement</strong> passer par un gestionnaire de tâc
 <div class="section" id="gmx-rms">
 <span id="rms"></span><h3>gmx rms<a class="headerlink" href="#gmx-rms" title="Lien permanent vers ce titre">¶</a></h3>
 </div>
+<div class="section" id="gmx-density">
+<span id="density"></span><h3>gmx density<a class="headerlink" href="#gmx-density" title="Lien permanent vers ce titre">¶</a></h3>
+</div>
+<div class="section" id="gmx-make-ndx">
+<span id="make-ndx"></span><h3>gmx make_ndx<a class="headerlink" href="#gmx-make-ndx" title="Lien permanent vers ce titre">¶</a></h3>
+</div>
+<div class="section" id="gmx-msd">
+<span id="msd"></span><h3>gmx msd<a class="headerlink" href="#gmx-msd" title="Lien permanent vers ce titre">¶</a></h3>
+</div>
 </div>
 </div>
 
 
+           </div>
+           <div class="articleComments">
+            
            </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="tuto-lysozyme.html" class="btn btn-neutral float-right" title="Tutoriel “Lysozyme”" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="tuto-lysozyme.html" class="btn btn-neutral float-right" title="Tutoriel « Lysozyme »" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="visualisation.html" class="btn btn-neutral" title="Outils de visualisation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="Bio15 - Introduction MD" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -302,14 +347,15 @@ Il faut donc <strong>impérativement</strong> passer par un gestionnaire de tâc
             VERSION:'2017.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
       <script type="text/javascript" src="_static/translations.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

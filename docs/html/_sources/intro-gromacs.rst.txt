@@ -17,6 +17,167 @@ Toutes les commandes propres à GROMACS doivent être exécutées par l'intermé
     gmx help
 
 
+Les fichiers GROMACS
+--------------------
 
+.. important::
+    Cette liste n'est pas exhaustive
+
+.. _coord_files:
+
+Coordonnées atomiques
++++++++++++++++++++++
+
+pdb
+
+gro
+
+xtc
+
+trr
+
+.. _topol_files:
+
+Topologie
++++++++++
+
+top
+
+itp
+
+tpr (renvoi)
+
+.. _simul_files:
+
+Fichiers de simulation
+++++++++++++++++++++++
+
+mdp
+
+tpr
+
+cpt
+
+log
+
+edr
+
+.. _select_file:
+
+Sélection des atomes
+++++++++++++++++++++
+
+ndx
+
+.. _misc_files:
+
+Autres type de fichiers
++++++++++++++++++++++++
+
+xvg
+
+
+
+Outils GROMACS pour lancer une simulation
+-----------------------------------------
+
+.. important::
+    Cette liste n'est pas exhaustive et ne reprend que les outils utilisés dans ce tutoriel.
+
+.. _insert-molecules:
+
+gmx insert-molecules
+++++++++++++++++++++
+
+
+.. _pdb2gmx:
+
+gmx pdb2gmx
++++++++++++
+
+
+.. _editconf:
+
+gmx editconf
+++++++++++++
+
+
+.. _solvate:
+
+gmx solvate
++++++++++++
+
+
+.. _genion:
+
+gmx genion
+++++++++++
+
+
+.. _grompp:
+
+gmx grompp
+++++++++++
+
+
+.. _mdrun:
+
+gmx mdrun
++++++++++
+
+.. _warning_mdrun:
+
+.. important::
+    La commande :ref:`mdrun` **ne doit jamais** être exécutée seule sur un supercalculateur!
+
+    Par défaut, :ref:`mdrun` utilise *toutes* les ressources disponibles or, sur un supercalculateur, l'attribution des ressources se fait par l'intermédiaire d'un gestionnaire.
+    Il faut donc **impérativement** passer par un gestionnaire de tâches (via un script de lancement).
+
+
+.. _convert-tpr:
+
+gmx convert-tpr
++++++++++++++++
+
+Outils GROMACS pour analyser une simulation
+-------------------------------------------
+
+.. important::
+    GROMACS offre beaucoup d'outils pour l'analyse, la liste suivante ne contient que ceux utilisés dans ce tutoriel.
+
+.. _energy:
+
+gmx energy
+++++++++++
+
+
+.. _trjconv:
+
+gmx trjconv
++++++++++++
+
+
+.. _rms:
+
+gmx rms
++++++++
+
+
+.. _density:
+
+gmx density
++++++++++++
+
+
+.. _make_ndx:
+
+gmx make_ndx
+++++++++++++
+
+
+.. _msd:
+
+gmx msd
++++++++
 
 .. _GROMACS: http://www.gromacs.org

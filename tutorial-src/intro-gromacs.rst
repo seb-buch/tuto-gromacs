@@ -162,4 +162,22 @@ gmx trjconv
 gmx rms
 +++++++
 
+
+.. _density:
+
+gmx density
++++++++++++
+
+
+.. _make_ndx:
+
+gmx make_ndx
+++++++++++++
+
+
+.. _msd:
+
+gmx msd
++++++++
+
 .. _GROMACS: http://www.gromacs.org

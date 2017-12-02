@@ -1,3 +1,5 @@
+.. _tuto_lyso:
+
 Tutoriel "Lysozyme"
 ===================
 
@@ -456,6 +458,16 @@ Ensuite, il faut sélectionner le groupe d'atome dont on veut calculer le RMSD. 
 Une fois le calcul effectué, :ref:`rms` génère un graphique (au format texte) du RMSD en fonction du temps de simulation: c'est le fichier `rmsd.xvg`.
 
 Plus le RMSD est faible, plus la protéine est stable (car ses atomes restent proches de leur position initiale)
+
+
+Les fichiers `.xvg` étant des fichiers texte, il peut être utile de les convertir en image.
+Pour cela, un script Python (:download:`xvg2png.py <files/xvg2png.py>` est mis à disposition pour convertir un (ou plusieurs!) fichier `.xvg` en image (format `PNG <https://fr.wikipedia.org/wiki/Portable_Network_Graphics>`_).
+Il suffit simplement d'exécuter le script de la façon suivante::
+
+    > python xvg2png.py rmsd.xvg
+
+Cela créera un fichier `rsmd.png` contenant le graphique au format `PNG`.
+
 
 .. note::
     Tracer ce graphique pour les deux simulations (avec et sans pont S-S) et comparer les pour vérifier si les ponts S-S ont une influence sur la stabilité.

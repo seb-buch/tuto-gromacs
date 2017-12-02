@@ -1,4 +1,0 @@
-Tutoriel "AMP"
-==============
-
-TODO

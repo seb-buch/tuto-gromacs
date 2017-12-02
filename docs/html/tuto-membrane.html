@@ -8,9 +8,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tutoriel “Membrane” &mdash; documentation Tutorial-gromacs 2017.1</title>
+  <title>Tutoriel « Membrane » &mdash; documentation Tutorial-gromacs 2017.1</title>
   
 
+  
+  
   
   
 
@@ -30,9 +32,11 @@
   
 
   
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Recherche" href="search.html"/>
     <link rel="top" title="documentation Tutorial-gromacs 2017.1" href="index.html"/>
-        <link rel="next" title="Tutoriel “AMP”" href="tuto-AMP.html"/>
-        <link rel="prev" title="Tutoriel “Lysozyme”" href="tuto-lysozyme.html"/> 
+        <link rel="prev" title="Tutoriel « Lysozyme »" href="tuto-lysozyme.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -41,6 +45,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -81,12 +86,28 @@
           
             
             
-                <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="visualisation.html">Outils de visualisation</a></li>
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro-gromacs.html">Introduction à GROMACS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tuto-lysozyme.html">Tutoriel &#8220;Lysozyme&#8221;</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Tutoriel &#8220;Membrane&#8221;</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tuto-AMP.html">Tutoriel &#8220;AMP&#8221;</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto-lysozyme.html">Tutoriel «&nbsp;Lysozyme&nbsp;»</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutoriel «&nbsp;Membrane&nbsp;»</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creation-de-la-topologie">Création de la topologie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#construction-du-systeme-initial">Construction du système initial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#construction-du-fichier-de-topologie-du-systeme">Construction du fichier de topologie du système</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solvation-des-lipides">Solvation des lipides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#minimisation-energetique">Minimisation énergétique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#simulation-de-l-auto-assemblage">Simulation de l’auto-assemblage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#analyse-de-la-bicouche-formee">Analyse de la bicouche formée</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#aire-par-lipide">Aire par lipide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#epaisseur-de-la-bicouche">Epaisseur de la bicouche</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diffusion-laterale">Diffusion latérale</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parametre-d-ordre">Paramètre d’ordre</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
             
@@ -99,8 +120,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">Tutorial-gromacs</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Tutorial-gromacs</a>
+        
       </nav>
 
 
@@ -109,41 +132,305 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-      
-    <li>Tutoriel &#8220;Membrane&#8221;</li>
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Tutoriel «&nbsp;Membrane&nbsp;»</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
   <div class="section" id="tutoriel-membrane">
-<h1>Tutoriel &#8220;Membrane&#8221;<a class="headerlink" href="#tutoriel-membrane" title="Lien permanent vers ce titre">¶</a></h1>
+<h1>Tutoriel «&nbsp;Membrane&nbsp;»<a class="headerlink" href="#tutoriel-membrane" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Ce tutoriel est inspiré du tutoriel disponible <a class="reference external" href="http://md.chem.rug.nl/index.php/tutorials-general-introduction-gmx5/bilayers-gmx5#Bilayer-self-assembly">ici</a>.</p>
+</div>
+<p>Le but de ce tutoriel est d’observer comment les lipides membranaires s’auto-assemblent pour former une bicouche qui constitue la matrice des membranes biologiques.</p>
+<p>En utilisant deux lipides différents (un saturé et un insaturé), le but est aussi d’étudier l’influence de l’insaturation des chaînes sur les propriétés de la membrane.</p>
+<div class="section" id="creation-de-la-topologie">
+<h2>Création de la topologie<a class="headerlink" href="#creation-de-la-topologie" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Afin d’accélérer les simulations, le champ de force utilisé ici sera de type «&nbsp;gros grains&nbsp;». Il s’agit du champ de force <a class="reference external" href="http://md.chem.rug.nl/">Martini</a>.</p>
+<p>Dans ce tutoriel, il n’y a pas besoin d’utiliser <a class="reference internal" href="intro-gromacs.html#pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a> (qui ne marche qu’avec les protéines) car la topologie des lipides est directement disponible.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p>Dans la suite, le système «&nbsp;DPPC&nbsp;» est pris comme base pour les exemples.</p>
+<p class="last">La transposition du DPPC au DOPC est laissé comme exercice.</p>
+</div>
+</div>
+<div class="section" id="construction-du-systeme-initial">
+<h2>Construction du système initial<a class="headerlink" href="#construction-du-systeme-initial" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Contrairement au <a class="reference internal" href="tuto-lysozyme.html#tuto-lyso"><span class="std std-ref">tutoriel lysozyme</span></a>, ici il n’existe pas de fichier <a class="reference internal" href="intro-gromacs.html#coord-files"><span class="std std-ref">pdb</span></a> à partir duquel le système peut être généré.
+Il est donc nécessaire de générer le system <em>ex nihilo</em>.
+Pour cela, on va utiliser l’utilitaire <a class="reference internal" href="intro-gromacs.html#insert-molecules"><span class="std std-ref">gmx insert-molecules</span></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">insert</span><span class="o">-</span><span class="n">molecules</span> <span class="o">-</span><span class="n">ci</span> <span class="n">DPPC</span><span class="o">-</span><span class="n">em</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">box</span> <span class="mi">15</span> <span class="mi">15</span> <span class="mf">7.5</span> <span class="o">-</span><span class="n">nmol</span> <span class="mi">512</span> <span class="o">-</span><span class="n">radius</span> <span class="mf">0.21</span> <span class="o">-</span><span class="k">try</span> <span class="mi">500</span> <span class="o">-</span><span class="n">o</span> <span class="n">system_noW</span><span class="o">.</span><span class="n">gro</span>
+</pre></div>
+</div>
+<p>Cet utilitaire permet, ici, d’insérer aléatoirement 512 (option <cite>-nmol</cite>) molécules de DPPC (option <cite>-ci</cite>) dans une nouvelle boîte MD de taille 15 nm x 15 nm x 7.5nm (option <cite>-box</cite>).
+Afin d’éviter les collisions entre les molécules insérées, un rayon de 0.21 nm (option <cite>-radius</cite>) est pris en compte et 500 essais d’insertion (par molécule insérée - option <cite>-try) est effectué`</cite>
+Quand les 512 molécules sont insérées (ou que les 500x512 essais sont passés), le système est sauvegardé dans <cite>system_noW.gro</cite> (option <cite>-o</cite>).</p>
+</div>
+<div class="section" id="construction-du-fichier-de-topologie-du-systeme">
+<h2>Construction du fichier de topologie du système<a class="headerlink" href="#construction-du-fichier-de-topologie-du-systeme" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Malheureusement, <a class="reference internal" href="intro-gromacs.html#insert-molecules"><span class="std std-ref">gmx insert-molecules</span></a> ne génère que les coordonnées du système (fichier <a class="reference internal" href="intro-gromacs.html#coord-files"><span class="std std-ref">.gro</span></a>).
+Il faut donc créé le fichier de topologie. Pour simplifier les choses, il est possible de télécharger ce fichier (
+<a class="reference download internal" href="_downloads/system.top" download=""><code class="xref download docutils literal"><span class="pre">system.top</span></code></a>) dont voici le contenu:</p>
+<div class="highlight-ahk"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">#include</span> <span class="s">&quot;martini_v2.1.itp&quot;</span>
+<span class="nb">#include</span> <span class="s">&quot;martini_v2.0_DPPC_01.itp&quot;</span>
+
+<span class="p">[</span> <span class="n">system</span> <span class="p">]</span>
+<span class="n">DPPC</span> <span class="n">BILAYER</span> <span class="n">SELF</span><span class="o">-</span><span class="n">ASSEMBLY</span>
+
+<span class="p">[</span> <span class="n">molecules</span> <span class="p">]</span>
+<span class="n">DPPC</span> <span class="mi">512</span><span class="c c-Singleline"></span>
+<span class="c c-Singleline">; W 3072</span>
+</pre></div>
+</td></tr></table></div>
+<p>Ce fichier est très simple à comprendre:</p>
+<ul class="simple">
+<li>Le premier <cite>#include</cite> (ligne 1) indique l’emplacement du champ de force <a class="reference download internal" href="_downloads/martini_v2.1.itp" download=""><code class="xref download docutils literal"><span class="pre">martini_v2.1.itp</span></code></a>.</li>
+<li>Ensuite (ligne 2), c’est la topologie du lipide <a class="reference download internal" href="_downloads/martini_v2.0_DPPC_01.itp" download=""><code class="xref download docutils literal"><span class="pre">martini_v2.0_DPPC_01.itp</span></code></a> qui est incluse.</li>
+</ul>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Pour que <cite>system.top</cite> puisse être interprété par <a class="reference internal" href="intro-gromacs.html#grompp"><span class="std std-ref">gmx grompp</span></a>, il faut que <em>tous</em> les fichiers inclus soit effectivement à l’emplacement indiqué.
+(Ici, il s’agit du même dossier que <cite>system.top</cite>.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Ouvrir <cite>martini_v2.1.itp</cite> et <cite>martini_v2.0_DPPC_01.itp</cite> pour observer les différences entre un fichier de définition de champ de forces et de topologie d’une molécule.</p>
+</div>
+<ul class="simple">
+<li>la section <cite>[ system ]</cite> contient la description du système qui a simplement une valeur indicative.</li>
+<li>la section <cite>[ molecules ]</cite> contient la liste des molécules présentes dans le système.</li>
+</ul>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<dl class="last docutils">
+<dt>Les molécules décrites dans la section <cite>[ molecules ]</cite> doivent:</dt>
+<dd><ol class="first last arabic simple">
+<li>être obligatoirement définies (directement dans le champ de forces ou dans un fichier de topologie <cite>.itp</cite>).</li>
+<li>correspondre à celles présentes dans le fichier <cite>.gro</cite> associé.</li>
+</ol>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="solvation-des-lipides">
+<h2>Solvation des lipides<a class="headerlink" href="#solvation-des-lipides" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Comme dans tutoriel <a class="reference internal" href="tuto-lysozyme.html#tuto-lyso"><span class="std std-ref">précédent</span></a>, il est nécessaire d’ajouter l’eau puisque seuls les lipides sont présents pour l’instant:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">solvate</span> <span class="o">-</span><span class="n">cp</span> <span class="n">system_noW</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">cs</span> <span class="n">water</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">o</span> <span class="n">system_W</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">maxsol</span> <span class="mi">3072</span> <span class="o">-</span><span class="n">radius</span> <span class="mf">0.21</span>
+</pre></div>
+</div>
+<p>Ici, on ajoute 3072 «&nbsp;billes&nbsp;» d’eau; 1 «&nbsp;bille&nbsp;» Martini correspondant à 4 molécules d’eau, cela fait 3072x4=12288 molécules d’eau soit 24 molécules d’eau pour un lipide.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Il faut éditer <cite>system.top</cite> pour y ajouter les 3072 particules d’eau (nom martini: <cite>W</cite>)</p>
+</div>
+</div>
+<div class="section" id="minimisation-energetique">
+<h2>Minimisation énergétique<a class="headerlink" href="#minimisation-energetique" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le système étant généré aléatoirement, il est nécessaire de minimiser l’énergie avant toute simulation de dynamique moléculaire:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">grompp</span> <span class="o">-</span><span class="n">f</span> <span class="n">minimization</span><span class="o">.</span><span class="n">mdp</span> <span class="o">-</span><span class="n">c</span> <span class="n">system_W</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">p</span> <span class="n">system</span><span class="o">.</span><span class="n">top</span> <span class="o">-</span><span class="n">o</span> <span class="n">em</span><span class="o">.</span><span class="n">tpr</span>
+
+<span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">deffnm</span> <span class="n">em</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Ne pas recopier (et exécuter) cette commande sans réflexion! (<a class="reference internal" href="intro-gromacs.html#warning-mdrun"><span class="std std-ref">Pourquoi ?</span></a>)</p>
+</div>
+</div>
+<div class="section" id="simulation-de-l-auto-assemblage">
+<h2>Simulation de l’auto-assemblage<a class="headerlink" href="#simulation-de-l-auto-assemblage" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La description mésoscopique (i.e. «&nbsp;gros grains&nbsp;») du système permet, cans ce cas, de se passer de la phase d’équilibration <cite>NVT</cite> et <cite>NPT</cite>.
+On peut lancer directement la simulation de l’auto-assemblage des lipides en bicouche en utilisant des paramètres (<a class="reference download internal" href="_downloads/martini_md.mdp" download=""><code class="xref download docutils literal"><span class="pre">martini_md.mdp</span></code></a>) spécifiques à Martini:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">grompp</span> <span class="o">-</span><span class="n">f</span> <span class="n">martini_md</span><span class="o">.</span><span class="n">mdp</span> <span class="o">-</span><span class="n">c</span> <span class="n">em</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">p</span> <span class="n">system</span><span class="o">.</span><span class="n">top</span> <span class="o">-</span><span class="n">o</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span>
+
+<span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">deffnm</span> <span class="n">md</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Ne pas recopier (et exécuter) cette commande sans réflexion! (<a class="reference internal" href="intro-gromacs.html#warning-mdrun"><span class="std std-ref">Pourquoi ?</span></a>)</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Ouvrir le fichier <cite>martini_md.mdp</cite> pour voir quels paramètres sont différents par rapport au fichier utilisé pour simuler le lysozyme (<a class="reference download internal" href="_downloads/md.mdp" download=""><code class="xref download docutils literal"><span class="pre">md.mdp</span></code></a>).</p>
+</div>
+</div>
+<div class="section" id="analyse-de-la-bicouche-formee">
+<h2>Analyse de la bicouche formée<a class="headerlink" href="#analyse-de-la-bicouche-formee" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Avant d’analyser la trajectoire, il est nécessaire de rendre entières les molécules «&nbsp;cassées&nbsp;» par la réplication de la boîte:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">trjconv</span> <span class="o">-</span><span class="n">s</span> <span class="n">md</span><span class="o">.</span><span class="n">xtc</span> <span class="o">-</span><span class="n">o</span> <span class="n">md_mol</span><span class="o">.</span><span class="n">xtc</span> <span class="o">-</span><span class="n">pbc</span> <span class="n">mol</span> <span class="o">-</span><span class="n">s</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span>
+</pre></div>
+</div>
+<div class="section" id="aire-par-lipide">
+<h3>Aire par lipide<a class="headerlink" href="#aire-par-lipide" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Un paramètre important quand on simule une membrane est l’aire occupée par un lipide.
+Quand la membrane est plane, il suffit simplement de diviser l’aire du plan XY de la boîte de MD par le nombre de lipides par feuillet.
+Le fichier <cite>md.edr</cite> contient justement les valeurs des axes de la boîte que l’on peut extraire à l’aide <a class="reference internal" href="intro-gromacs.html#energy"><span class="std std-ref">gmx energy</span></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">energy</span> <span class="o">-</span><span class="n">f</span> <span class="n">md</span><span class="o">.</span><span class="n">edr</span> <span class="o">-</span><span class="n">o</span> <span class="n">box</span><span class="o">-</span><span class="n">x</span><span class="o">.</span><span class="n">xvg</span>
+</pre></div>
+</div>
+<p>Sachant que le couplage en pression est anisotrope (cf <cite>martini_md.mdp</cite>), l’axe X et l’axe Y de la boîte sont strictement identiques
+et il suffit d’extraire seulement la coordonnée X de la boîte (<cite>Box-X</cite>) pour pouvoir calculer l’aire du plan XY:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Select</span> <span class="n">the</span> <span class="n">terms</span> <span class="n">you</span> <span class="n">want</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">following</span> <span class="nb">list</span> <span class="n">by</span>
+<span class="n">selecting</span> <span class="n">either</span> <span class="p">(</span><span class="n">part</span> <span class="n">of</span><span class="p">)</span> <span class="n">the</span> <span class="n">name</span> <span class="ow">or</span> <span class="n">the</span> <span class="n">number</span> <span class="ow">or</span> <span class="n">a</span> <span class="n">combination</span><span class="o">.</span>
+<span class="n">End</span> <span class="n">your</span> <span class="n">selection</span> <span class="k">with</span> <span class="n">an</span> <span class="n">empty</span> <span class="n">line</span> <span class="ow">or</span> <span class="n">a</span> <span class="n">zero</span><span class="o">.</span>
+<span class="o">-------------------------------------------------------------------</span>
+  <span class="mi">1</span>  <span class="n">Bond</span>             <span class="mi">2</span>  <span class="n">G96Angle</span>         <span class="mi">3</span>  <span class="n">LJ</span><span class="o">-</span><span class="p">(</span><span class="n">SR</span><span class="p">)</span>          <span class="mi">4</span>  <span class="n">Coulomb</span><span class="o">-</span><span class="p">(</span><span class="n">SR</span><span class="p">)</span>
+  <span class="mi">5</span>  <span class="n">Potential</span>        <span class="mi">6</span>  <span class="n">Kinetic</span><span class="o">-</span><span class="n">En</span><span class="o">.</span>      <span class="mi">7</span>  <span class="n">Total</span><span class="o">-</span><span class="n">Energy</span>     <span class="mi">8</span>  <span class="n">Temperature</span>
+  <span class="mi">9</span>  <span class="n">Pressure</span>        <span class="mi">10</span>  <span class="n">Box</span><span class="o">-</span><span class="n">X</span>           <span class="mi">11</span>  <span class="n">Box</span><span class="o">-</span><span class="n">Y</span>           <span class="mi">12</span>  <span class="n">Box</span><span class="o">-</span><span class="n">Z</span>
+ <span class="mi">13</span>  <span class="n">Volume</span>          <span class="mi">14</span>  <span class="n">Density</span>         <span class="mi">15</span>  <span class="n">pV</span>              <span class="mi">16</span>  <span class="n">Enthalpy</span>
+ <span class="mi">17</span>  <span class="n">Vir</span><span class="o">-</span><span class="n">XX</span>          <span class="mi">18</span>  <span class="n">Vir</span><span class="o">-</span><span class="n">XY</span>          <span class="mi">19</span>  <span class="n">Vir</span><span class="o">-</span><span class="n">XZ</span>          <span class="mi">20</span>  <span class="n">Vir</span><span class="o">-</span><span class="n">YX</span>
+ <span class="mi">21</span>  <span class="n">Vir</span><span class="o">-</span><span class="n">YY</span>          <span class="mi">22</span>  <span class="n">Vir</span><span class="o">-</span><span class="n">YZ</span>          <span class="mi">23</span>  <span class="n">Vir</span><span class="o">-</span><span class="n">ZX</span>          <span class="mi">24</span>  <span class="n">Vir</span><span class="o">-</span><span class="n">ZY</span>
+ <span class="mi">25</span>  <span class="n">Vir</span><span class="o">-</span><span class="n">ZZ</span>          <span class="mi">26</span>  <span class="n">Pres</span><span class="o">-</span><span class="n">XX</span>         <span class="mi">27</span>  <span class="n">Pres</span><span class="o">-</span><span class="n">XY</span>         <span class="mi">28</span>  <span class="n">Pres</span><span class="o">-</span><span class="n">XZ</span>
+ <span class="mi">29</span>  <span class="n">Pres</span><span class="o">-</span><span class="n">YX</span>         <span class="mi">30</span>  <span class="n">Pres</span><span class="o">-</span><span class="n">YY</span>         <span class="mi">31</span>  <span class="n">Pres</span><span class="o">-</span><span class="n">YZ</span>         <span class="mi">32</span>  <span class="n">Pres</span><span class="o">-</span><span class="n">ZX</span>
+ <span class="mi">33</span>  <span class="n">Pres</span><span class="o">-</span><span class="n">ZY</span>                             <span class="mi">34</span>  <span class="n">Pres</span><span class="o">-</span><span class="n">ZZ</span>
+ <span class="mi">35</span>  <span class="c1">#Surf*SurfTen                       36  Coul-SR:DOPC-DOPC</span>
+ <span class="mi">37</span>  <span class="n">LJ</span><span class="o">-</span><span class="n">SR</span><span class="p">:</span><span class="n">DOPC</span><span class="o">-</span><span class="n">DOPC</span>                     <span class="mi">38</span>  <span class="n">Coul</span><span class="o">-</span><span class="n">SR</span><span class="p">:</span><span class="n">DOPC</span><span class="o">-</span><span class="n">W</span>
+ <span class="mi">39</span>  <span class="n">LJ</span><span class="o">-</span><span class="n">SR</span><span class="p">:</span><span class="n">DOPC</span><span class="o">-</span><span class="n">W</span>    <span class="mi">40</span>  <span class="n">Coul</span><span class="o">-</span><span class="n">SR</span><span class="p">:</span><span class="n">W</span><span class="o">-</span><span class="n">W</span>     <span class="mi">41</span>  <span class="n">LJ</span><span class="o">-</span><span class="n">SR</span><span class="p">:</span><span class="n">W</span><span class="o">-</span><span class="n">W</span>       <span class="mi">42</span>  <span class="n">T</span><span class="o">-</span><span class="n">DOPC</span>
+ <span class="mi">43</span>  <span class="n">T</span><span class="o">-</span><span class="n">W</span>             <span class="mi">44</span>  <span class="n">Lamb</span><span class="o">-</span><span class="n">DOPC</span>       <span class="mi">45</span>  <span class="n">Lamb</span><span class="o">-</span><span class="n">W</span>
+</pre></div>
+</div>
+<p>Il faut donc sélectionner seulement le terme <cite>10</cite>.</p>
+<p>Le fichier ainsi créé (<cite>box-x.xvg</cite>) contient la longueur de l’axe X de la boîte au cours de la trajectoire.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Inspecter le fichier <cite>box-x.xvg</cite> (il s’agit d’un fichier texte)</p>
+</div>
+<p>Il faut donc retraiter les valeurs contenues dans ce fichier pour pouvoir calculer l’aire par lipide au cours de la simulation.
+Pour cela, on va utiliser un script Python (<a class="reference download internal" href="_downloads/box2apl.py" download=""><code class="xref download docutils literal"><span class="pre">box2apl.py</span></code></a>) qui va lire le fichier <cite>box-x.xvg</cite>
+et calculer l’aire par lipide:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">python</span> <span class="n">box2apl</span><span class="o">.</span><span class="n">py</span> <span class="n">box</span><span class="o">-</span><span class="n">x</span><span class="o">.</span><span class="n">xvg</span> <span class="mi">256</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Il faut fournir le nombre de lipides par feuillet (ici 256) au script car cette information n’est pas disponible dans <cite>box-x.xvg</cite>.</p>
+</div>
+<p>Le script crée un fichier <cite>PNG</cite> (<cite>box-x_APL.png</cite>) contenant le graphique correspondant.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Comparer l’aire par lipide entre DPPC et DOPC.</p>
+</div>
+</div>
+<div class="section" id="epaisseur-de-la-bicouche">
+<h3>Epaisseur de la bicouche<a class="headerlink" href="#epaisseur-de-la-bicouche" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Pour déterminer l’épaisseur, on va utiliser l’utilitaire <a class="reference internal" href="intro-gromacs.html#density"><span class="std std-ref">gmx density</span></a> qui permet de tracer la densité des atomes suivant un axe (ici Z).
+Classiquement, on détermine l’épaisseur membranaire à partir de la distance en les atomes de phosphore de chacun des feuillets.</p>
+<p>La première chose à faire est donc de créer un fichier <cite>.ndx</cite> (cf <a class="reference internal" href="intro-gromacs.html#topol-files"><span class="std std-ref">Topologie</span></a>) contenant un groupe d’atome correspondant aux atomes de phosophore.
+<a class="reference internal" href="intro-gromacs.html#make-ndx"><span class="std std-ref">gmx make_ndx</span></a> permet de faire cela:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">make_ndx</span> <span class="o">-</span><span class="n">f</span> <span class="n">md</span><span class="o">.</span><span class="n">gro</span>
+</pre></div>
+</div>
+<p>Par défaut, GROMACS reconnait et crée un certain nombre de groupes:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">0</span> <span class="n">System</span>              <span class="p">:</span>  <span class="mi">9216</span> <span class="n">atoms</span>
+<span class="mi">1</span> <span class="n">Other</span>               <span class="p">:</span>  <span class="mi">9216</span> <span class="n">atoms</span>
+<span class="mi">2</span> <span class="n">DOPC</span>                <span class="p">:</span>  <span class="mi">6144</span> <span class="n">atoms</span>
+<span class="mi">3</span> <span class="n">W</span>                   <span class="p">:</span>  <span class="mi">3072</span> <span class="n">atoms</span>
+</pre></div>
+</div>
+<p>Il faut créer un nouveau groupe pour les phosphate. Pour cela on va sélectionner les atomes (<cite>a</cite>) qui s’appellent <cite>PO4</cite> (nom de la bille phosphate dans Martini):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">a</span> <span class="n">PO4</span>
+
+<span class="n">Found</span> <span class="mi">512</span> <span class="n">atoms</span> <span class="k">with</span> <span class="n">name</span> <span class="n">PO4</span>
+
+  <span class="mi">4</span> <span class="n">PO4</span>                 <span class="p">:</span>   <span class="mi">512</span> <span class="n">atoms</span>
+</pre></div>
+</div>
+<p>Une fois <a class="reference internal" href="intro-gromacs.html#make-ndx"><span class="std std-ref">gmx make_ndx</span></a> quitté (commande <cite>q</cite>), un fichier <cite>index.ndx</cite> est créé et il contient la sélection d’atome.</p>
+<p>On peut alors se servir de <a class="reference internal" href="intro-gromacs.html#density"><span class="std std-ref">gmx density</span></a> pour calculer le profil de densité:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">density</span> <span class="o">-</span><span class="n">f</span> <span class="n">md</span><span class="o">.</span><span class="n">xtc</span> <span class="o">-</span><span class="n">s</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span> <span class="o">-</span><span class="n">b</span> <span class="mi">50000</span> <span class="o">-</span><span class="n">n</span> <span class="n">index</span><span class="o">.</span><span class="n">ndx</span> <span class="o">-</span><span class="n">d</span> <span class="n">z</span> <span class="o">-</span><span class="n">o</span> <span class="n">p</span><span class="o">-</span><span class="n">density</span><span class="o">.</span><span class="n">xvg</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Il faut évidemment choisir le groupe <cite>PO4</cite> (numéro <cite>4</cite>) pour avoir la densité des phosphates…</p>
+</div>
+<p>On peut évaluer l’épaisseur membranaire à partir de la distance entre les deux pics de densité correspondant aux deux feuillets.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Comparer les valeurs d’épaisseur membranaire entre le DPPC et le DOPC.</p>
+</div>
+</div>
+<div class="section" id="diffusion-laterale">
+<h3>Diffusion latérale<a class="headerlink" href="#diffusion-laterale" title="Lien permanent vers ce titre">¶</a></h3>
+<p>La diffusion latérale des lipides peut se calculer facilement avec GROMACS à partir du moment où il est possible d’enlever
+les «&nbsp;sauts&nbsp;» des molécules:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">trjconv</span> <span class="o">-</span><span class="n">f</span> <span class="n">md</span><span class="o">.</span><span class="n">xtc</span> <span class="o">-</span><span class="n">s</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span> <span class="o">-</span><span class="n">pbc</span> <span class="n">nojump</span> <span class="o">-</span><span class="n">o</span> <span class="n">nojump</span><span class="o">.</span><span class="n">xtc</span>
+</pre></div>
+</div>
+<p>La nouvelle trajectoire <cite>nojump.xtc</cite> ne contenant plus aucun saut de molécules, on peut calculer la diffusion des lipides à l’aide de
+<span class="xref std std-ref">msd</span>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">msd</span> <span class="o">-</span><span class="n">f</span> <span class="n">nojump</span><span class="o">.</span><span class="n">xtc</span> <span class="o">-</span><span class="n">s</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span> <span class="o">-</span><span class="n">rmcomm</span> <span class="o">-</span><span class="n">lateral</span> <span class="n">z</span> <span class="o">-</span><span class="n">b</span> <span class="mi">50000</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Comparer les diffusion latérale des 2 lipides.</p>
+</div>
+</div>
+<div class="section" id="parametre-d-ordre">
+<h3>Paramètre d’ordre<a class="headerlink" href="#parametre-d-ordre" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Enfin, le paramètre d’ordre peut être calculé à l’aide du script Python <a class="reference download internal" href="_downloads/do-order-gmx5.py" download=""><code class="xref download docutils literal"><span class="pre">do-order-gmx5.py</span></code></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">python</span> <span class="n">do</span><span class="o">-</span><span class="n">order</span><span class="o">-</span><span class="n">gmx5</span><span class="o">.</span><span class="n">py</span> <span class="n">md</span><span class="o">.</span><span class="n">xtc</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span> <span class="mi">15000</span> <span class="mi">30000</span> <span class="mi">20</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">512</span> <span class="n">DPPC</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 
 
+           </div>
+           <div class="articleComments">
+            
            </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="tuto-AMP.html" class="btn btn-neutral float-right" title="Tutoriel “AMP”" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="tuto-lysozyme.html" class="btn btn-neutral" title="Tutoriel “Lysozyme”" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="tuto-lysozyme.html" class="btn btn-neutral" title="Tutoriel « Lysozyme »" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -177,14 +464,15 @@
             VERSION:'2017.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
       <script type="text/javascript" src="_static/translations.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
