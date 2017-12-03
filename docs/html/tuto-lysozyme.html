@@ -542,8 +542,8 @@ dans la disparation de la ligne activant les contraintes de positions. En effet,
 La durée simulée est donc de 500000 x 2 fs soit 1 ns.</p>
 <p>Cette durée est malheureusement trop courte pour pouvoir observer une différence de comportement entre le lysozyme natif et le lysozyme sans ponts S-S.
 Il faut donc poursuivre la simulation sur une durée plus longue (50 à 100 ns).
-L’utilitaire <a class="reference internal" href="intro-gromacs.html#convert-tpr"><span class="std std-ref">gmx convert-tpr</span></a> est justement fait pour cela. Pour changer la durée de simulation jusqu’à une durée de 50 ns (soit 50000 ps), il suffit d’exécuter la commande suivante:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">convert</span><span class="o">-</span><span class="n">tpr</span> <span class="o">-</span><span class="n">s</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span> <span class="o">-</span><span class="n">o</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span> <span class="o">-</span><span class="n">until</span> <span class="mi">50000</span>
+L’utilitaire <a class="reference internal" href="intro-gromacs.html#convert-tpr"><span class="std std-ref">gmx convert-tpr</span></a> est justement fait pour cela. Pour changer la durée de simulation jusqu’à une durée de 25 ns (soit 25000 ps), il suffit d’exécuter la commande suivante:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">convert</span><span class="o">-</span><span class="n">tpr</span> <span class="o">-</span><span class="n">s</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span> <span class="o">-</span><span class="n">o</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span> <span class="o">-</span><span class="n">until</span> <span class="mi">25000</span>
 </pre></div>
 </div>
 <p>Puis de lancer la suite de la simulation à l’aide de la commande suivante:</p>

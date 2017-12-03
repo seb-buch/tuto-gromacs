@@ -390,9 +390,9 @@ La durée simulée est donc de 500000 x 2 fs soit 1 ns.
 
 Cette durée est malheureusement trop courte pour pouvoir observer une différence de comportement entre le lysozyme natif et le lysozyme sans ponts S-S.
 Il faut donc poursuivre la simulation sur une durée plus longue (50 à 100 ns).
-L'utilitaire :ref:`convert-tpr` est justement fait pour cela. Pour changer la durée de simulation jusqu'à une durée de 50 ns (soit 50000 ps), il suffit d'exécuter la commande suivante::
+L'utilitaire :ref:`convert-tpr` est justement fait pour cela. Pour changer la durée de simulation jusqu'à une durée de 25 ns (soit 25000 ps), il suffit d'exécuter la commande suivante::
 
-    > gmx convert-tpr -s md.tpr -o md.tpr -until 50000
+    > gmx convert-tpr -s md.tpr -o md.tpr -until 25000
 
 
 Puis de lancer la suite de la simulation à l'aide de la commande suivante:

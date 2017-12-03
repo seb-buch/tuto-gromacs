@@ -20,11 +20,9 @@ nstcomm                  = 100
 nstxout                  = 0
 nstvout                  = 0
 nstfout                  = 0
-nstlog                   = 10000 ; Output frequency for energies to log file 
+nstlog                   = 10000 ; Output frequency for energies to log file
 nstenergy                = 100   ; Output frequency for energies to energy file
-nstxtcout                = 1000  ; Output frequency for .xtc file
-xtc_precision            = 100
-xtc-grps                 = 
+nstxout-compressed       = 1000  ; Output frequency for .xtc file
 energygrps               = DPPC W
 
 cutoff-scheme            = Verlet
@@ -36,25 +34,26 @@ verlet-buffer-tolerance  = 0.005
 coulombtype              = reaction-field
 rcoulomb                 = 1.1
 epsilon_r                = 15	; 2.5 (with polarizable water)
-epsilon_rf               = 0 
-vdw_type                 = cutoff ;(for use with Verlet-pairlist)   
+epsilon_rf               = 0
+vdw_type                 = cutoff ;(for use with Verlet-pairlist)
 rvdw                     = 1.1 ;(for use with Verlet-pairlist)
 
-tcoupl                   = v-rescale 
+nstpcouple		 = 10
+tcoupl                   = v-rescale
 tc-grps                  = DPPC W
-tau_t                    = 1.0  1.0 
+tau_t                    = 1.0  1.0
 ref_t                    = 310 310
 Pcoupl                   = berendsen  ; parrinello-rahman
 Pcoupltype               = isotropic  ; semiisotropic
 tau_p                    = 6.0        ; 12.0  ;parrinello-rahman is more stable with larger tau-p, DdJ, 20130422
 compressibility          = 3e-4       ; 3e-4
-ref_p                    = 1.0        ; 1.0 
+ref_p                    = 1.0        ; 1.0
 
 gen_vel                  = yes
 gen_temp                 = 310
 gen_seed                 = 473529
 
-constraints              = none 
+constraints              = none
 constraint_algorithm     = Lincs
 continuation             = no
 lincs_order              = 4

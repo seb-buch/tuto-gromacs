@@ -192,10 +192,10 @@
 <p>Contrairement au <a class="reference internal" href="tuto-lysozyme.html#tuto-lyso"><span class="std std-ref">tutoriel lysozyme</span></a>, ici il n’existe pas de fichier <a class="reference internal" href="intro-gromacs.html#coord-files"><span class="std std-ref">pdb</span></a> à partir duquel le système peut être généré.
 Il est donc nécessaire de générer le system <em>ex nihilo</em>.
 Pour cela, on va utiliser l’utilitaire <a class="reference internal" href="intro-gromacs.html#insert-molecules"><span class="std std-ref">gmx insert-molecules</span></a>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">insert</span><span class="o">-</span><span class="n">molecules</span> <span class="o">-</span><span class="n">ci</span> <span class="n">DPPC</span><span class="o">-</span><span class="n">em</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">box</span> <span class="mi">15</span> <span class="mi">15</span> <span class="mf">7.5</span> <span class="o">-</span><span class="n">nmol</span> <span class="mi">512</span> <span class="o">-</span><span class="n">radius</span> <span class="mf">0.21</span> <span class="o">-</span><span class="k">try</span> <span class="mi">500</span> <span class="o">-</span><span class="n">o</span> <span class="n">system_noW</span><span class="o">.</span><span class="n">gro</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">insert</span><span class="o">-</span><span class="n">molecules</span> <span class="o">-</span><span class="n">ci</span> <span class="n">DPPC</span><span class="o">-</span><span class="n">em</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">box</span> <span class="mi">15</span> <span class="mi">15</span> <span class="mi">5</span> <span class="o">-</span><span class="n">nmol</span> <span class="mi">512</span> <span class="o">-</span><span class="n">radius</span> <span class="mf">0.21</span> <span class="o">-</span><span class="k">try</span> <span class="mi">500</span> <span class="o">-</span><span class="n">o</span> <span class="n">system_noW</span><span class="o">.</span><span class="n">gro</span>
 </pre></div>
 </div>
-<p>Cet utilitaire permet, ici, d’insérer aléatoirement 512 (option <cite>-nmol</cite>) molécules de DPPC (option <cite>-ci</cite>) dans une nouvelle boîte MD de taille 15 nm x 15 nm x 7.5nm (option <cite>-box</cite>).
+<p>Cet utilitaire permet, ici, d’insérer aléatoirement 512 (option <cite>-nmol</cite>) molécules de DPPC (option <cite>-ci</cite>) dans une nouvelle boîte MD de taille 15 nm x 15 nm x 5nm (option <cite>-box</cite>).
 Afin d’éviter les collisions entre les molécules insérées, un rayon de 0.21 nm (option <cite>-radius</cite>) est pris en compte et 500 essais d’insertion (par molécule insérée - option <cite>-try) est effectué`</cite>
 Quand les 512 molécules sont insérées (ou que les 500x512 essais sont passés), le système est sauvegardé dans <cite>system_noW.gro</cite> (option <cite>-o</cite>).</p>
 </div>
@@ -299,7 +299,7 @@ On peut lancer directement la simulation de l’auto-assemblage des lipides en b
 <div class="section" id="analyse-de-la-bicouche-formee">
 <h2>Analyse de la bicouche formée<a class="headerlink" href="#analyse-de-la-bicouche-formee" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Avant d’analyser la trajectoire, il est nécessaire de rendre entières les molécules «&nbsp;cassées&nbsp;» par la réplication de la boîte:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">trjconv</span> <span class="o">-</span><span class="n">s</span> <span class="n">md</span><span class="o">.</span><span class="n">xtc</span> <span class="o">-</span><span class="n">o</span> <span class="n">md_mol</span><span class="o">.</span><span class="n">xtc</span> <span class="o">-</span><span class="n">pbc</span> <span class="n">mol</span> <span class="o">-</span><span class="n">s</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">trjconv</span> <span class="o">-</span><span class="n">f</span> <span class="n">md</span><span class="o">.</span><span class="n">xtc</span> <span class="o">-</span><span class="n">o</span> <span class="n">md_mol</span><span class="o">.</span><span class="n">xtc</span> <span class="o">-</span><span class="n">pbc</span> <span class="n">mol</span> <span class="o">-</span><span class="n">s</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span>
 </pre></div>
 </div>
 <div class="section" id="aire-par-lipide">
@@ -400,20 +400,45 @@ les «&nbsp;sauts&nbsp;» des molécules:</p>
 </pre></div>
 </div>
 <p>La nouvelle trajectoire <cite>nojump.xtc</cite> ne contenant plus aucun saut de molécules, on peut calculer la diffusion des lipides à l’aide de
-<span class="xref std std-ref">msd</span>:</p>
+<a class="reference internal" href="intro-gromacs.html#msd"><span class="std std-ref">gmx msd</span></a>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">msd</span> <span class="o">-</span><span class="n">f</span> <span class="n">nojump</span><span class="o">.</span><span class="n">xtc</span> <span class="o">-</span><span class="n">s</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span> <span class="o">-</span><span class="n">rmcomm</span> <span class="o">-</span><span class="n">lateral</span> <span class="n">z</span> <span class="o">-</span><span class="n">b</span> <span class="mi">50000</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Comparer les diffusion latérale des 2 lipides.</p>
+<p class="last">Comparer les diffusions latérales des 2 lipides.</p>
 </div>
 </div>
 <div class="section" id="parametre-d-ordre">
 <h3>Paramètre d’ordre<a class="headerlink" href="#parametre-d-ordre" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Enfin, le paramètre d’ordre peut être calculé à l’aide du script Python <a class="reference download internal" href="_downloads/do-order-gmx5.py" download=""><code class="xref download docutils literal"><span class="pre">do-order-gmx5.py</span></code></a>:</p>
+<p>Enfin, le paramètre d’ordre peut être calculé à l’aide du script Python <a class="reference download internal" href="_downloads/do-order-gmx5.py" download=""><code class="xref download docutils literal"><span class="pre">do-order-gmx5.py</span></code></a>.
+Ce script nécessite un total de 10 arguments:</p>
+<ol class="arabic simple">
+<li>la trajectoire au format <cite>.xtc</cite></li>
+<li>la topologie au format <cite>.tpr</cite></li>
+<li>le temps de simulation (en ps) du début d’analyse</li>
+<li>le temps de simulation (en ps) de fin d’analyse</li>
+<li>la fréquence d’analyse (e.g. <cite>20</cite> signifie une analyse toutes les 20 «&nbsp;frames&nbsp;»)</li>
+<li>la coordonnée X de l’axe de référence pour l’analyse</li>
+<li>la coordonnée Y de l’axe de référence pour l’analyse</li>
+<li>la coordonnée Z de l’axe de référence pour l’analyse</li>
+<li>le nombre de lipides (au total)</li>
+<li>le nom de lipide à considérer</li>
+</ol>
+<p>Dans le cadre de ce tutoriel, la commande à exécuter doit ressembler à la suivante:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">python</span> <span class="n">do</span><span class="o">-</span><span class="n">order</span><span class="o">-</span><span class="n">gmx5</span><span class="o">.</span><span class="n">py</span> <span class="n">md</span><span class="o">.</span><span class="n">xtc</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span> <span class="mi">15000</span> <span class="mi">30000</span> <span class="mi">20</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">512</span> <span class="n">DPPC</span>
 </pre></div>
+</div>
+<p>Ce script calcule les paramètres d’ordre <a class="reference external" href="http://md.chem.rug.nl/index.php/tutorials-general-introduction-gmx5/bilayers-gmx5#Order-parameters">P2</a>
+pour les différentes liaisons du lipide et sauvegarde les valeurs dans deux fichiers texte: <cite>order.dat</cite> et <cite>S-profile.dat</cite>.</p>
+<p>Un dernier script python (<a class="reference download internal" href="_downloads/plot-order.py" download=""><code class="xref download docutils literal"><span class="pre">plot-order.py</span></code></a>) permet de tracer le profil d’ordre à partir du fichier <cite>order.dat</cite> et
+de le sauvegarder sous format <cite>PNG</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">python</span> <span class="n">plot</span><span class="o">-</span><span class="n">order</span><span class="o">.</span><span class="n">py</span> <span class="n">order</span><span class="o">.</span><span class="n">dat</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Comparer les profils d’ordre pour le DPPC et le DOPC.</p>
 </div>
 </div>
 </div>

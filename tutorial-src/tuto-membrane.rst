@@ -30,11 +30,13 @@ Contrairement au :ref:`tutoriel lysozyme <tuto_lyso>`, ici il n'existe pas de fi
 Il est donc nécessaire de générer le system *ex nihilo*.
 Pour cela, on va utiliser l'utilitaire :ref:`insert-molecules`::
 
-    > gmx insert-molecules -ci DPPC-em.gro -box 15 15 7.5 -nmol 512 -radius 0.21 -try 500 -o system_noW.gro
+    > gmx insert-molecules -ci DPPC-em.gro -box 15 15 5 -nmol 512 -radius 0.21 -try 500 -o system_noW.gro
 
-Cet utilitaire permet, ici, d'insérer aléatoirement 512 (option `-nmol`) molécules de DPPC (option `-ci`) dans une nouvelle boîte MD de taille 15 nm x 15 nm x 7.5nm (option `-box`).
+Cet utilitaire permet, ici, d'insérer aléatoirement 512 (option `-nmol`) molécules de DPPC (option `-ci`) dans une nouvelle boîte MD de taille 15 nm x 15 nm x 5nm (option `-box`).
 Afin d'éviter les collisions entre les molécules insérées, un rayon de 0.21 nm (option `-radius`) est pris en compte et 500 essais d'insertion (par molécule insérée - option `-try) est effectué``
 Quand les 512 molécules sont insérées (ou que les 500x512 essais sont passés), le système est sauvegardé dans `system_noW.gro` (option `-o`).
+
+
 
 Construction du fichier de topologie du système
 -----------------------------------------------
@@ -125,7 +127,7 @@ Analyse de la bicouche formée
 
 Avant d'analyser la trajectoire, il est nécessaire de rendre entières les molécules "cassées" par la réplication de la boîte::
 
-    > gmx trjconv -s md.xtc -o md_mol.xtc -pbc mol -s md.tpr
+    > gmx trjconv -f md.xtc -o md_mol.xtc -pbc mol -s md.tpr
 
 Aire par lipide
 +++++++++++++++
@@ -234,14 +236,39 @@ La nouvelle trajectoire `nojump.xtc` ne contenant plus aucun saut de molécules,
     > gmx msd -f nojump.xtc -s md.tpr -rmcomm -lateral z -b 50000
 
 .. note::
-    Comparer les diffusion latérale des 2 lipides.
+    Comparer les diffusions latérales des 2 lipides.
 
 
 Paramètre d'ordre
 +++++++++++++++++
 
-Enfin, le paramètre d'ordre peut être calculé à l'aide du script Python :download:`do-order-gmx5.py <./files/membrane/do-order-gmx5.py>`::
+Enfin, le paramètre d'ordre peut être calculé à l'aide du script Python :download:`do-order-gmx5.py <./files/membrane/do-order-gmx5.py>`.
+Ce script nécessite un total de 10 arguments:
+
+1. la trajectoire au format `.xtc`
+2. la topologie au format `.tpr`
+3. le temps de simulation (en ps) du début d'analyse
+4. le temps de simulation (en ps) de fin d'analyse
+5. la fréquence d'analyse (e.g. `20` signifie une analyse toutes les 20 "frames")
+6. la coordonnée X de l'axe de référence pour l'analyse
+7. la coordonnée Y de l'axe de référence pour l'analyse
+8. la coordonnée Z de l'axe de référence pour l'analyse
+9. le nombre de lipides (au total)
+10. le nom de lipide à considérer
+
+
+Dans le cadre de ce tutoriel, la commande à exécuter doit ressembler à la suivante::
 
     > python do-order-gmx5.py md.xtc md.tpr 15000 30000 20 0 0 1 512 DPPC
 
+Ce script calcule les paramètres d'ordre `P2 <http://md.chem.rug.nl/index.php/tutorials-general-introduction-gmx5/bilayers-gmx5#Order-parameters>`_
+pour les différentes liaisons du lipide et sauvegarde les valeurs dans deux fichiers texte: `order.dat` et `S-profile.dat`.
+
+Un dernier script python (:download:`plot-order.py <./files/membrane/plot-order.py>`) permet de tracer le profil d'ordre à partir du fichier `order.dat` et
+de le sauvegarder sous format `PNG`::
+
+    > python plot-order.py order.dat
+
+.. note::
+    Comparer les profils d'ordre pour le DPPC et le DOPC.
 
