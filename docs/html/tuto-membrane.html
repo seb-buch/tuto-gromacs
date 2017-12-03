@@ -198,6 +198,10 @@ Pour cela, on va utiliser l’utilitaire <a class="reference internal" href="int
 <p>Cet utilitaire permet, ici, d’insérer aléatoirement 512 (option <cite>-nmol</cite>) molécules de DPPC (option <cite>-ci</cite>) dans une nouvelle boîte MD de taille 15 nm x 15 nm x 5nm (option <cite>-box</cite>).
 Afin d’éviter les collisions entre les molécules insérées, un rayon de 0.21 nm (option <cite>-radius</cite>) est pris en compte et 500 essais d’insertion (par molécule insérée - option <cite>-try) est effectué`</cite>
 Quand les 512 molécules sont insérées (ou que les 500x512 essais sont passés), le système est sauvegardé dans <cite>system_noW.gro</cite> (option <cite>-o</cite>).</p>
+<p>On modifie ensuite légèrement la boîte pour laisser de la place pour les particules d’eau:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">editconf</span> <span class="o">-</span><span class="n">f</span> <span class="n">system_noW</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">box</span> <span class="mi">15</span> <span class="mi">15</span> <span class="mf">7.5</span> <span class="o">-</span><span class="n">o</span> <span class="n">system_noW</span><span class="o">.</span><span class="n">gro</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="construction-du-fichier-de-topologie-du-systeme">
 <h2>Construction du fichier de topologie du système<a class="headerlink" href="#construction-du-fichier-de-topologie-du-systeme" title="Lien permanent vers ce titre">¶</a></h2>

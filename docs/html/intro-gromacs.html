@@ -93,14 +93,7 @@
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction à GROMACS</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#utiliser-gromacs">Utiliser GROMACS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#les-fichiers-gromacs">Les fichiers GROMACS</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#coordonnees-atomiques">Coordonnées atomiques</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#topologie">Topologie</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#fichiers-de-simulation">Fichiers de simulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#selection-des-atomes">Sélection des atomes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#autres-type-de-fichiers">Autres type de fichiers</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#les-fichiers-gromacs">Les fichiers GROMACS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#outils-gromacs-pour-lancer-une-simulation">Outils GROMACS pour lancer une simulation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#gmx-insert-molecules">gmx insert-molecules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gmx-pdb2gmx">gmx pdb2gmx</a></li>
@@ -196,45 +189,18 @@ qui permet de préparer les simulations (<cite>gmx grompp</cite>), de les exécu
 <p class="first admonition-title">Important</p>
 <p class="last">GROMACS n’a pas d’interface graphique. Il est donc nécessaire de passer par l’invite de commande.</p>
 </div>
-<p>Toutes les commandes propres à GROMACS doivent être exécutées par l’intermédiaire de l’exécutable <cite>gmx</cite>. Il est par exemple possible d’afficher l’aide de GROMACS grâce à:</p>
-<blockquote>
-<div>gmx help</div></blockquote>
+<p>Toutes les commandes propres à GROMACS doivent être exécutées par l’intermédiaire de l’exécutable <cite>gmx</cite>.
+Il est par exemple possible d’afficher l’aide de GROMACS grâce à:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">help</span>
+</pre></div>
+</div>
+<p>ou en utilisation l’option <cite>-h</cite> de la commande dont on veut l’aide.</p>
 </div>
 <div class="section" id="les-fichiers-gromacs">
 <h2>Les fichiers GROMACS<a class="headerlink" href="#les-fichiers-gromacs" title="Lien permanent vers ce titre">¶</a></h2>
-<div class="admonition important">
-<p class="first admonition-title">Important</p>
-<p class="last">Cette liste n’est pas exhaustive</p>
-</div>
-<div class="section" id="coordonnees-atomiques">
-<span id="coord-files"></span><h3>Coordonnées atomiques<a class="headerlink" href="#coordonnees-atomiques" title="Lien permanent vers ce titre">¶</a></h3>
-<p>pdb</p>
-<p>gro</p>
-<p>xtc</p>
-<p>trr</p>
-</div>
-<div class="section" id="topologie">
-<span id="topol-files"></span><h3>Topologie<a class="headerlink" href="#topologie" title="Lien permanent vers ce titre">¶</a></h3>
-<p>top</p>
-<p>itp</p>
-<p>tpr (renvoi)</p>
-</div>
-<div class="section" id="fichiers-de-simulation">
-<span id="simul-files"></span><h3>Fichiers de simulation<a class="headerlink" href="#fichiers-de-simulation" title="Lien permanent vers ce titre">¶</a></h3>
-<p>mdp</p>
-<p>tpr</p>
-<p>cpt</p>
-<p>log</p>
-<p>edr</p>
-</div>
-<div class="section" id="selection-des-atomes">
-<span id="select-file"></span><h3>Sélection des atomes<a class="headerlink" href="#selection-des-atomes" title="Lien permanent vers ce titre">¶</a></h3>
-<p>ndx</p>
-</div>
-<div class="section" id="autres-type-de-fichiers">
-<span id="misc-files"></span><h3>Autres type de fichiers<a class="headerlink" href="#autres-type-de-fichiers" title="Lien permanent vers ce titre">¶</a></h3>
-<p>xvg</p>
-</div>
+<p id="misc-files"><span id="select-file"></span><span id="simul-files"></span><span id="topol-files"></span><span id="coord-files"></span>L’ensemble des fichiers supportés par GROMACS est disponible à l’adresse suivante:</p>
+<blockquote>
+<div><a class="reference external" href="http://manual.gromacs.org/online/files.html">http://manual.gromacs.org/online/files.html</a></div></blockquote>
 </div>
 <div class="section" id="outils-gromacs-pour-lancer-une-simulation">
 <h2>Outils GROMACS pour lancer une simulation<a class="headerlink" href="#outils-gromacs-pour-lancer-une-simulation" title="Lien permanent vers ce titre">¶</a></h2>
@@ -244,24 +210,31 @@ qui permet de préparer les simulations (<cite>gmx grompp</cite>), de les exécu
 </div>
 <div class="section" id="gmx-insert-molecules">
 <span id="insert-molecules"></span><h3>gmx insert-molecules<a class="headerlink" href="#gmx-insert-molecules" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Voir <a class="reference external" href="http://manual.gromacs.org/programs/gmx-insert-molecules.html">http://manual.gromacs.org/programs/gmx-insert-molecules.html</a></p>
 </div>
 <div class="section" id="gmx-pdb2gmx">
 <span id="pdb2gmx"></span><h3>gmx pdb2gmx<a class="headerlink" href="#gmx-pdb2gmx" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Voir <a class="reference external" href="http://manual.gromacs.org/programs/gmx-pdb2gmx.html">http://manual.gromacs.org/programs/gmx-pdb2gmx.html</a></p>
 </div>
 <div class="section" id="gmx-editconf">
 <span id="editconf"></span><h3>gmx editconf<a class="headerlink" href="#gmx-editconf" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Voir <a class="reference external" href="http://manual.gromacs.org/programs/gmx-editconf.html">http://manual.gromacs.org/programs/gmx-editconf.html</a></p>
 </div>
 <div class="section" id="gmx-solvate">
 <span id="solvate"></span><h3>gmx solvate<a class="headerlink" href="#gmx-solvate" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Voir <a class="reference external" href="http://manual.gromacs.org/programs/gmx-solvate.html">http://manual.gromacs.org/programs/gmx-solvate.html</a></p>
 </div>
 <div class="section" id="gmx-genion">
 <span id="genion"></span><h3>gmx genion<a class="headerlink" href="#gmx-genion" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Voir <a class="reference external" href="http://manual.gromacs.org/programs/gmx-genion.html">http://manual.gromacs.org/programs/gmx-genion.html</a></p>
 </div>
 <div class="section" id="gmx-grompp">
 <span id="grompp"></span><h3>gmx grompp<a class="headerlink" href="#gmx-grompp" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Voir <a class="reference external" href="http://manual.gromacs.org/programs/gmx-grompp.html">http://manual.gromacs.org/programs/gmx-grompp.html</a></p>
 </div>
 <div class="section" id="gmx-mdrun">
 <span id="mdrun"></span><h3>gmx mdrun<a class="headerlink" href="#gmx-mdrun" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Voir <a class="reference external" href="http://manual.gromacs.org/programs/gmx-mdrun.html">http://manual.gromacs.org/programs/gmx-mdrun.html</a></p>
 <div class="admonition important" id="warning-mdrun">
 <p class="first admonition-title">Important</p>
 <p>La commande <a class="reference internal" href="#mdrun"><span class="std std-ref">gmx mdrun</span></a> <strong>ne doit jamais</strong> être exécutée seule sur un supercalculateur!</p>
@@ -271,6 +244,7 @@ Il faut donc <strong>impérativement</strong> passer par un gestionnaire de tâc
 </div>
 <div class="section" id="gmx-convert-tpr">
 <span id="convert-tpr"></span><h3>gmx convert-tpr<a class="headerlink" href="#gmx-convert-tpr" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Voir <a class="reference external" href="http://manual.gromacs.org/programs/gmx-convert-tpr.html">http://manual.gromacs.org/programs/gmx-convert-tpr.html</a></p>
 </div>
 </div>
 <div class="section" id="outils-gromacs-pour-analyser-une-simulation">
@@ -281,21 +255,27 @@ Il faut donc <strong>impérativement</strong> passer par un gestionnaire de tâc
 </div>
 <div class="section" id="gmx-energy">
 <span id="energy"></span><h3>gmx energy<a class="headerlink" href="#gmx-energy" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Voir <a class="reference external" href="http://manual.gromacs.org/programs/gmx-energy.html">http://manual.gromacs.org/programs/gmx-energy.html</a></p>
 </div>
 <div class="section" id="gmx-trjconv">
 <span id="trjconv"></span><h3>gmx trjconv<a class="headerlink" href="#gmx-trjconv" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Voir <a class="reference external" href="http://manual.gromacs.org/programs/gmx-trjconv.html">http://manual.gromacs.org/programs/gmx-trjconv.html</a></p>
 </div>
 <div class="section" id="gmx-rms">
 <span id="rms"></span><h3>gmx rms<a class="headerlink" href="#gmx-rms" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Voir <a class="reference external" href="http://manual.gromacs.org/programs/gmx-rms.html">http://manual.gromacs.org/programs/gmx-rms.html</a></p>
 </div>
 <div class="section" id="gmx-density">
 <span id="density"></span><h3>gmx density<a class="headerlink" href="#gmx-density" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Voir <a class="reference external" href="http://manual.gromacs.org/programs/gmx-density.html">http://manual.gromacs.org/programs/gmx-density.html</a></p>
 </div>
 <div class="section" id="gmx-make-ndx">
 <span id="make-ndx"></span><h3>gmx make_ndx<a class="headerlink" href="#gmx-make-ndx" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Voir <a class="reference external" href="http://manual.gromacs.org/programs/gmx-make_ndx.html">http://manual.gromacs.org/programs/gmx-make_ndx.html</a></p>
 </div>
 <div class="section" id="gmx-msd">
 <span id="msd"></span><h3>gmx msd<a class="headerlink" href="#gmx-msd" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Voir <a class="reference external" href="http://manual.gromacs.org/programs/gmx-msd.html">http://manual.gromacs.org/programs/gmx-msd.html</a></p>
 </div>
 </div>
 </div>

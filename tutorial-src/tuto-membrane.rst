@@ -36,7 +36,9 @@ Cet utilitaire permet, ici, d'insérer aléatoirement 512 (option `-nmol`) molé
 Afin d'éviter les collisions entre les molécules insérées, un rayon de 0.21 nm (option `-radius`) est pris en compte et 500 essais d'insertion (par molécule insérée - option `-try) est effectué``
 Quand les 512 molécules sont insérées (ou que les 500x512 essais sont passés), le système est sauvegardé dans `system_noW.gro` (option `-o`).
 
+On modifie ensuite légèrement la boîte pour laisser de la place pour les particules d'eau::
 
+    > gmx editconf -f system_noW.gro -box 15 15 7.5 -o system_noW.gro
 
 Construction du fichier de topologie du système
 -----------------------------------------------

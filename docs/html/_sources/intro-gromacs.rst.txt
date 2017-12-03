@@ -12,69 +12,29 @@ Utiliser GROMACS
 .. important::
     GROMACS n'a pas d'interface graphique. Il est donc nécessaire de passer par l'invite de commande.
 
-Toutes les commandes propres à GROMACS doivent être exécutées par l'intermédiaire de l'exécutable `gmx`. Il est par exemple possible d'afficher l'aide de GROMACS grâce à:
+Toutes les commandes propres à GROMACS doivent être exécutées par l'intermédiaire de l'exécutable `gmx`.
+Il est par exemple possible d'afficher l'aide de GROMACS grâce à::
 
-    gmx help
+    > gmx help
 
+ou en utilisation l'option `-h` de la commande dont on veut l'aide.
 
 Les fichiers GROMACS
 --------------------
 
-.. important::
-    Cette liste n'est pas exhaustive
-
 .. _coord_files:
-
-Coordonnées atomiques
-+++++++++++++++++++++
-
-pdb
-
-gro
-
-xtc
-
-trr
 
 .. _topol_files:
 
-Topologie
-+++++++++
-
-top
-
-itp
-
-tpr (renvoi)
-
 .. _simul_files:
-
-Fichiers de simulation
-++++++++++++++++++++++
-
-mdp
-
-tpr
-
-cpt
-
-log
-
-edr
 
 .. _select_file:
 
-Sélection des atomes
-++++++++++++++++++++
-
-ndx
-
 .. _misc_files:
 
-Autres type de fichiers
-+++++++++++++++++++++++
+L'ensemble des fichiers supportés par GROMACS est disponible à l'adresse suivante:
 
-xvg
+    `http://manual.gromacs.org/online/files.html <http://manual.gromacs.org/online/files.html>`_
 
 
 
@@ -89,11 +49,15 @@ Outils GROMACS pour lancer une simulation
 gmx insert-molecules
 ++++++++++++++++++++
 
+Voir `http://manual.gromacs.org/programs/gmx-insert-molecules.html <http://manual.gromacs.org/programs/gmx-insert-molecules.html>`_
+
 
 .. _pdb2gmx:
 
 gmx pdb2gmx
 +++++++++++
+
+Voir `http://manual.gromacs.org/programs/gmx-pdb2gmx.html <http://manual.gromacs.org/programs/gmx-pdb2gmx.html>`_
 
 
 .. _editconf:
@@ -101,11 +65,15 @@ gmx pdb2gmx
 gmx editconf
 ++++++++++++
 
+Voir `http://manual.gromacs.org/programs/gmx-editconf.html <http://manual.gromacs.org/programs/gmx-editconf.html>`_
+
 
 .. _solvate:
 
 gmx solvate
 +++++++++++
+
+Voir `http://manual.gromacs.org/programs/gmx-solvate.html <http://manual.gromacs.org/programs/gmx-solvate.html>`_
 
 
 .. _genion:
@@ -113,17 +81,24 @@ gmx solvate
 gmx genion
 ++++++++++
 
+Voir `http://manual.gromacs.org/programs/gmx-genion.html <http://manual.gromacs.org/programs/gmx-genion.html>`_
+
 
 .. _grompp:
 
 gmx grompp
 ++++++++++
 
+Voir `http://manual.gromacs.org/programs/gmx-grompp.html <http://manual.gromacs.org/programs/gmx-grompp.html>`_
+
 
 .. _mdrun:
 
 gmx mdrun
 +++++++++
+
+Voir `http://manual.gromacs.org/programs/gmx-mdrun.html <http://manual.gromacs.org/programs/gmx-mdrun.html>`_
+
 
 .. _warning_mdrun:
 
@@ -139,6 +114,9 @@ gmx mdrun
 gmx convert-tpr
 +++++++++++++++
 
+Voir `http://manual.gromacs.org/programs/gmx-convert-tpr.html <http://manual.gromacs.org/programs/gmx-convert-tpr.html>`_
+
+
 Outils GROMACS pour analyser une simulation
 -------------------------------------------
 
@@ -150,11 +128,15 @@ Outils GROMACS pour analyser une simulation
 gmx energy
 ++++++++++
 
+Voir `http://manual.gromacs.org/programs/gmx-energy.html <http://manual.gromacs.org/programs/gmx-energy.html>`_
+
 
 .. _trjconv:
 
 gmx trjconv
 +++++++++++
+
+Voir `http://manual.gromacs.org/programs/gmx-trjconv.html <http://manual.gromacs.org/programs/gmx-trjconv.html>`_
 
 
 .. _rms:
@@ -162,11 +144,15 @@ gmx trjconv
 gmx rms
 +++++++
 
+Voir `http://manual.gromacs.org/programs/gmx-rms.html <http://manual.gromacs.org/programs/gmx-rms.html>`_
+
 
 .. _density:
 
 gmx density
 +++++++++++
+
+Voir `http://manual.gromacs.org/programs/gmx-density.html <http://manual.gromacs.org/programs/gmx-density.html>`_
 
 
 .. _make_ndx:
@@ -174,10 +160,15 @@ gmx density
 gmx make_ndx
 ++++++++++++
 
+Voir `http://manual.gromacs.org/programs/gmx-make_ndx.html <http://manual.gromacs.org/programs/gmx-make_ndx.html>`_
+
 
 .. _msd:
 
 gmx msd
 +++++++
+
+Voir `http://manual.gromacs.org/programs/gmx-msd.html <http://manual.gromacs.org/programs/gmx-msd.html>`_
+
 
 .. _GROMACS: http://www.gromacs.org
