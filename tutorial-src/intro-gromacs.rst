@@ -19,18 +19,10 @@ Il est par exemple possible d'afficher l'aide de GROMACS grâce à::
 
 ou en utilisation l'option `-h` de la commande dont on veut l'aide.
 
+.. _gromacs_files:
+
 Les fichiers GROMACS
 --------------------
-
-.. _coord_files:
-
-.. _topol_files:
-
-.. _simul_files:
-
-.. _select_file:
-
-.. _misc_files:
 
 L'ensemble des fichiers supportés par GROMACS est disponible à l'adresse suivante:
 

@@ -184,12 +184,12 @@
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
 <p>Dans la suite, le système «&nbsp;DPPC&nbsp;» est pris comme base pour les exemples.</p>
-<p class="last">La transposition du DPPC au DOPC est laissé comme exercice.</p>
+<p class="last">La transposition du DPPC au DOPC est laissée comme exercice.</p>
 </div>
 </div>
 <div class="section" id="construction-du-systeme-initial">
 <h2>Construction du système initial<a class="headerlink" href="#construction-du-systeme-initial" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Contrairement au <a class="reference internal" href="tuto-lysozyme.html#tuto-lyso"><span class="std std-ref">tutoriel lysozyme</span></a>, ici il n’existe pas de fichier <a class="reference internal" href="intro-gromacs.html#coord-files"><span class="std std-ref">pdb</span></a> à partir duquel le système peut être généré.
+<p>Contrairement au <a class="reference internal" href="tuto-lysozyme.html#tuto-lyso"><span class="std std-ref">tutoriel lysozyme</span></a>, ici, il n’existe pas de fichier <cite>pdb</cite> à partir duquel le système peut être généré.
 Il est donc nécessaire de générer le system <em>ex nihilo</em>.
 Pour cela, on va utiliser l’utilitaire <a class="reference internal" href="intro-gromacs.html#insert-molecules"><span class="std std-ref">gmx insert-molecules</span></a>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">insert</span><span class="o">-</span><span class="n">molecules</span> <span class="o">-</span><span class="n">ci</span> <span class="n">DPPC</span><span class="o">-</span><span class="n">em</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">box</span> <span class="mi">15</span> <span class="mi">15</span> <span class="mi">5</span> <span class="o">-</span><span class="n">nmol</span> <span class="mi">512</span> <span class="o">-</span><span class="n">radius</span> <span class="mf">0.21</span> <span class="o">-</span><span class="k">try</span> <span class="mi">500</span> <span class="o">-</span><span class="n">o</span> <span class="n">system_noW</span><span class="o">.</span><span class="n">gro</span>
@@ -205,7 +205,7 @@ Quand les 512 molécules sont insérées (ou que les 500x512 essais sont passés
 </div>
 <div class="section" id="construction-du-fichier-de-topologie-du-systeme">
 <h2>Construction du fichier de topologie du système<a class="headerlink" href="#construction-du-fichier-de-topologie-du-systeme" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Malheureusement, <a class="reference internal" href="intro-gromacs.html#insert-molecules"><span class="std std-ref">gmx insert-molecules</span></a> ne génère que les coordonnées du système (fichier <a class="reference internal" href="intro-gromacs.html#coord-files"><span class="std std-ref">.gro</span></a>).
+<p>Malheureusement, <a class="reference internal" href="intro-gromacs.html#insert-molecules"><span class="std std-ref">gmx insert-molecules</span></a> ne génère que les coordonnées du système (fichier <a class="reference internal" href="intro-gromacs.html#gromacs-files"><span class="std std-ref">.gro</span></a>).
 Il faut donc créé le fichier de topologie. Pour simplifier les choses, il est possible de télécharger ce fichier (
 <a class="reference download internal" href="_downloads/system.top" download=""><code class="xref download docutils literal"><span class="pre">system.top</span></code></a>) dont voici le contenu:</p>
 <div class="highlight-ahk"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -236,6 +236,10 @@ Il faut donc créé le fichier de topologie. Pour simplifier les choses, il est 
 <p class="first admonition-title">Important</p>
 <p class="last">Pour que <cite>system.top</cite> puisse être interprété par <a class="reference internal" href="intro-gromacs.html#grompp"><span class="std std-ref">gmx grompp</span></a>, il faut que <em>tous</em> les fichiers inclus soit effectivement à l’emplacement indiqué.
 (Ici, il s’agit du même dossier que <cite>system.top</cite>.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Pour le DOPC, la topologie est également disponible: <a class="reference download internal" href="_downloads/martini_v2.0_DOPC_02.itp" download=""><code class="xref download docutils literal"><span class="pre">martini_v2.0_DOPC_02.itp</span></code></a></p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -361,7 +365,7 @@ et calculer l’aire par lipide:</p>
 <h3>Epaisseur de la bicouche<a class="headerlink" href="#epaisseur-de-la-bicouche" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Pour déterminer l’épaisseur, on va utiliser l’utilitaire <a class="reference internal" href="intro-gromacs.html#density"><span class="std std-ref">gmx density</span></a> qui permet de tracer la densité des atomes suivant un axe (ici Z).
 Classiquement, on détermine l’épaisseur membranaire à partir de la distance en les atomes de phosphore de chacun des feuillets.</p>
-<p>La première chose à faire est donc de créer un fichier <cite>.ndx</cite> (cf <a class="reference internal" href="intro-gromacs.html#topol-files"><span class="std std-ref">Topologie</span></a>) contenant un groupe d’atome correspondant aux atomes de phosophore.
+<p>La première chose à faire est donc de créer un fichier <cite>.ndx</cite> (cf <a class="reference internal" href="intro-gromacs.html#gromacs-files"><span class="std std-ref">Les fichiers GROMACS</span></a>) contenant un groupe d’atome correspondant aux atomes de phosophore.
 <a class="reference internal" href="intro-gromacs.html#make-ndx"><span class="std std-ref">gmx make_ndx</span></a> permet de faire cela:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">make_ndx</span> <span class="o">-</span><span class="n">f</span> <span class="n">md</span><span class="o">.</span><span class="n">gro</span>
 </pre></div>
@@ -386,10 +390,7 @@ Classiquement, on détermine l’épaisseur membranaire à partir de la distance
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">density</span> <span class="o">-</span><span class="n">f</span> <span class="n">md</span><span class="o">.</span><span class="n">xtc</span> <span class="o">-</span><span class="n">s</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span> <span class="o">-</span><span class="n">b</span> <span class="mi">50000</span> <span class="o">-</span><span class="n">n</span> <span class="n">index</span><span class="o">.</span><span class="n">ndx</span> <span class="o">-</span><span class="n">d</span> <span class="n">z</span> <span class="o">-</span><span class="n">o</span> <span class="n">p</span><span class="o">-</span><span class="n">density</span><span class="o">.</span><span class="n">xvg</span>
 </pre></div>
 </div>
-<div class="admonition important">
-<p class="first admonition-title">Important</p>
-<p class="last">Il faut évidemment choisir le groupe <cite>PO4</cite> (numéro <cite>4</cite>) pour avoir la densité des phosphates…</p>
-</div>
+<p>Il faut évidemment choisir le groupe <cite>PO4</cite> (numéro <cite>4</cite>) pour avoir la densité des phosphates…</p>
 <p>On peut évaluer l’épaisseur membranaire à partir de la distance entre les deux pics de densité correspondant aux deux feuillets.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>

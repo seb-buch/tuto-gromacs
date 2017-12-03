@@ -20,13 +20,13 @@ Dans ce tutoriel, il n'y a pas besoin d'utiliser :ref:`pdb2gmx` (qui ne marche q
 
     Dans la suite, le système "DPPC" est pris comme base pour les exemples.
 
-    La transposition du DPPC au DOPC est laissé comme exercice.
+    La transposition du DPPC au DOPC est laissée comme exercice.
 
 
 Construction du système initial
 -------------------------------
 
-Contrairement au :ref:`tutoriel lysozyme <tuto_lyso>`, ici il n'existe pas de fichier :ref:`pdb <coord_files>` à partir duquel le système peut être généré.
+Contrairement au :ref:`tutoriel lysozyme <tuto_lyso>`, ici, il n'existe pas de fichier `pdb` à partir duquel le système peut être généré.
 Il est donc nécessaire de générer le system *ex nihilo*.
 Pour cela, on va utiliser l'utilitaire :ref:`insert-molecules`::
 
@@ -43,7 +43,7 @@ On modifie ensuite légèrement la boîte pour laisser de la place pour les part
 Construction du fichier de topologie du système
 -----------------------------------------------
 
-Malheureusement, :ref:`insert-molecules` ne génère que les coordonnées du système (fichier :ref:`.gro <coord_files>`).
+Malheureusement, :ref:`insert-molecules` ne génère que les coordonnées du système (fichier :ref:`.gro <gromacs_files>`).
 Il faut donc créé le fichier de topologie. Pour simplifier les choses, il est possible de télécharger ce fichier (
 :download:`system.top <./files/membrane/system.top>`) dont voici le contenu:
 
@@ -68,6 +68,9 @@ Ce fichier est très simple à comprendre:
 .. important::
     Pour que `system.top` puisse être interprété par :ref:`grompp`, il faut que *tous* les fichiers inclus soit effectivement à l'emplacement indiqué.
     (Ici, il s'agit du même dossier que `system.top`.
+
+.. note::
+    Pour le DOPC, la topologie est également disponible: :download:`martini_v2.0_DOPC_02.itp <./files/membrane/martini_v2.0_DOPC_02.itp>`
 
 .. note::
     Ouvrir `martini_v2.1.itp` et `martini_v2.0_DPPC_01.itp` pour observer les différences entre un fichier de définition de champ de forces et de topologie d'une molécule.
@@ -189,7 +192,7 @@ Epaisseur de la bicouche
 Pour déterminer l'épaisseur, on va utiliser l'utilitaire :ref:`density` qui permet de tracer la densité des atomes suivant un axe (ici Z).
 Classiquement, on détermine l'épaisseur membranaire à partir de la distance en les atomes de phosphore de chacun des feuillets.
 
-La première chose à faire est donc de créer un fichier `.ndx` (cf :ref:`topol_files`) contenant un groupe d'atome correspondant aux atomes de phosophore.
+La première chose à faire est donc de créer un fichier `.ndx` (cf :ref:`gromacs_files`) contenant un groupe d'atome correspondant aux atomes de phosophore.
 :ref:`make_ndx` permet de faire cela::
 
     > gmx make_ndx -f md.gro
@@ -215,8 +218,8 @@ On peut alors se servir de :ref:`density` pour calculer le profil de densité::
 
     > gmx density -f md.xtc -s md.tpr -b 50000 -n index.ndx -d z -o p-density.xvg
 
-.. important::
-    Il faut évidemment choisir le groupe `PO4` (numéro `4`) pour avoir la densité des phosphates...
+
+Il faut évidemment choisir le groupe `PO4` (numéro `4`) pour avoir la densité des phosphates...
 
 On peut évaluer l'épaisseur membranaire à partir de la distance entre les deux pics de densité correspondant aux deux feuillets.
 

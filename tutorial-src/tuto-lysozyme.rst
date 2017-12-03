@@ -3,9 +3,13 @@
 Tutoriel "Lysozyme"
 ===================
 
+.. note::
+    Ce tutoriel est inspiré du tutoriel disponible `ici <http://www.bevanlab.biochem.vt.edu/Pages/Personal/justin/gmx-tutorials/lysozyme/index.html>`_.
+
+
 Le but de ce tutoriel est d'étudier l'influence des ponts disulfures sur la stabilité en température du lysozyme.
 Le lysozyme est une protéine présente notamment dans le blanc d'oeuf et qui possède des propriétés antimicrobienne puisque
-cette enzyme (EC 3.2.1.17) hydrolyse le peptidoglycane ce qui fragilise la paroi des bactéries à Gram positif:
+cette enzyme (EC 3.2.1.17) hydrolyse le peptidoglycane, ce qui fragilise la paroi des bactéries à Gram positif:
 
 .. figure:: images/Mecanism_of_action_for_Lysozyme.svg
     :width: 400px
@@ -13,7 +17,7 @@ cette enzyme (EC 3.2.1.17) hydrolyse le peptidoglycane ce qui fragilise la paroi
 
     Liaison hydrolysée par le lysozyme.
 
-Le lysozyme contient aussi 4 ponts disulfure qui lui confère une structure relativement stable puisque sa température de dénaturation élevée (85°C dans le glycérol [Knubovets1999]_).
+Le lysozyme contient aussi 4 ponts disulfure qui lui confèrent une structure relativement stable puisque sa température de dénaturation élevée (85°C dans le glycérol [Knubovets1999]_).
 
 .. figure:: images/lysozyme_S-S.png
     :width: 400px
@@ -38,7 +42,7 @@ Pour générer cette topologie, on peut utiliser l'utilitaire :ref:`pdb2gmx` qui
 
 .. important::
 
-    Comme le but est d'étudier l'effet des ponts S-S, nous allons générer *2* topologies:
+    Comme le but est d'étudier l'effet des ponts S-S, il faut générer 2 topologies:
 
     1. une topologie contenant les ponts S-S
 
@@ -50,7 +54,7 @@ La commande pour générer la topologie du lysozyme est::
 
 L'option `-ss` rend interactif le choix des ponts S-S.
 
-Premièrement :ref:`pdb2gmx` demande de choisir le champ de force::
+Premièrement, :ref:`pdb2gmx` demande de choisir le champ de force::
 
      1: AMBER03 protein, nucleic AMBER94 (Duan et al., J. Comp. Chem. 24, 1999-2012, 2003)
      2: AMBER94 force field (Cornell et al., JACS 117, 5179-5197, 1995)
@@ -76,7 +80,7 @@ Ensuite, le modèle d'eau doit être choisi::
      2: SPC/E  extended simple point charge
      3: None
 
-Il faut choisir `SPC` (choix *1*)
+Il faut choisir `SPC` (choix *1*).
 
 Enfin, le choix des ponts S-S intervient::
 
@@ -142,11 +146,11 @@ un fichier de paramètre de simulation (:download:`ions.mdp <./files/lyso/ions.m
 
 Le fichier `ions.tpr` contenant à la fois les coordonnées des atomes et la topologie du système (i.e. les molécules),
 on peut maintenant l'utiliser pour remplacer une molécule d'eau par un ion Cl- afin de rendre la boîte MD neutre.
-Pour cela on utilise l'utilitaire :ref:`genion`::
+Pour cela, on utilise l'utilitaire :ref:`genion`::
 
     > gmx genion -s ions.tpr -o lyso_WI.gro -p topol.top -neutral
 
-Même si les molécules sont définies dans le fichier `ions.tpr`, :ref:`genion` ne sélectionner que des groupes d'atomes::
+Même si les molécules sont définies dans le fichier `ions.tpr`, :ref:`genion` ne permet de sélectionner que des groupes d'atomes::
 
     Select a continuous group of solvent molecules
     Group     0 (         System) has 20808 elements
@@ -213,7 +217,7 @@ On introduit toujours la contrainte de température en premier sous la forme d'u
 dans laquelle:
 
     1. Le nombre `N` de particles ne varie pas (imposé par les `Conditions Périodiques aux Limites <https://fr.wikipedia.org/wiki/Condition_p%C3%A9riodique_aux_limites>`_)
-    2. Le volume `V` de la boîte est fixe (car la pression n'est pas fixée - cf. l'`équation des gaz parfaits <https://fr.wikipedia.org/wiki/Loi_des_gaz_parfaits#.C3.89quation_des_gaz_parfaits>`_)
+    2. Le volume `V` de la boîte est fixe (car la pression n'est pas fixée - cf. l' `équation des gaz parfaits <https://fr.wikipedia.org/wiki/Loi_des_gaz_parfaits#.C3.89quation_des_gaz_parfaits>`_)
     3. La température `T` du système est fixé à l'aide d'un thermostat (e.g. `Thermostat de Berendsen <https://en.wikipedia.org/wiki/Berendsen_thermostat>`_)
 
 C'est pourquoi on parle souvent d'équilibration `NVT`.
@@ -233,8 +237,8 @@ Le fichier de paramètre utilisé ici (:download:`nvt.mdp <./files/lyso/nvt.mdp>
 Contrainte des positions
 ++++++++++++++++++++++++
 
-Il est possible de contraindre les atomes afin qu'ils reste fixes. Dans le cas d'une équilibration,
-il est souvent intéressant (voire nécessaire) de garder les grosses molécules (e.g. molécules) fixes afin de laisser les petites molécules (e.g. eau et ions), très mobiles, s'équilibrer.
+Il est possible de contraindre les atomes afin qu'ils restent fixes. Dans le cas d'une équilibration,
+il est souvent intéressant (voire nécessaire) de garder les grosses molécules (e.g. protéines) fixes afin de laisser les petites molécules (e.g. eau et ions), très mobiles, s'équilibrer.
 
 Dans GROMACS, l'introduction de ces contraintes se fait généralement via l'utilisation de fichiers du type `posres.itp`
 tels que celui-ci généré par :ref:`pdb2gmx` et dont le contenu ressemble à cela::
@@ -269,7 +273,7 @@ qui active (`-D` suivi de `POSRES`) la contrainte de positions.
 Le couplage en température
 ++++++++++++++++++++++++++
 
-Différents algorithmes sont disponibles afin de coupler le mouvement des atomes (agitation thermique) à la température.
+Différents algorithmes sont disponibles afin de coupler le mouvement des atomes à la température (agitation thermique).
 Les paramètres associés doivent évidemment être décrits dans le fichier `.mdp` associé à la simulation.
 En l'occurence, le fichier `nvt.mdp` décrit plus haut contient les lignes suivantes::
 
@@ -295,7 +299,7 @@ Ce qui confirme bien l'absence de couplage en pression.
 Simulation NVT
 ++++++++++++++
 
-Une fois la topologie complète prête, l'équilibration `NVT` est effectué à l'aide de :ref:`mdrun`::
+Une fois la topologie complète prête, l'équilibration `NVT` est effectuée à l'aide de :ref:`mdrun`::
 
     > gmx mdrun -v -deffnm nvt
 
@@ -338,7 +342,7 @@ Ce paramètre permet d'indiquer que la simulation est la suite d'une simulation 
 
     > gmx grompp -f npt.mdp -c nvt.gro -p topol.top -t nvt.cpt -o npt.tpr
 
-Le fichier `nvt.cpt` est un fichier :ref:`checkpoint <simul_files>` qui contient toutes les informations nécessaire pour poursuivre la simulation (notamment les vitesses des atomes).
+Le fichier `nvt.cpt` est un fichier :ref:`checkpoint <gromacs_files>` qui contient toutes les informations nécessaire pour poursuivre la simulation (notamment les vitesses des atomes).
 On le fourni à :ref:`grompp` pour permettre de faire l'équilibration `NPT` en se basant sur l'équilibration `NVT`.
 
 On peut alors lancer l'équilibration `NPT` avec :ref:`mdrun`::
@@ -403,17 +407,17 @@ Puis de lancer la suite de la simulation à l'aide de la commande suivante:
     Ne pas recopier (et exécuter) cette commande sans réflexion! (:ref:`Pourquoi ?<warning_mdrun>`)
 
 .. important::
-    L'ajout de `-cpi md.cpt` permet d'utiliser le fichier :ref:`checkpoint <simul_files>` comme point de départ plutôt
+    L'ajout de `-cpi md.cpt` permet d'utiliser le fichier :ref:`checkpoint <gromacs_files>` comme point de départ plutôt
     que de devoir relancer la simulation depuis le début.
 
 Analyse
 +++++++
 
 Pour des raisons d'efficacité, GROMACS place toujours tous les atomes dans une boîte de simulation "rectangulaire" pour effectuer les calculs.
-Cela croit souvent des artéfacts quand, en particulier, une molécule est à cheval sur deux boîtes (la "vraie" et une réplique).
+Cela crée souvent des artéfacts quand, en particulier, une molécule est à cheval sur deux boîtes (la "vraie" et une réplique).
 
 Il faut donc traiter la trajectoire issue de la simulation de production avant de pouvoir l'analyser.
-Pour cela on utilise l'utilitaire :ref:`trjconv`::
+Pour cela, on utilise l'utilitaire :ref:`trjconv`::
 
     > gmx trjconv -f md.xtc -o md_mol.xtc -pbc mol -ur compact -s md.tpr
 
@@ -451,7 +455,7 @@ En premier, il faut spécifier le groupe d'atome de référence::
     Group    16 (             CL) has     8 elements
     Group    17 ( Water_and_ions) has 19469 elements
 
-Ici, on utiliser le squelette protéique (groupe `4`) comme référence.
+Ici, on veut utiliser le squelette protéique (groupe `4`) comme référence.
 
 Ensuite, il faut sélectionner le groupe d'atome dont on veut calculer le RMSD. On choisit également le groupe `4`.
 
@@ -461,7 +465,7 @@ Plus le RMSD est faible, plus la protéine est stable (car ses atomes restent pr
 
 
 Les fichiers `.xvg` étant des fichiers texte, il peut être utile de les convertir en image.
-Pour cela, un script Python (:download:`xvg2png.py <files/xvg2png.py>` est mis à disposition pour convertir un (ou plusieurs!) fichier `.xvg` en image (format `PNG <https://fr.wikipedia.org/wiki/Portable_Network_Graphics>`_).
+Pour cela, un script Python (:download:`xvg2png.py <files/xvg2png.py>` est mis à disposition pour convertir un (ou plusieurs) fichier `.xvg` en image (format `PNG <https://fr.wikipedia.org/wiki/Portable_Network_Graphics>`_).
 Il suffit simplement d'exécuter le script de la façon suivante::
 
     > python xvg2png.py rmsd.xvg

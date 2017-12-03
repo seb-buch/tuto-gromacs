@@ -177,14 +177,18 @@
             
   <div class="section" id="tutoriel-lysozyme">
 <span id="tuto-lyso"></span><h1>Tutoriel «&nbsp;Lysozyme&nbsp;»<a class="headerlink" href="#tutoriel-lysozyme" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Ce tutoriel est inspiré du tutoriel disponible <a class="reference external" href="http://www.bevanlab.biochem.vt.edu/Pages/Personal/justin/gmx-tutorials/lysozyme/index.html">ici</a>.</p>
+</div>
 <p>Le but de ce tutoriel est d’étudier l’influence des ponts disulfures sur la stabilité en température du lysozyme.
 Le lysozyme est une protéine présente notamment dans le blanc d’oeuf et qui possède des propriétés antimicrobienne puisque
-cette enzyme (EC 3.2.1.17) hydrolyse le peptidoglycane ce qui fragilise la paroi des bactéries à Gram positif:</p>
+cette enzyme (EC 3.2.1.17) hydrolyse le peptidoglycane, ce qui fragilise la paroi des bactéries à Gram positif:</p>
 <div class="figure align-center" id="id7">
 <a class="reference internal image-reference" href="_images/Mecanism_of_action_for_Lysozyme.svg"><img alt="_images/Mecanism_of_action_for_Lysozyme.svg" src="_images/Mecanism_of_action_for_Lysozyme.svg" width="400px" /></a>
 <p class="caption"><span class="caption-text">Liaison hydrolysée par le lysozyme.</span></p>
 </div>
-<p>Le lysozyme contient aussi 4 ponts disulfure qui lui confère une structure relativement stable puisque sa température de dénaturation élevée (85°C dans le glycérol <a class="reference internal" href="#knubovets1999" id="id1">[Knubovets1999]</a>).</p>
+<p>Le lysozyme contient aussi 4 ponts disulfure qui lui confèrent une structure relativement stable puisque sa température de dénaturation élevée (85°C dans le glycérol <a class="reference internal" href="#knubovets1999" id="id1">[Knubovets1999]</a>).</p>
 <div class="figure align-center" id="id8">
 <a class="reference internal image-reference" href="_images/lysozyme_S-S.png"><img alt="_images/lysozyme_S-S.png" src="_images/lysozyme_S-S.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text">Structure du lysozyme avec ses 4 ponts S-S.</span></p>
@@ -204,7 +208,7 @@ La première étape est donc de télécharger les coordonnées atomiques sous le
 Pour générer cette topologie, on peut utiliser l’utilitaire <a class="reference internal" href="intro-gromacs.html#pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a> qui permet de lire un fichier <cite>.pdb</cite> et de générer automatiquement la topologie associée.</p>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p>Comme le but est d’étudier l’effet des ponts S-S, nous allons générer <em>2</em> topologies:</p>
+<p>Comme le but est d’étudier l’effet des ponts S-S, il faut générer 2 topologies:</p>
 <ol class="last arabic simple">
 <li>une topologie contenant les ponts S-S</li>
 <li>une topologie ne contenant <em>pas</em> les ponts S-S</li>
@@ -215,7 +219,7 @@ Pour générer cette topologie, on peut utiliser l’utilitaire <a class="refere
 </pre></div>
 </div>
 <p>L’option <cite>-ss</cite> rend interactif le choix des ponts S-S.</p>
-<p>Premièrement <a class="reference internal" href="intro-gromacs.html#pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a> demande de choisir le champ de force:</p>
+<p>Premièrement, <a class="reference internal" href="intro-gromacs.html#pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a> demande de choisir le champ de force:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span> <span class="mi">1</span><span class="p">:</span> <span class="n">AMBER03</span> <span class="n">protein</span><span class="p">,</span> <span class="n">nucleic</span> <span class="n">AMBER94</span> <span class="p">(</span><span class="n">Duan</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span><span class="p">,</span> <span class="n">J</span><span class="o">.</span> <span class="n">Comp</span><span class="o">.</span> <span class="n">Chem</span><span class="o">.</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">1999</span><span class="o">-</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">2003</span><span class="p">)</span>
  <span class="mi">2</span><span class="p">:</span> <span class="n">AMBER94</span> <span class="n">force</span> <span class="n">field</span> <span class="p">(</span><span class="n">Cornell</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span><span class="p">,</span> <span class="n">JACS</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">5179</span><span class="o">-</span><span class="mi">5197</span><span class="p">,</span> <span class="mi">1995</span><span class="p">)</span>
  <span class="mi">3</span><span class="p">:</span> <span class="n">AMBER96</span> <span class="n">protein</span><span class="p">,</span> <span class="n">nucleic</span> <span class="n">AMBER94</span> <span class="p">(</span><span class="n">Kollman</span> <span class="n">et</span> <span class="n">al</span><span class="o">.</span><span class="p">,</span> <span class="n">Acc</span><span class="o">.</span> <span class="n">Chem</span><span class="o">.</span> <span class="n">Res</span><span class="o">.</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">461</span><span class="o">-</span><span class="mi">469</span><span class="p">,</span> <span class="mi">1996</span><span class="p">)</span>
@@ -240,7 +244,7 @@ Pour générer cette topologie, on peut utiliser l’utilitaire <a class="refere
 <span class="mi">3</span><span class="p">:</span> <span class="kc">None</span>
 </pre></div>
 </div>
-<p>Il faut choisir <cite>SPC</cite> (choix <em>1</em>)</p>
+<p>Il faut choisir <cite>SPC</cite> (choix <em>1</em>).</p>
 <p>Enfin, le choix des ponts S-S intervient:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>Link CYS-6 SG-48 and CYS-127 SG-981 (y/n) ?
 </pre></div>
@@ -309,11 +313,11 @@ un fichier de paramètre de simulation (<a class="reference download internal" h
 </div>
 <p>Le fichier <cite>ions.tpr</cite> contenant à la fois les coordonnées des atomes et la topologie du système (i.e. les molécules),
 on peut maintenant l’utiliser pour remplacer une molécule d’eau par un ion Cl- afin de rendre la boîte MD neutre.
-Pour cela on utilise l’utilitaire <a class="reference internal" href="intro-gromacs.html#genion"><span class="std std-ref">gmx genion</span></a>:</p>
+Pour cela, on utilise l’utilitaire <a class="reference internal" href="intro-gromacs.html#genion"><span class="std std-ref">gmx genion</span></a>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">genion</span> <span class="o">-</span><span class="n">s</span> <span class="n">ions</span><span class="o">.</span><span class="n">tpr</span> <span class="o">-</span><span class="n">o</span> <span class="n">lyso_WI</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">p</span> <span class="n">topol</span><span class="o">.</span><span class="n">top</span> <span class="o">-</span><span class="n">neutral</span>
 </pre></div>
 </div>
-<p>Même si les molécules sont définies dans le fichier <cite>ions.tpr</cite>, <a class="reference internal" href="intro-gromacs.html#genion"><span class="std std-ref">gmx genion</span></a> ne sélectionner que des groupes d’atomes:</p>
+<p>Même si les molécules sont définies dans le fichier <cite>ions.tpr</cite>, <a class="reference internal" href="intro-gromacs.html#genion"><span class="std std-ref">gmx genion</span></a> ne permet de sélectionner que des groupes d’atomes:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Select</span> <span class="n">a</span> <span class="n">continuous</span> <span class="n">group</span> <span class="n">of</span> <span class="n">solvent</span> <span class="n">molecules</span>
 <span class="n">Group</span>     <span class="mi">0</span> <span class="p">(</span>         <span class="n">System</span><span class="p">)</span> <span class="n">has</span> <span class="mi">20808</span> <span class="n">elements</span>
 <span class="n">Group</span>     <span class="mi">1</span> <span class="p">(</span>        <span class="n">Protein</span><span class="p">)</span> <span class="n">has</span>  <span class="mi">1323</span> <span class="n">elements</span>
@@ -377,7 +381,7 @@ dans laquelle:</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li>Le nombre <cite>N</cite> de particles ne varie pas (imposé par les <a class="reference external" href="https://fr.wikipedia.org/wiki/Condition_p%C3%A9riodique_aux_limites">Conditions Périodiques aux Limites</a>)</li>
-<li>Le volume <cite>V</cite> de la boîte est fixe (car la pression n’est pas fixée - cf. l”<a class="reference external" href="https://fr.wikipedia.org/wiki/Loi_des_gaz_parfaits#.C3.89quation_des_gaz_parfaits">équation des gaz parfaits</a>)</li>
+<li>Le volume <cite>V</cite> de la boîte est fixe (car la pression n’est pas fixée - cf. l” <a class="reference external" href="https://fr.wikipedia.org/wiki/Loi_des_gaz_parfaits#.C3.89quation_des_gaz_parfaits">équation des gaz parfaits</a>)</li>
 <li>La température <cite>T</cite> du système est fixé à l’aide d’un thermostat (e.g. <a class="reference external" href="https://en.wikipedia.org/wiki/Berendsen_thermostat">Thermostat de Berendsen</a>)</li>
 </ol>
 </div></blockquote>
@@ -396,8 +400,8 @@ dans laquelle:</p>
 </div></blockquote>
 <div class="section" id="contrainte-des-positions">
 <span id="posres"></span><h3>Contrainte des positions<a class="headerlink" href="#contrainte-des-positions" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Il est possible de contraindre les atomes afin qu’ils reste fixes. Dans le cas d’une équilibration,
-il est souvent intéressant (voire nécessaire) de garder les grosses molécules (e.g. molécules) fixes afin de laisser les petites molécules (e.g. eau et ions), très mobiles, s’équilibrer.</p>
+<p>Il est possible de contraindre les atomes afin qu’ils restent fixes. Dans le cas d’une équilibration,
+il est souvent intéressant (voire nécessaire) de garder les grosses molécules (e.g. protéines) fixes afin de laisser les petites molécules (e.g. eau et ions), très mobiles, s’équilibrer.</p>
 <p>Dans GROMACS, l’introduction de ces contraintes se fait généralement via l’utilisation de fichiers du type <cite>posres.itp</cite>
 tels que celui-ci généré par <a class="reference internal" href="intro-gromacs.html#pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a> et dont le contenu ressemble à cela:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="n">position_restraints</span> <span class="p">]</span>
@@ -427,7 +431,7 @@ tels que celui-ci généré par <a class="reference internal" href="intro-gromac
 </div>
 <div class="section" id="le-couplage-en-temperature">
 <span id="temperature-coupling"></span><h3>Le couplage en température<a class="headerlink" href="#le-couplage-en-temperature" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Différents algorithmes sont disponibles afin de coupler le mouvement des atomes (agitation thermique) à la température.
+<p>Différents algorithmes sont disponibles afin de coupler le mouvement des atomes à la température (agitation thermique).
 Les paramètres associés doivent évidemment être décrits dans le fichier <cite>.mdp</cite> associé à la simulation.
 En l’occurence, le fichier <cite>nvt.mdp</cite> décrit plus haut contient les lignes suivantes:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tcoupl</span>              <span class="o">=</span> <span class="n">V</span><span class="o">-</span><span class="n">rescale</span>
@@ -449,7 +453,7 @@ que la température est fixée à 363 K (~90 °C) de manière indépendante pour
 </div>
 <div class="section" id="simulation-nvt">
 <h3>Simulation NVT<a class="headerlink" href="#simulation-nvt" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Une fois la topologie complète prête, l’équilibration <cite>NVT</cite> est effectué à l’aide de <a class="reference internal" href="intro-gromacs.html#mdrun"><span class="std std-ref">gmx mdrun</span></a>:</p>
+<p>Une fois la topologie complète prête, l’équilibration <cite>NVT</cite> est effectuée à l’aide de <a class="reference internal" href="intro-gromacs.html#mdrun"><span class="std std-ref">gmx mdrun</span></a>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">deffnm</span> <span class="n">nvt</span>
 </pre></div>
 </div>
@@ -492,7 +496,7 @@ que la température est fixée à 363 K (~90 °C) de manière indépendante pour
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">grompp</span> <span class="o">-</span><span class="n">f</span> <span class="n">npt</span><span class="o">.</span><span class="n">mdp</span> <span class="o">-</span><span class="n">c</span> <span class="n">nvt</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">p</span> <span class="n">topol</span><span class="o">.</span><span class="n">top</span> <span class="o">-</span><span class="n">t</span> <span class="n">nvt</span><span class="o">.</span><span class="n">cpt</span> <span class="o">-</span><span class="n">o</span> <span class="n">npt</span><span class="o">.</span><span class="n">tpr</span>
 </pre></div>
 </div>
-<p>Le fichier <cite>nvt.cpt</cite> est un fichier <a class="reference internal" href="intro-gromacs.html#simul-files"><span class="std std-ref">checkpoint</span></a> qui contient toutes les informations nécessaire pour poursuivre la simulation (notamment les vitesses des atomes).
+<p>Le fichier <cite>nvt.cpt</cite> est un fichier <a class="reference internal" href="intro-gromacs.html#gromacs-files"><span class="std std-ref">checkpoint</span></a> qui contient toutes les informations nécessaire pour poursuivre la simulation (notamment les vitesses des atomes).
 On le fourni à <a class="reference internal" href="intro-gromacs.html#grompp"><span class="std std-ref">gmx grompp</span></a> pour permettre de faire l’équilibration <cite>NPT</cite> en se basant sur l’équilibration <cite>NVT</cite>.</p>
 <p>On peut alors lancer l’équilibration <cite>NPT</cite> avec <a class="reference internal" href="intro-gromacs.html#mdrun"><span class="std std-ref">gmx mdrun</span></a>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">deffnm</span> <span class="n">npt</span>
@@ -555,16 +559,16 @@ L’utilitaire <a class="reference internal" href="intro-gromacs.html#convert-tp
 </div>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">L’ajout de <cite>-cpi md.cpt</cite> permet d’utiliser le fichier <a class="reference internal" href="intro-gromacs.html#simul-files"><span class="std std-ref">checkpoint</span></a> comme point de départ plutôt
+<p class="last">L’ajout de <cite>-cpi md.cpt</cite> permet d’utiliser le fichier <a class="reference internal" href="intro-gromacs.html#gromacs-files"><span class="std std-ref">checkpoint</span></a> comme point de départ plutôt
 que de devoir relancer la simulation depuis le début.</p>
 </div>
 </div>
 <div class="section" id="analyse">
 <h3>Analyse<a class="headerlink" href="#analyse" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Pour des raisons d’efficacité, GROMACS place toujours tous les atomes dans une boîte de simulation «&nbsp;rectangulaire&nbsp;» pour effectuer les calculs.
-Cela croit souvent des artéfacts quand, en particulier, une molécule est à cheval sur deux boîtes (la «&nbsp;vraie&nbsp;» et une réplique).</p>
+Cela crée souvent des artéfacts quand, en particulier, une molécule est à cheval sur deux boîtes (la «&nbsp;vraie&nbsp;» et une réplique).</p>
 <p>Il faut donc traiter la trajectoire issue de la simulation de production avant de pouvoir l’analyser.
-Pour cela on utilise l’utilitaire <a class="reference internal" href="intro-gromacs.html#trjconv"><span class="std std-ref">gmx trjconv</span></a>:</p>
+Pour cela, on utilise l’utilitaire <a class="reference internal" href="intro-gromacs.html#trjconv"><span class="std std-ref">gmx trjconv</span></a>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">gmx</span> <span class="n">trjconv</span> <span class="o">-</span><span class="n">f</span> <span class="n">md</span><span class="o">.</span><span class="n">xtc</span> <span class="o">-</span><span class="n">o</span> <span class="n">md_mol</span><span class="o">.</span><span class="n">xtc</span> <span class="o">-</span><span class="n">pbc</span> <span class="n">mol</span> <span class="o">-</span><span class="n">ur</span> <span class="n">compact</span> <span class="o">-</span><span class="n">s</span> <span class="n">md</span><span class="o">.</span><span class="n">tpr</span>
 </pre></div>
 </div>
@@ -601,12 +605,12 @@ déviation standard des positions atomiques ou <a class="reference external" hre
 <span class="n">Group</span>    <span class="mi">17</span> <span class="p">(</span> <span class="n">Water_and_ions</span><span class="p">)</span> <span class="n">has</span> <span class="mi">19469</span> <span class="n">elements</span>
 </pre></div>
 </div>
-<p>Ici, on utiliser le squelette protéique (groupe <cite>4</cite>) comme référence.</p>
+<p>Ici, on veut utiliser le squelette protéique (groupe <cite>4</cite>) comme référence.</p>
 <p>Ensuite, il faut sélectionner le groupe d’atome dont on veut calculer le RMSD. On choisit également le groupe <cite>4</cite>.</p>
 <p>Une fois le calcul effectué, <a class="reference internal" href="intro-gromacs.html#rms"><span class="std std-ref">gmx rms</span></a> génère un graphique (au format texte) du RMSD en fonction du temps de simulation: c’est le fichier <cite>rmsd.xvg</cite>.</p>
 <p>Plus le RMSD est faible, plus la protéine est stable (car ses atomes restent proches de leur position initiale)</p>
 <p>Les fichiers <cite>.xvg</cite> étant des fichiers texte, il peut être utile de les convertir en image.
-Pour cela, un script Python (<a class="reference download internal" href="_downloads/xvg2png.py" download=""><code class="xref download docutils literal"><span class="pre">xvg2png.py</span></code></a> est mis à disposition pour convertir un (ou plusieurs!) fichier <cite>.xvg</cite> en image (format <a class="reference external" href="https://fr.wikipedia.org/wiki/Portable_Network_Graphics">PNG</a>).
+Pour cela, un script Python (<a class="reference download internal" href="_downloads/xvg2png.py" download=""><code class="xref download docutils literal"><span class="pre">xvg2png.py</span></code></a> est mis à disposition pour convertir un (ou plusieurs) fichier <cite>.xvg</cite> en image (format <a class="reference external" href="https://fr.wikipedia.org/wiki/Portable_Network_Graphics">PNG</a>).
 Il suffit simplement d’exécuter le script de la façon suivante:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">python</span> <span class="n">xvg2png</span><span class="o">.</span><span class="n">py</span> <span class="n">rmsd</span><span class="o">.</span><span class="n">xvg</span>
 </pre></div>
